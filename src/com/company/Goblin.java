@@ -28,7 +28,7 @@ public class Goblin extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("gui.fxml"));
 
-			Scene scene = new Scene(root, 1080, 800);
+			Scene scene = new Scene(root, 640, 400);
 			ScrollPane scrollPane = (ScrollPane) scene.lookup("#scrollPane");
 
 			List<Hexagon> hexagons = new ArrayList<>();
@@ -53,11 +53,11 @@ public class Goblin extends Application {
 				}
 			}*/
 
-			float width = (float) sqrt(3) * 30;
-			float distVertical = 30 * 1.5f;
+			float width = (float) sqrt(3) * 40;
+			float distVertical = 40 * 1.5f;
 
-			float colNumber = 1080 / width;
-			float rowNumber = 80 / distVertical;
+			float colNumber = 4096 / width;
+			float rowNumber = 2048 / distVertical;
 
 			for (int col = 0; col < colNumber; col++) {
 				for (int row = 0; row < rowNumber; row++) {
@@ -69,7 +69,7 @@ public class Goblin extends Application {
 							new Point2D.Double(
 									width * (col + ((row % 2 == 0) ? 0 : 0.5f)),
 									distVertical * row),
-							30,
+							38,
 							new Triplet(x, - x - z, z),
 							Hexagon.POINTY)
 					);
