@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+  <MenuBar VBox.vgrow="NEVER">
+    <Menu mnemonicParsing="false" text="File">
+      <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem mnemonicParsing="false" text="Preferences…" />
+      <SeparatorMenuItem mnemonicParsing="false" />
+      <MenuItem mnemonicParsing="false" text="Quit" />
+    </Menu>
+  </MenuBar>
+  <AnchorPane VBox.vgrow="ALWAYS">
+      <children>
+         <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="ALWAYS" prefHeight="400.0" prefWidth="640.0" vbarPolicy="ALWAYS"/>
+      </children>
+  </AnchorPane>
+</VBox>
