@@ -34,13 +34,8 @@ public class Goblin extends Application {
 
 			List<Hexagon> hexagons = new ArrayList<>();
 
-<<<<<<< Updated upstream
-			float height = (float) sqrt(3) * 40;
+			/*float height = (float) sqrt(3) * 40;
 			float distHorizontal = 40 * 1.5f;
-=======
-			float height = (float) sqrt(3) * 30;
-			float distHorizontal = 30 * 1.5f;
->>>>>>> Stashed changes
 
 			for (int col = 0; col < (4096 / distHorizontal); col++) {
 				for (int row = 0; row < (2048 / height); row++) {
@@ -56,9 +51,7 @@ public class Goblin extends Application {
 							Hexagon.FLAT)
 					);
 				}
-			}
-<<<<<<< Updated upstream
-=======
+			}*/
 
 			/*float width = (float) sqrt(3) * 40;
 			float distVertical = 40 * 1.5f;
@@ -81,8 +74,7 @@ public class Goblin extends Application {
 							Hexagon.POINTY)
 					);
 				}
-			}*/
->>>>>>> Stashed changes
+			}
 
 			Pane pane = new Pane(hexagons.toArray(new Hexagon[0]));
 
