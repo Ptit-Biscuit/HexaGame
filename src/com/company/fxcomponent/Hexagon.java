@@ -3,6 +3,7 @@ package com.company.fxcomponent;
 import com.company.system.Triplet;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class Hexagon extends Polygon {
 	/**
 	 * La longueur des côtés
 	 */
-	private int hexWidth = 30;
+	private int hexWidth = 40;
 
 	/**
 	 * Les coordonnées
@@ -75,6 +76,25 @@ public class Hexagon extends Polygon {
 	/**
 	 * Constructeur
 	 * @param center Le centre de l'hexagone
+	 * @param coords Les coordonnées de l'hexagone
+	 * @param orientation L'orientation de l'hexagone (Hexagon.FLAT ou Hexagon.POINTY)
+	 * @see Point2D.Double
+	 */
+	public Hexagon(Point2D.Double center, Triplet coords, boolean orientation) {
+		this.center = center;
+		this.coords = coords;
+		this.orientation = orientation;
+		this.theme = this.colors.get(new Random().nextInt(5));
+
+		this.setFill(this.theme);
+		this.setStroke(Color.GRAY);
+		this.addPoints();
+		this.addNeighbors();
+	}
+
+	/**
+	 * Constructeur
+	 * @param center Le centre de l'hexagone
 	 * @param width La longueur des côtés de l'hexagone
 	 * @param coords Les coordonnées de l'hexagone
 	 * @param orientation L'orientation de l'hexagone (Hexagon.FLAT ou Hexagon.POINTY)
@@ -88,6 +108,7 @@ public class Hexagon extends Polygon {
 		this.theme = this.colors.get(new Random().nextInt(5));
 
 		this.setFill(this.theme);
+		this.setStroke(Color.GRAY);
 		this.addPoints();
 		this.addNeighbors();
 	}

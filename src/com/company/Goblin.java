@@ -34,11 +34,11 @@ public class Goblin extends Application {
 
 			List<Hexagon> hexagons = new ArrayList<>();
 
-			/*float height = (float) sqrt(3) * 30;
-			float distHorizontal = 30 * 1.5f;
+			float height = (float) sqrt(3) * 40;
+			float distHorizontal = 40 * 1.5f;
 
-			for (int col = 0; col < (640 / distHorizontal); col++) {
-				for (int row = 0; row < (640 / height); row++) {
+			for (int col = 0; col < (4096 / distHorizontal); col++) {
+				for (int row = 0; row < (2048 / height); row++) {
 					int x = col - 16;
 					int z = row - (col - (col & 1)) / 2;
 
@@ -46,33 +46,9 @@ public class Goblin extends Application {
 						new Hexagon(
 							new Point2D.Double(
 								distHorizontal * col,
-								height * (row + ((col%2 == 0) ? 0 : 0.5f))),
-							30,
+								height * (row + ((col % 2 == 0) ? 0 : 0.5f))),
 							new Triplet(x, - x - z, z),
 							Hexagon.FLAT)
-					);
-				}
-			}*/
-
-			float width = (float) sqrt(3) * 40;
-			float distVertical = 40 * 1.5f;
-
-			float colNumber = 4096 / width;
-			float rowNumber = 2048 / distVertical;
-
-			for (int col = 0; col < colNumber; col++) {
-				for (int row = 0; row < rowNumber; row++) {
-					int x = col - (row - (row & 1)) / 2 - 9;
-					int z = row - 9;
-
-					hexagons.add(
-						new Hexagon(
-							new Point2D.Double(
-									width * (col + ((row % 2 == 0) ? 0 : 0.5f)),
-									distVertical * row),
-							38,
-							new Triplet(x, - x - z, z),
-							Hexagon.POINTY)
 					);
 				}
 			}
@@ -82,30 +58,8 @@ public class Goblin extends Application {
 			scrollPane.setContent(pane);
 			scrollPane.addEventFilter(ScrollEvent.SCROLL, Event::consume);
 
-
-
 			primaryStage.setScene(scene);
 			primaryStage.show();
-
-			/* Main Looper
-			class Loop implements Runnable {
-
-				@Override
-				public void run() {
-					while(true) {
-						hexagons.forEach(i -> i.setTheme((int) (random() * 5)));
-						try {
-							Thread.sleep(500);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			}
-
-			new Thread(new Loop()).start();
-			*/
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
