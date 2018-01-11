@@ -7,7 +7,7 @@ public class MapManager {
         return ourInstance;
     }
 
-    // 0 = Montain
+    // 0 = Mountain
     // 1 = Plain
     // 2 = Hill
     // 3 = Forest
@@ -15,14 +15,6 @@ public class MapManager {
     // 6 = City
     // 7 = Ruin
     // 8 = Keep
-
-
-
-
-    int[][] t = new int[][]{
-            new int[]{},
-            new int[]{}
-    };
 
     private MapManager() {
 

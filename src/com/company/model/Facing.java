@@ -1,5 +1,8 @@
 package com.company.model;
 
+/**
+ * Indicates the facing of a tile element
+ */
 public enum Facing {
     NORTH,
     NORTH_EAST,

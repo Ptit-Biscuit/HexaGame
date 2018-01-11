@@ -1,7 +1,5 @@
 package com.company.model;
 
-import javafx.scene.image.Image;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -10,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- *
+ * Manager of the tiles
  * @param <T>
  */
 public class TileManager <T> {
@@ -30,35 +28,35 @@ public class TileManager <T> {
 	private HashMap<T, Tile> tileset = new HashMap<>(); // (Tilename, Tile)
 
 	/**
-	 *
-	 * @param name
-	 * @param tile
+	 * Adding a tile to the tileset
+	 * @param name The name of the tile
+	 * @param tile The tile
 	 */
     public void addTile(T name, Tile tile){
         tileset.put(name, tile);
     }
 
 	/**
-	 *
-	 * @param name
-	 * @return
+	 * Getter of a tile
+	 * @param name The name of the tile
+	 * @return The tile if found by name, null otherwise
 	 */
 	public Tile getTile(T name){ return tileset.get(name); }
 
 	/**
-	 *
-	 * @param tilesetFile
-	 * @param width
-	 * @param names
+	 * Parse a tileset in a file and initialize all the tiles
+	 * @param tilesetFile The file containing the tileset
+	 * @param width The width of a tile
+	 * @param names The names of the tiles
 	 */
 	public void parsePicture(File tilesetFile, int width, ArrayList<T> names) { parsePicture(tilesetFile, width, width, names); }
 
 	/**
-	 * Parse a tileset file and initilize all the tiles
-	 * @param tilesetFile
-	 * @param width
-	 * @param height
-	 * @param names
+	 * Parse a tileset in a file and initialize all the tiles
+	 * @param tilesetFile The file contaning the tileset
+	 * @param width The width of a tile
+	 * @param height The height of a tile
+	 * @param names The names of the tiles
 	 */
     public void parsePicture(File tilesetFile, int width, int height, ArrayList<T> names){
         try {

@@ -5,7 +5,7 @@ package com.company.model;
  * <i>Decorations like road, river, etc are added after the base</i>
  */
 public enum TileType {
-	MOUTAIN,
+	MOUNTAIN,
 	PLAIN,
 	HILL,
 	FOREST,
