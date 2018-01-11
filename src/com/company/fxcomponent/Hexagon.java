@@ -206,6 +206,7 @@ public class Hexagon extends Polygon {
 	 */
 	public void setTheme(int index) {
 		this.theme = this.colors.get(index);
+		this.setFill(this.theme);
 	}
 
 	/**

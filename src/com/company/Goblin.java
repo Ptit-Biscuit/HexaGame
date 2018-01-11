@@ -3,10 +3,12 @@ package com.company;
 import com.company.fxcomponent.Hexagon;
 import com.company.system.Triplet;
 import javafx.application.Application;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -18,7 +20,6 @@ import java.util.List;
 import static java.lang.StrictMath.sqrt;
 
 public class Goblin extends Application {
-
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -79,9 +80,32 @@ public class Goblin extends Application {
 			Pane pane = new Pane(hexagons.toArray(new Hexagon[0]));
 
 			scrollPane.setContent(pane);
+			scrollPane.addEventFilter(ScrollEvent.SCROLL, Event::consume);
+
+
 
 			primaryStage.setScene(scene);
 			primaryStage.show();
+
+			/* Main Looper
+			class Loop implements Runnable {
+
+				@Override
+				public void run() {
+					while(true) {
+						hexagons.forEach(i -> i.setTheme((int) (random() * 5)));
+						try {
+							Thread.sleep(500);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+
+			new Thread(new Loop()).start();
+			*/
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
