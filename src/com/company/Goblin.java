@@ -34,7 +34,7 @@ public class Goblin extends Application {
 
 			List<Hexagon> hexagons = new ArrayList<>();
 
-			/*float height = (float) sqrt(3) * 40;
+			float height = (float) sqrt(3) * 40;
 			float distHorizontal = 40 * 1.5f;
 
 			for (int col = 0; col < (4096 / distHorizontal); col++) {
@@ -49,29 +49,6 @@ public class Goblin extends Application {
 								height * (row + ((col % 2 == 0) ? 0 : 0.5f))),
 							new Triplet(x, - x - z, z),
 							Hexagon.FLAT)
-					);
-				}
-			}*/
-
-			/*float width = (float) sqrt(3) * 40;
-			float distVertical = 40 * 1.5f;
-
-			float colNumber = 4096 / width;
-			float rowNumber = 2048 / distVertical;
-
-			for (int col = 0; col < colNumber; col++) {
-				for (int row = 0; row < rowNumber; row++) {
-					int x = col - (row - (row & 1)) / 2 - 9;
-					int z = row - 9;
-
-					hexagons.add(
-						new Hexagon(
-							new Point2D.Double(
-									width * (col + ((row % 2 == 0) ? 0 : 0.5f)),
-									distVertical * row),
-							38,
-							new Triplet(x, - x - z, z),
-							Hexagon.POINTY)
 					);
 				}
 			}
