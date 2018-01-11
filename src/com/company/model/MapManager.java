@@ -13,7 +13,7 @@ public class MapManager {
     // 3 = Forest
     // 5 = Lake
     // 6 = City
-    // 7 = Ruins
+    // 7 = Ruin
     // 8 = Keep
 
 

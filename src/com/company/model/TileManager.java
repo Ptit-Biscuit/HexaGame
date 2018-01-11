@@ -9,23 +9,57 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ *
+ * @param <T>
+ */
 public class TileManager <T> {
-    private static TileManager ourInstance = new TileManager();
+	/**
+	 * Unique intance of TileManager (Singleton Pattern)
+	 */
+    private static TileManager instance = new TileManager();
 
-    public static TileManager getInstance() {
-        return ourInstance;
-    }
+	/**
+	 * Default constructor
+	 */
+	private TileManager() {  }
 
-    private TileManager() {  }
+	/**
+	 * Tileset containing all the tiles
+	 */
+	private HashMap<T, Tile> tileset = new HashMap<>(); // (Tilename, Tile)
 
-    private Image picture;
-    private HashMap<T, Tile> tileset = new HashMap<>(); // (Tilename, Tile)
-
+	/**
+	 *
+	 * @param name
+	 * @param tile
+	 */
     public void addTile(T name, Tile tile){
         tileset.put(name, tile);
     }
 
-    public void parsePicture(File tilesetFile, int width, ArrayList<T> names){ parsePicture(tilesetFile, width, width, names); }
+	/**
+	 *
+	 * @param name
+	 * @return
+	 */
+	public Tile getTile(T name){ return tileset.get(name); }
+
+	/**
+	 *
+	 * @param tilesetFile
+	 * @param width
+	 * @param names
+	 */
+	public void parsePicture(File tilesetFile, int width, ArrayList<T> names) { parsePicture(tilesetFile, width, width, names); }
+
+	/**
+	 * Parse a tileset file and initilize all the tiles
+	 * @param tilesetFile
+	 * @param width
+	 * @param height
+	 * @param names
+	 */
     public void parsePicture(File tilesetFile, int width, int height, ArrayList<T> names){
         try {
             BufferedImage tilemap = ImageIO.read(tilesetFile);
@@ -42,5 +76,11 @@ public class TileManager <T> {
         }
     }
 
-    public Tile getTile(T name){ return tileset.get(name); }
+	/**
+	 * Complementary method of singleton pattern
+	 * @return The unique instance of TileManager
+	 */
+	public static TileManager getInstance() {
+		return instance;
+	}
 }
