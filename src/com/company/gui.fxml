@@ -16,5 +16,9 @@
       <MenuItem mnemonicParsing="false" text="Quit" />
     </Menu>
   </MenuBar>
+<<<<<<< Updated upstream
    <ScrollPane  pannable="true" fx:id="scrollPane" hbarPolicy="NEVER" prefViewportHeight="2048" prefViewportWidth="4096" vbarPolicy="NEVER" />
+=======
+   <ScrollPane fx:id="scrollPane" hbarPolicy="AS_NEEDED" prefViewportHeight="2048" prefViewportWidth="4096" vbarPolicy="AS_NEEDED" />
+>>>>>>> Stashed changes
 </VBox>
