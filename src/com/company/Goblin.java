@@ -50,7 +50,7 @@ public class Goblin extends Application {
         initTile();
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("gui.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("board.fxml"));
 
             Scene scene = new Scene(root, 640, 400);
             ScrollPane scrollPane = (ScrollPane) scene.lookup("#scrollPane");

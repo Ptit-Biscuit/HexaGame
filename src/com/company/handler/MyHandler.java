@@ -2,6 +2,7 @@ package com.company.handler;
 
 import com.company.fxcomponent.Hexagon;
 import javafx.event.EventHandler;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -10,13 +11,19 @@ public class MyHandler implements EventHandler<MouseEvent> {
 	public void handle(MouseEvent event) {
 		Hexagon current = (Hexagon) event.getSource();
 
+		ColorAdjust colorDark = new ColorAdjust();
+		colorDark.setBrightness(0.2);
+
+		ColorAdjust colorBright = new ColorAdjust();
+		colorBright.setBrightness(0);
+
 		if(event.getEventType().equals(MouseEvent.MOUSE_ENTERED)) {
-			current.setTheme(current.getTheme());
+			current.setEffect(colorDark);
 		}
 
 		if(event.getEventType().equals(MouseEvent.MOUSE_EXITED))
 		{
-			current.setTheme(current.getTheme().darker());
+			current.setEffect(colorBright);
 		}
 	}
 }
