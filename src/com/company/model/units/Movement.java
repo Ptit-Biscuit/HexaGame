@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Movement {
 
 
-
+/*
     public Boolean detectMove(Pair selected, ArrayList<Pair> movementList) {
         Unit unit;
 
@@ -39,5 +39,7 @@ public class Movement {
         }
         return true;
     }
+
+    */
 
 }
