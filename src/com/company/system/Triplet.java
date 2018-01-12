@@ -2,25 +2,25 @@ package com.company.system;
 
 public class Triplet {
 	/**
-	 * Coord x
+	 * Coordinate x
 	 */
 	private int x = 0;
 
 	/**
-	 * Coord y
+	 * Coordinate y
 	 */
 	private int y = 0;
 
 	/**
-	 * Coord z
+	 * Coordinate z
 	 */
 	private int z = 0;
 
 	/**
-	 * Constructeur
-	 * @param x Coord x
-	 * @param y Coord y
-	 * @param z Coord z
+	 * Constructor
+	 * @param x Coordinate x
+	 * @param y Coordinate y
+	 * @param z Coordinate z
 	 */
 	public Triplet(int x, int y, int z) {
 		this.x = x;
@@ -38,7 +38,7 @@ public class Triplet {
 
 	/**
 	 * Setter x
-	 * @param x Nouveau x
+	 * @param x New x
 	 */
 	public void setX(int x) {
 		this.x = x;
@@ -54,7 +54,7 @@ public class Triplet {
 
 	/**
 	 * Setter y
-	 * @param y Nouveau y
+	 * @param y New y
 	 */
 	public void setY(int y) {
 		this.y = y;
@@ -70,7 +70,7 @@ public class Triplet {
 
 	/**
 	 * Setter z
-	 * @param z Nouveau z
+	 * @param z New z
 	 */
 	public void setZ(int z) {
 		this.z = z;
@@ -88,8 +88,6 @@ public class Triplet {
 
 		Triplet triplet = (Triplet) o;
 
-		if (x != triplet.x) return false;
-		if (y != triplet.y) return false;
-		return z == triplet.z;
+		return x == triplet.x && y == triplet.y && z == triplet.z;
 	}
 }

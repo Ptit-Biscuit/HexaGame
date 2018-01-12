@@ -1,11 +1,15 @@
 package com.company.fxcomponent;
 
 import com.company.system.Triplet;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,67 +18,65 @@ import java.util.Random;
 import static java.lang.Math.*;
 
 /**
- * Class Hexagon: represent an hexagon
+ * Represent an hexagon
  */
 public class Hexagon extends Polygon {
 	/**
-	 * The center
+	 * Center of the hexagon
 	 */
 	private Point2D.Double center;
 
 	/**
-	 * The sides width
+	 * Width of the hexagon's sides
 	 */
 	private int hexWidth = 40;
 
 	/**
-	 * The coordinates
+	 * Cubic coordinates of the hexagon
 	 */
 	private Triplet coords;
 
 	/**
-	 * The horizontal orientation
+	 * Horizontal orientation
 	 */
 	public static final boolean FLAT = true;
 
 	/**
-	 * The vertical orientation
+	 * Vertical orientation
 	 */
 	public static final boolean POINTY = false;
 
 	/**
-	 * The used orientation
+	 * Used orientation
 	 */
 	private boolean orientation = FLAT;
 
 	/**
-	 * The colors
+	 * Usable colors for the hexagon
 	 */
 	private List<Color> colors = new ArrayList<>(
 			Arrays.asList(
-					/*Color.TRANSPARENT,
-					Color.LIGHTGRAY,*/
-					Color.WHITE,
-					Color.BLACK,
-					Color.RED,
-					Color.GREEN,
-					Color.BLUE));
+					Color.rgb(236, 240, 241),
+					Color.rgb(44, 62, 80),
+					Color.rgb(230,126,34),
+					Color.rgb(52, 152, 219),
+					Color.rgb(35, 243, 35)));
 
 	/**
-	 * The theme (i.e the actual color)
+	 * Theme (i.e Actual color) of the hexagon
 	 */
 	private Color theme;
 
 	/**
-	 * The neighbors' coordinates
+	 * Coordinates of neighbors hexagons
 	 */
 	private List<Triplet> neighbors;
 
 	/**
 	 * Constructor
-	 * @param center The center of hexagon
-	 * @param coords The coordinates of the hexagon
-	 * @param orientation The orientation of the hexagon (i.e <code>Hexagon.FLAT</code> or <code>Hexagon.POINTY</code>)
+	 * @param center Center of the hexagon
+	 * @param coords Coordinates of the hexagon
+	 * @param orientation Orientation of the hexagon (Hexagon.FLAT or Hexagon.POINTY)
 	 * @see Point2D.Double
 	 */
 	public Hexagon(Point2D.Double center, Triplet coords, boolean orientation) {
@@ -84,17 +86,18 @@ public class Hexagon extends Polygon {
 		this.theme = this.colors.get(new Random().nextInt(5));
 
 		this.setFill(this.theme);
-		this.setStroke(Color.GRAY);
+		this.setStroke(Color.WHITE);
+		this.setStrokeWidth(2.5);
 		this.addPoints();
 		this.addNeighbors();
 	}
 
 	/**
 	 * Constructor
-	 * @param center The center of hexagon
-	 * @param width The width of the hexagon's sides
-	 * @param coords The coordinates of the hexagon
-	 * @param orientation The orientation of the hexagon (i.e <code>Hexagon.FLAT</code> or <code>Hexagon.POINTY</code>)
+	 * @param center Center of the hexagon
+	 * @param width Width of the hexagon
+	 * @param coords Coordinates of the hexagon
+	 * @param orientation Orientation of the hexagon (Hexagon.FLAT or Hexagon.POINTY)
 	 * @see Point2D.Double
 	 */
 	public Hexagon(Point2D.Double center, int width, Triplet coords, boolean orientation) {
@@ -127,7 +130,7 @@ public class Hexagon extends Polygon {
 	}
 
 	/**
-	 * Adding the neighbors
+	 * Adding neighbors
 	 */
 	private void addNeighbors() {
 		this.neighbors = new ArrayList<>();
@@ -146,7 +149,7 @@ public class Hexagon extends Polygon {
 
 	/**
 	 * Getter of the central point
-	 * @return The central point
+	 * @return Central point
 	 * @see Point2D.Double
 	 */
 	public Point2D.Double getCenter() {
@@ -172,7 +175,7 @@ public class Hexagon extends Polygon {
 
 	/**
 	 * Setter of the hexagon's sides width
-	 * @param hexWidth The new hexagon's sides width
+	 * @param hexWidth the new hexagon's sides width
 	 */
 	public void setHexWidth(int hexWidth) {
 		this.hexWidth = hexWidth;
@@ -188,7 +191,7 @@ public class Hexagon extends Polygon {
 
 	/**
 	 * Setter of the cubic coordinates
-	 * @param coords The new cubic coordinates
+	 * @param coords the new cubic coordinates
 	 */
 	public void setCoords(Triplet coords) {
 		this.coords = coords;
@@ -220,7 +223,7 @@ public class Hexagon extends Polygon {
 
 	/**
 	 * Setter of the theme
-	 * @param color The new color for the theme
+	 * @param color The color for the theme
 	 */
 	public void setTheme(Color color) {
 		this.theme = color;
@@ -228,8 +231,17 @@ public class Hexagon extends Polygon {
 	}
 
 	/**
-	 * Getter of neighbors coordinates
-	 * @return Neighbors coordinates
+	 * Set the theme with a bufferedImage
+	 * @param image The bufferedImage for the theme
+	 */
+	public void setTheme(BufferedImage image) {
+		this.setFill(new ImagePattern(SwingFXUtils.toFXImage(image, null)));
+
+	}
+
+	/**
+	 * Getter of the neighbors hexagons' coordinates
+	 * @return The neighbors hexagons' coordinates
 	 */
 	public List<Triplet> getNeighbors() {
 		return this.neighbors;
