@@ -33,17 +33,17 @@ public class Hexagon extends Polygon {
 	private Triplet coords;
 
 	/**
-	 * L'orientation horizontale
+	 * CL'orientation horizontale
 	 */
 	public static final boolean FLAT = true;
 
 	/**
-	 * L'orientation verticale
+	 * CL'orientation verticale
 	 */
 	public static final boolean POINTY = false;
 
 	/**
-	 * L'orientation utilisée
+	 * CL'orientation utilisée
 	 */
 	private boolean orientation = FLAT;
 
@@ -75,7 +75,7 @@ public class Hexagon extends Polygon {
 	 * @param center Le centre de l'hexagone
 	 * @param width La longueur des côtés de l'hexagone
 	 * @param coords Les coordonnées de l'hexagone
-	 * @param orientation L'orientation de l'hexagone (Hexagon.FLAT ou Hexagon.POINTY)
+	 * @param orientation CL'orientation de l'hexagone (Hexagon.FLAT ou Hexagon.POINTY)
 	 * @see Point2D.Double
 	 */
 	public Hexagon(Point2D.Double center, int width, Triplet coords, boolean orientation) {
@@ -174,7 +174,7 @@ public class Hexagon extends Polygon {
 
 	/**
 	 * Getter de l'orientation
-	 * @return L'orientation (c-a-d FLAT ou POINTY)
+	 * @return CL'orientation (c-a-d FLAT ou POINTY)
 	 */
 	public boolean getOrientation() {
 		return orientation;
@@ -198,7 +198,7 @@ public class Hexagon extends Polygon {
 
 	/**
 	 * Setter du theme
-	 * @param index L'indice du thème
+	 * @param index CL'indice du thème
 	 */
 	public void setTheme(int index) {
 		this.theme = this.colors.get(index);

@@ -14,7 +14,7 @@ import java.util.Objects;
 
 public class BoardListener implements MouseListener, MouseMotionListener {
 	/**
-	 * L'unique instance du plateau
+	 * CL'unique instance du plateau
 	 */
 	private Board board = Board.getInstance();
 
@@ -32,7 +32,7 @@ public class BoardListener implements MouseListener, MouseMotionListener {
 	 * Setter du theme de l'hexagone survolé ou cliqué
 	 * ainsi que du thème de ses voisins
 	 *
-	 * @param hex L'hexagone actuellement survolé ou cliqué
+	 * @param hex CL'hexagone actuellement survolé ou cliqué
 	 * @param themeForHex Le thème pour l'hexagone actuel
 	 * @param themeForNeighbors Le thème pour les voisins de l'hexagone actuel
 	 */

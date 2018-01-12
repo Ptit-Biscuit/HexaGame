@@ -9,9 +9,9 @@ import java.util.HashMap;
 
 /**
  * Manager of the tiles
- * @param <T>
+ * @param
  */
-public class TileManager <T> {
+public class TileManager {
 	/**
 	 * Unique intance of TileManager (Singleton Pattern)
 	 */
@@ -25,14 +25,14 @@ public class TileManager <T> {
 	/**
 	 * Tileset containing all the tiles
 	 */
-	private HashMap<T, Tile> tileset = new HashMap<>(); // (Tilename, Tile)
+	private HashMap<TileType, BufferedImage> tileset = new HashMap<>(); // (Tilename, Tile)
 
 	/**
 	 * Adding a tile to the tileset
 	 * @param name The name of the tile
 	 * @param tile The tile
 	 */
-    public void addTile(T name, Tile tile){
+    public void addTile(TileType name, BufferedImage tile){
         tileset.put(name, tile);
     }
 
@@ -41,7 +41,7 @@ public class TileManager <T> {
 	 * @param name The name of the tile
 	 * @return The tile if found by name, null otherwise
 	 */
-	public Tile getTile(T name){ return tileset.get(name); }
+	public BufferedImage getTile(TileType name){ return tileset.get(name); }
 
 	/**
 	 * Parse a tileset in a file and initialize all the tiles
@@ -49,7 +49,7 @@ public class TileManager <T> {
 	 * @param width The width of a tile
 	 * @param names The names of the tiles
 	 */
-	public void parsePicture(File tilesetFile, int width, ArrayList<T> names) { parsePicture(tilesetFile, width, width, names); }
+	public void parsePicture(File tilesetFile, int width, ArrayList<TileType> names) { parsePicture(tilesetFile, width, width, names); }
 
 	/**
 	 * Parse a tileset in a file and initialize all the tiles
@@ -58,17 +58,19 @@ public class TileManager <T> {
 	 * @param height The height of a tile
 	 * @param names The names of the tiles
 	 */
-    public void parsePicture(File tilesetFile, int width, int height, ArrayList<T> names){
+    public void parsePicture(File tilesetFile, int width, int height, ArrayList<TileType> names){
         try {
             BufferedImage tilemap = ImageIO.read(tilesetFile);
             int xmax = tilemap.getWidth() / width;
             int ymax = tilemap.getHeight() / height;
 
-            for (int x = 0; x < xmax; ++x) for (int y = 0; y < ymax; ++y) {
-                T name = names.get(x + y * xmax);
-                if(name != null)
-                    tileset.put(name, new Tile(tilemap.getSubimage(x * width, y * height, width, height)));
-            }
+            for (int x = 0; x < xmax; ++x)
+            	for (int y = 0; y < ymax; ++y) {
+					System.out.println(y + x * ymax);
+					TileType name = names.get(y + x * ymax);
+                	if(name != null)
+	                    tileset.put(name, tilemap.getSubimage(x * width, y * height, width, height));
+	            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -79,6 +81,8 @@ public class TileManager <T> {
 	 * @return The unique instance of TileManager
 	 */
 	public static TileManager getInstance() {
+		if(instance == null)
+			instance = new TileManager();
 		return instance;
 	}
 }

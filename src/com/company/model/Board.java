@@ -40,7 +40,7 @@ public class Board extends JPanel {
 	private static final int MAX_HEX_WIDTH = 50;
 
 	/**
-	 * L'unique instance
+	 * CL'unique instance
 	 */
 	private static Board instance = new Board();
 
@@ -170,7 +170,7 @@ public class Board extends JPanel {
 
 	/**
 	 * Getter de l'unique instance du plateau
-	 * @return L'unique instance du plateau
+	 * @return CL'unique instance du plateau
 	 */
 	public static Board getInstance() {
 		return instance;
@@ -187,7 +187,7 @@ public class Board extends JPanel {
 	/**
 	 * Getter d'un hexagone contenant le point passé en paramètre
 	 * @param point Un point de la fenêtre dont on veut l'hexagone
-	 * @return L'hexagone contenant le point, null si aucun hexagone ne le contient
+	 * @return CL'hexagone contenant le point, null si aucun hexagone ne le contient
 	 */
 	public Hexagon getHexagon(Point point) {
 		return this.hexagons.stream()
@@ -199,7 +199,7 @@ public class Board extends JPanel {
 	/**
 	 * Getter d'un hexagone en fonction des coordonnées passées en paramètre
 	 * @param coords Des coordonnées dont on veut l'hexagone
-	 * @return L'hexagone ayant les mêmes coordonnées, null si aucun hexagone n'a ces coordonnées
+	 * @return CL'hexagone ayant les mêmes coordonnées, null si aucun hexagone n'a ces coordonnées
 	 */
 	public Hexagon getHexagon(Triplet coords) {
 		return this.hexagons.stream()
@@ -210,8 +210,8 @@ public class Board extends JPanel {
 
 	/**
 	 * Getter de la distance entre deux hexagones
-	 * @param from L'hexagone de départ
-	 * @param to L'hexagone d'arriver
+	 * @param from CL'hexagone de départ
+	 * @param to CL'hexagone d'arriver
 	 * @return La distance entre les hexagones
 	 */
 	public int getDist(Hexagon from, Hexagon to) {
@@ -225,8 +225,8 @@ public class Board extends JPanel {
 
 	/**
 	 * Dessine une ligne entre deux hexagones
-	 * @param from L'hexagone de départ
-	 * @param to L'hexagone d'arriver
+	 * @param from CL'hexagone de départ
+	 * @param to CL'hexagone d'arriver
 	 */
 	public void drawLine(Hexagon from, Hexagon to) {
 		Graphics2D g2 = (Graphics2D) this.getGraphics();
