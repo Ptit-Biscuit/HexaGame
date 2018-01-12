@@ -66,7 +66,6 @@ public class TileManager {
 
             for (int x = 0; x < xmax; ++x)
             	for (int y = 0; y < ymax; ++y) {
-					System.out.println(y + x * ymax);
 					TileType name = names.get(y + x * ymax);
                 	if(name != null)
 	                    tileset.put(name, tilemap.getSubimage(x * width, y * height, width, height));

@@ -223,16 +223,16 @@ public class Hexagon extends Polygon {
 
 	/**
 	 * Setter of the theme
-	 * @param index The index of the theme
+	 * @param color The color for the theme
 	 */
-	public void setTheme(int index) {
-		this.theme = this.colors.get(index);
+	public void setTheme(Color color) {
+		this.theme = color;
 		this.setFill(this.theme);
 	}
 
 	/**
 	 * Set the theme with a bufferedImage
-	 * @param image
+	 * @param image The bufferedImage for the theme
 	 */
 	public void setTheme(BufferedImage image) {
 		this.setFill(new ImagePattern(SwingFXUtils.toFXImage(image, null)));

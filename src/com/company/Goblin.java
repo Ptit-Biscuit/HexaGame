@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.fxcomponent.Hexagon;
+import com.company.handler.MyHandler;
 import com.company.model.MapManager;
 import com.company.model.TileManager;
 import com.company.model.TileType;
@@ -11,10 +12,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import org.apache.logging.log4j.LogManager;
 
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
@@ -22,28 +26,34 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 
 import static com.company.model.TileType.*;
-import static java.lang.StrictMath.random;
 import static java.lang.StrictMath.sqrt;
 
 public class Goblin extends Application {
-    public static void main(String[] args) {
-        launch(args);
-    }
+	/**
+	 * The hexagons
+	 */
+	private static HashMap<Triplet, Hexagon> hexagons = new HashMap<>();
+
+	/**
+	 * Main
+	 * @param args Arguments
+	 */
+	public static void main(String[] args) {
+		launch(args);
+	}
 
     @Override
     public void start(Stage primaryStage) {
         initTile();
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("gui.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("board.fxml"));
 
             Scene scene = new Scene(root, 640, 400);
             ScrollPane scrollPane = (ScrollPane) scene.lookup("#scrollPane");
-
-            List<Hexagon> hexagons = new ArrayList<>();
 
             float height = (float) sqrt(3) * 40;
             float distHorizontal = 40 * 1.5f;
@@ -52,45 +62,35 @@ public class Goblin extends Application {
 
             for (int col = 0; col < size.getValue(); col++) {
                 for (int row = 0; row < size.getKey(); row++) {
-                    int x = col - 16;
-                    int z = row - (col - (col & 1)) / 2;
+                    Triplet coordinates = new Triplet(row, col, - row - col);
 
                     Hexagon hexagon = new Hexagon(
                             new Point2D.Double(
                                     distHorizontal * col,
-                                    height * (row + ((col % 2 == 0) ? 0 : 0.5f))),
-                            new Triplet(x, -x - z, z),
+                                    height * (row + ((col % 2 == 0) ? 0.5f : 0))),
+                            coordinates,
                             Hexagon.FLAT);
                     BufferedImage tile = TileManager.getInstance().getTile(MapManager.get(row, col));
                     if (tile != null)
                         hexagon.setTheme(tile);
-                    else hexagon.setTheme(4);
-                    hexagons.add(hexagon);
+                    else hexagon.setTheme(Color.rgb(35, 243, 35));
+                    hexagons.put(coordinates, hexagon);
                 }
             }
 
-            Pane pane = new Pane(hexagons.toArray(new Hexagon[0]));
+            new Thread(() -> hexagons.values().forEach(h -> {
+	            h.addEventHandler(MouseEvent.MOUSE_ENTERED, new MyHandler());
+	            h.addEventHandler(MouseEvent.MOUSE_EXITED, new MyHandler());
+            })).start();
+
+	        Pane pane = new Pane(hexagons.values().toArray(new Hexagon[0]));
 
             scrollPane.setContent(pane);
             scrollPane.addEventFilter(ScrollEvent.SCROLL, Event::consume);
-
-            new Thread(() -> {
-                while (true) {
-                    hexagons.forEach(h -> h.setTheme((int) (random() * 5)));
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            TileManager.getInstance();
-
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            LogManager.getLogger(Goblin.class).error(e.getMessage());
         }
     }
 
@@ -113,12 +113,30 @@ public class Goblin extends Application {
                             .getResource("map.png")
                             .toURI()));
         } catch (Exception e) {
-            e.printStackTrace();
+			      LogManager.getLogger(Goblin.class).error(e.getMessage());
         }
+        
         TileManager.getInstance().parsePicture(
                 map,
                 180,
                 155,
                 names);
     }
+
+	/**
+	 * Getter of the hexagons
+	 * @return The hexagons
+	 */
+	public static HashMap<Triplet, Hexagon> getHexagons() {
+		return hexagons;
+	}
+
+	/**
+	 * Getter of an hexagon from its coordinates
+	 * @param coordinates The hexagon's coordinates
+	 * @return The hexagon found, null otherwise
+	 */
+	public static Hexagon getHexagon(Triplet coordinates) {
+		return hexagons.get(coordinates);
+	}
 }

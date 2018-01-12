@@ -88,8 +88,6 @@ public class Triplet {
 
 		Triplet triplet = (Triplet) o;
 
-		if (x != triplet.x) return false;
-		if (y != triplet.y) return false;
-		return z == triplet.z;
+		return x == triplet.x && y == triplet.y && z == triplet.z;
 	}
 }
