@@ -1,11 +1,15 @@
 package com.company.fxcomponent;
 
 import com.company.system.Triplet;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,13 +56,11 @@ public class Hexagon extends Polygon {
 	 */
 	private List<Color> colors = new ArrayList<>(
 			Arrays.asList(
-					/*Color.TRANSPARENT,
-					Color.LIGHTGRAY,*/
-					Color.WHITE,
-					Color.BLACK,
-					Color.RED,
-					Color.GREEN,
-					Color.BLUE));
+					Color.rgb(236, 240, 241),
+					Color.rgb(44, 62, 80),
+					Color.rgb(230,126,34),
+					Color.rgb(52, 152, 219),
+					Color.rgb(35, 243, 35)));
 
 	/**
 	 * Theme (i.e Actual color) of the hexagon
@@ -84,7 +86,8 @@ public class Hexagon extends Polygon {
 		this.theme = this.colors.get(new Random().nextInt(5));
 
 		this.setFill(this.theme);
-		this.setStroke(Color.GRAY);
+		this.setStroke(Color.WHITE);
+		this.setStrokeWidth(2.5);
 		this.addPoints();
 		this.addNeighbors();
 	}
@@ -220,11 +223,20 @@ public class Hexagon extends Polygon {
 
 	/**
 	 * Setter of the theme
-	 * @param index The index of the theme
+	 * @param color The color for the theme
 	 */
-	public void setTheme(int index) {
-		this.theme = this.colors.get(index);
+	public void setTheme(Color color) {
+		this.theme = color;
 		this.setFill(this.theme);
+	}
+
+	/**
+	 * Set the theme with a bufferedImage
+	 * @param image The bufferedImage for the theme
+	 */
+	public void setTheme(BufferedImage image) {
+		this.setFill(new ImagePattern(SwingFXUtils.toFXImage(image, null)));
+
 	}
 
 	/**
