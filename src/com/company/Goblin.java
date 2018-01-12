@@ -69,7 +69,7 @@ public class Goblin extends Application {
                             new Point2D.Double(
                                     40 + distHorizontal * col,
                                     height/2 + height * (row + ((col % 2 == 0) ? 0 : 0.5f))),
-                            new Triplet(x, -x - z, z),
+                            coordinates,
                             Hexagon.FLAT);
                     BufferedImage tile = TileManager.getInstance().getTile(MapManager.get(row, col));
                     if (tile != null)
