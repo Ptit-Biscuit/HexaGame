@@ -14,44 +14,41 @@ import java.util.Random;
 import static java.lang.Math.*;
 
 /**
- * Class Hexagon: représente un hexagone
- * @author Ptit-Biscuit
- * @version 1.0
- * @since 1.0
+ * Class Hexagon: represent an hexagon
  */
 public class Hexagon extends Polygon {
 	/**
-	 * Le centre
+	 * The center
 	 */
 	private Point2D.Double center;
 
 	/**
-	 * La longueur des côtés
+	 * The sides width
 	 */
 	private int hexWidth = 40;
 
 	/**
-	 * Les coordonnées
+	 * The coordinates
 	 */
 	private Triplet coords;
 
 	/**
-	 * L'orientation horizontale
+	 * The horizontal orientation
 	 */
 	public static final boolean FLAT = true;
 
 	/**
-	 * L'orientation verticale
+	 * The vertical orientation
 	 */
 	public static final boolean POINTY = false;
 
 	/**
-	 * L'orientation utilisée
+	 * The used orientation
 	 */
 	private boolean orientation = FLAT;
 
 	/**
-	 * Les couleurs
+	 * The colors
 	 */
 	private List<Color> colors = new ArrayList<>(
 			Arrays.asList(
@@ -64,20 +61,20 @@ public class Hexagon extends Polygon {
 					Color.BLUE));
 
 	/**
-	 * Le thème (c-a-d la couleur actuelle)
+	 * The theme (i.e the actual color)
 	 */
 	private Color theme;
 
 	/**
-	 * Les coordonnées des hexagones voisins
+	 * The neighbors' coordinates
 	 */
 	private List<Triplet> neighbors;
 
 	/**
-	 * Constructeur
-	 * @param center Le centre de l'hexagone
-	 * @param coords Les coordonnées de l'hexagone
-	 * @param orientation L'orientation de l'hexagone (Hexagon.FLAT ou Hexagon.POINTY)
+	 * Constructor
+	 * @param center The center of hexagon
+	 * @param coords The coordinates of the hexagon
+	 * @param orientation The orientation of the hexagon (i.e <code>Hexagon.FLAT</code> or <code>Hexagon.POINTY</code>)
 	 * @see Point2D.Double
 	 */
 	public Hexagon(Point2D.Double center, Triplet coords, boolean orientation) {
@@ -93,11 +90,11 @@ public class Hexagon extends Polygon {
 	}
 
 	/**
-	 * Constructeur
-	 * @param center Le centre de l'hexagone
-	 * @param width La longueur des côtés de l'hexagone
-	 * @param coords Les coordonnées de l'hexagone
-	 * @param orientation L'orientation de l'hexagone (Hexagon.FLAT ou Hexagon.POINTY)
+	 * Constructor
+	 * @param center The center of hexagon
+	 * @param width The width of the hexagon's sides
+	 * @param coords The coordinates of the hexagon
+	 * @param orientation The orientation of the hexagon (i.e <code>Hexagon.FLAT</code> or <code>Hexagon.POINTY</code>)
 	 * @see Point2D.Double
 	 */
 	public Hexagon(Point2D.Double center, int width, Triplet coords, boolean orientation) {
@@ -114,7 +111,7 @@ public class Hexagon extends Polygon {
 	}
 
 	/**
-	 * Ajout des points correspondants aux sommets
+	 * Adding points corresponding to vertices
 	 */
 	private void addPoints() {
 		int orientationAngle = (this.orientation ? 0 : 30);
@@ -130,7 +127,7 @@ public class Hexagon extends Polygon {
 	}
 
 	/**
-	 * Ajout des voisins
+	 * Adding the neighbors
 	 */
 	private void addNeighbors() {
 		this.neighbors = new ArrayList<>();
@@ -148,8 +145,8 @@ public class Hexagon extends Polygon {
 	}
 
 	/**
-	 * Getter du point central
-	 * @return Le point central
+	 * Getter of the central point
+	 * @return The central point
 	 * @see Point2D.Double
 	 */
 	public Point2D.Double getCenter() {
@@ -157,8 +154,8 @@ public class Hexagon extends Polygon {
 	}
 
 	/**
-	 * Setter du point central
-	 * @param center Le nouveau point central
+	 * Setter of the central point
+	 * @param center The new central point
 	 * @see Point2D.Double
 	 */
 	public void setCenter(Point2D.Double center) {
@@ -166,73 +163,73 @@ public class Hexagon extends Polygon {
 	}
 
 	/**
-	 * Getter de la longueur des côtés
-	 * @return La longeur des côtés
+	 * Getter of the hexagon's sides width
+	 * @return The hexagon's sides width
 	 */
 	public int getHexWidth() {
 		return hexWidth;
 	}
 
 	/**
-	 * Setter de la longueur des côtés
-	 * @param hexWidth La nouvelle longueur des côtés
+	 * Setter of the hexagon's sides width
+	 * @param hexWidth The new hexagon's sides width
 	 */
 	public void setHexWidth(int hexWidth) {
 		this.hexWidth = hexWidth;
 	}
 
 	/**
-	 * Getter des coordonnées cubiques
-	 * @return Les coordonnées cubiques
+	 * Getter of the cubic coordinates
+	 * @return The cubic coordinates
 	 */
 	public Triplet getCoords() {
 		return this.coords;
 	}
 
 	/**
-	 * Setter des coordonnées cubiques
-	 * @param coords Les nouvelles coordonnées cubiques
+	 * Setter of the cubic coordinates
+	 * @param coords The new cubic coordinates
 	 */
 	public void setCoords(Triplet coords) {
 		this.coords = coords;
 	}
 
 	/**
-	 * Getter de l'orientation
-	 * @return L'orientation (c-a-d FLAT ou POINTY)
+	 * Getter of the orientation
+	 * @return The orientation (i.e <code>Hexagon.FLAT</code> or <code>Hexagon.POINTY</code>)
 	 */
 	public boolean getOrientation() {
 		return orientation;
 	}
 
 	/**
-	 * Setter de l'orientation
-	 * @param orientation La nouvelle orientation (c-a-d <code>Hexagon.FLAT</code> ou <code>Hexagon.POINTY</code>)
+	 * Setter of the orientation
+	 * @param orientation The new orientation (i.e <code>Hexagon.FLAT</code> or <code>Hexagon.POINTY</code>)
 	 */
 	public void setOrientation(boolean orientation) {
 		this.orientation = orientation;
 	}
 
 	/**
-	 * Getter du thème actuel
-	 * @return Le thème actuel
+	 * Getter of the actual theme
+	 * @return The actual theme
 	 */
 	public Color getTheme() {
 		return this.theme;
 	}
 
 	/**
-	 * Setter du theme
-	 * @param index L'indice du thème
+	 * Setter of the theme
+	 * @param color The new color for the theme
 	 */
-	public void setTheme(int index) {
-		this.theme = this.colors.get(index);
+	public void setTheme(Color color) {
+		this.theme = color;
 		this.setFill(this.theme);
 	}
 
 	/**
-	 * Getter des coordonnées des hexagones voisins
-	 * @return Les coordonnées des hexagones voisins
+	 * Getter of neighbors coordinates
+	 * @return Neighbors coordinates
 	 */
 	public List<Triplet> getNeighbors() {
 		return this.neighbors;
