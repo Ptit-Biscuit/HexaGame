@@ -11,19 +11,18 @@ public class MyHandler implements EventHandler<MouseEvent> {
 	public void handle(MouseEvent event) {
 		Hexagon current = (Hexagon) event.getSource();
 
-		ColorAdjust colorDark = new ColorAdjust();
-		colorDark.setBrightness(0.2);
-
-		ColorAdjust colorBright = new ColorAdjust();
-		colorBright.setBrightness(0);
+		ColorAdjust colorAdjust = new ColorAdjust();
 
 		if(event.getEventType().equals(MouseEvent.MOUSE_ENTERED)) {
-			current.setEffect(colorDark);
+			colorAdjust.setBrightness(-0.2);
+			current.setEffect(colorAdjust);
+			current.toFront();
 		}
 
 		if(event.getEventType().equals(MouseEvent.MOUSE_EXITED))
 		{
-			current.setEffect(colorBright);
+			colorAdjust.setBrightness(0);
+			current.setEffect(colorAdjust);
 		}
 	}
 }
