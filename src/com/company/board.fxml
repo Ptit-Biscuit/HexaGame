@@ -16,5 +16,5 @@
       <MenuItem mnemonicParsing="false" text="Quit" />
     </Menu>
   </MenuBar>
-   <ScrollPane fx:id="scrollPane" pannable="true" hbarPolicy="NEVER" prefViewportHeight="2048" prefViewportWidth="4096" vbarPolicy="NEVER" />
+   <ScrollPane fx:id="scrollPane" pannable="true" hbarPolicy="NEVER"  vbarPolicy="NEVER" />
 </VBox>

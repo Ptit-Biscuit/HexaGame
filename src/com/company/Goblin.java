@@ -9,6 +9,7 @@ import com.company.system.Triplet;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.BoundingBox;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -66,9 +67,9 @@ public class Goblin extends Application {
 
                     Hexagon hexagon = new Hexagon(
                             new Point2D.Double(
-                                    distHorizontal * col,
-                                    height * (row + ((col % 2 == 0) ? 0.5f : 0))),
-                            coordinates,
+                                    40 + distHorizontal * col,
+                                    height/2 + height * (row + ((col % 2 == 0) ? 0 : 0.5f))),
+                            new Triplet(x, -x - z, z),
                             Hexagon.FLAT);
                     BufferedImage tile = TileManager.getInstance().getTile(MapManager.get(row, col));
                     if (tile != null)
