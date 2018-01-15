@@ -5,8 +5,11 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Movement {
 
+/**
+ * Class Movement represent a movemement
+ */
+public class Movement {
 
 /*
     public Boolean detectMove(Pair selected, ArrayList<Pair> movementList) {
@@ -40,6 +43,9 @@ public class Movement {
         return true;
     }
 
-    */
+    public void move(){
 
+    }
+
+*/
 }

@@ -28,12 +28,12 @@ public class Unit {
     private int MP;
 
     /**
-     * Number of MP after a movement
+     * Number of MP after a movement test
      */
     private int MPGhost;
 
     /**
-     * A pair of coordinates that represents the position of the unit
+     * A pair that represents the position of the unit
      */
     private Pair position;
 
@@ -55,9 +55,9 @@ public class Unit {
         this.mounted = mounted;
         this.race = race;
         this.MP = MP;
-        this.MPGhost = 0;
         this.position = position;
         this.deploymentCode = deploymentCode;
+        this.MPGhost = 0;
     }
 
     /**
@@ -69,95 +69,83 @@ public class Unit {
     }
 
     /**
-     * Setter of the armor
-     * @param armor The new value of armor
-     */
-    public  void setArmor(int armor) {
-        this.armor = armor;
-    }
-
-    /**
-     *
+     * Getter of the mounted value
+     * @return The mounted value
      */
     public  Boolean getMounted() {
         return mounted;
     }
 
     /**
-     *
+     * Setter of the mounted value
+     * @param mounted The new value of mounted
      */
     public  void setMounted(Boolean mounted) {
         this.mounted = mounted;
     }
 
     /**
-     *
+     * Getter of the race
+     * @return the race
      */
     public  String getRace() {
         return race;
     }
 
     /**
-     *
-     */
-    public  void setRace(String race) {
-        this.race = race;
-    }
-
-    /**
-     *
+     * Getter of MP
+     * @return The movement point
      */
     public  int getMP() {
         return MP;
     }
 
     /**
-     *
+     * Setter of the MP
+     * @param MP The new value of MP
      */
     public  void setMP(int MP) {
         this.MP = MP;
     }
 
     /**
-     *
+     * Getter of MPGhost
+     * @return The MPGhost
      */
     public  int getMPGhost() {
-        return MP;
+        return MPGhost;
     }
 
     /**
-     *
+     * Setter of MPGhost
+     * @param MPGhost The new value of MPGhost
      */
-    public  void setMPGhost(int MP) {
-        this.MP = MP;
+    public  void setMPGhost(int MPGhost) {
+        this.MPGhost = MPGhost;
     }
 
     /**
-     *
+     * Getter of position
+     * @return The position
      */
     public  Pair getPosition() {
         return position;
     }
 
     /**
-     *
+     * Setter of position
+     * @param position The new position
      */
     public  void setPosition(Pair position) {
         this.position = position;
     }
 
     /**
-     *
+     * Getter of deployment code
+     * @return The deployment code
      */
     public  String getDeploymentCode() {
         return deploymentCode;
-    }
-
-    /**
-     *
-     */
-    public  void setDeploymentCode(String deploymentCode) {
-        this.deploymentCode = deploymentCode;
     }
 
 
