@@ -4,7 +4,6 @@ import com.company.fxcomponent.Hexagon;
 import javafx.event.EventHandler;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 
 public class MyHandler implements EventHandler<MouseEvent> {
 	@Override

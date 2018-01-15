@@ -44,11 +44,12 @@ public class Unit {
 
     /**
      * Constructor
-     * @param armor
-     * @param mounted
-     * @param MP
-     * @param position
-     * @param deploymentCode
+     * @param armor The unit armor
+     * @param mounted If the unit is mounted
+     * @param race The race of the unit
+     * @param MP The movement points of the unit
+     * @param position The position of the unit
+     * @param deploymentCode The deployment code of the unit
      */
     public Unit(int armor, Boolean mounted, String race, int MP, Pair position, String deploymentCode) {
         this.armor = armor;

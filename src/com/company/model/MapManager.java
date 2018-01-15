@@ -8,6 +8,9 @@ import static com.company.model.TileType.*;
  * Have a Map
  */
 public class MapManager {
+    /**
+     * Map of the game
+     */
     private static TileType[][] map = new TileType[][]{
 /*  1 */ new TileType[]{MOUNTAIN, PLAIN,    PLAIN, HILL,  HILL,   HILL,   PLAIN,  HILL,   HILL,   FIELD,  PLAIN,  PLAIN,  FOREST, FOREST, FOREST, FIELD,  HILL,   HILL,   PLAIN,  PLAIN, PLAIN,  PLAIN,   PLAIN,  PLAIN,  PLAIN,  PLAIN },
 /*  2 */ new TileType[]{MOUNTAIN, MOUNTAIN, HILL,  PLAIN, PLAIN,  HILL,   HILL,   PLAIN,  HILL,   FIELD,  HAMLET, PLAIN,  FOREST, PLAIN,  PLAIN,  HAMLET, FIELD,  HILL,   HILL,   HILL,  FIELD,  ABBEY,   PLAIN,  PLAIN,  PLAIN,  PLAIN },
@@ -30,12 +33,20 @@ public class MapManager {
 /* 19 */ new TileType[]{MOUNTAIN, MOUNTAIN, PLAIN, HILL,  FOREST, FOREST, FIELD,  FIELD,  PLAIN,  PLAIN,  PLAIN,  FOREST, FOREST, FOREST, FOREST, PLAIN,  FIELD,  PLAIN,  PLAIN,  PLAIN, PLAIN,  PLAIN,   PLAIN,  PLAIN,  PLAIN,  PLAIN }
     };
 
-
+    /**
+     * Getter of map's size
+     * @return Map's size
+     */
     public static Pair<Integer, Integer> getMapSize(){
         return new Pair<>(map.length, map[0].length);
     }
 
-
+    /**
+     * Getter of a tile
+     * @param x Row of the tile
+     * @param y Column of the tile
+     * @return The tile found
+     */
     public static TileType get(int x, int y){
         return map[x][y];
     }

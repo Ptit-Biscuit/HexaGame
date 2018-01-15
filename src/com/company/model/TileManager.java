@@ -1,5 +1,7 @@
 package com.company.model;
 
+import org.apache.logging.log4j.LogManager;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -9,7 +11,6 @@ import java.util.HashMap;
 
 /**
  * Manager of the tiles
- * @param
  */
 public class TileManager {
 	/**
@@ -71,7 +72,7 @@ public class TileManager {
 	                    tileset.put(name, tilemap.getSubimage(x * width, y * height, width, height));
 	            }
         } catch (IOException e) {
-            e.printStackTrace();
+	        LogManager.getLogger(TileManager.class).error(e.getMessage());
         }
     }
 

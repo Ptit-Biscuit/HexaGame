@@ -11,7 +11,6 @@ import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -40,6 +39,9 @@ public class Goblin extends Application {
 	 */
 	private static HashMap<Triplet, Hexagon> hexagons = new HashMap<>();
 
+	/**
+	 * The scroll pane
+	 */
 	@FXML
 	public ScrollPane scrollPane;
 
@@ -57,7 +59,6 @@ public class Goblin extends Application {
 
         try {
             Parent root = FXMLLoader.load(getClass().getResource("board.fxml"));
-
             Scene scene = new Scene(root, 1280, 720);
 
             float height = (float) sqrt(3) * Hexagon.getHexWidth();
@@ -71,14 +72,17 @@ public class Goblin extends Application {
 
                     Hexagon hexagon = new Hexagon(
                         new Point2D.Double(
-                            distHorizontal * col,
-                            height * (row + ((col % 2 == 0) ? 0.5f : 0))),
+		                        Hexagon.getHexWidth() + distHorizontal * col,
+		                        height/2 + height * (row + ((col % 2 == 0) ? 0 : 0.5f))),
                         coordinates,
                         Hexagon.FLAT);
+
                     BufferedImage tile = TileManager.getInstance().getTile(MapManager.get(row, col));
+
                     if (tile != null)
                         hexagon.setTheme(tile);
                     else hexagon.setTheme(Color.rgb(35, 243, 35));
+
                     hexagons.put(coordinates, hexagon);
                 }
             }
@@ -90,7 +94,6 @@ public class Goblin extends Application {
 
 	        Pane pane = new Pane(hexagons.values().toArray(new Hexagon[0]));
 
-
 	        scrollPane = (ScrollPane) scene.lookup("#scrollPane");
             scrollPane.setContent(pane);
             scrollPane.addEventFilter(ScrollEvent.SCROLL, Event::consume);
@@ -99,25 +102,6 @@ public class Goblin extends Application {
         } catch (IOException e) {
             LogManager.getLogger(Goblin.class).error(e.getMessage());
         }
-    }
-
-	/**
-	 * The preferences
-	 */
-	@FXML
-	public void preferences() {
-		Platform.runLater(() -> {
-			try {
-				Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
-				Stage stage = new Stage();
-				stage.setTitle("My New Stage Title");
-				stage.setScene(new Scene(root, 450, 450));
-				stage.show();
-			}
-            catch (IOException e) {
-				e.printStackTrace();
-			}
-		});
     }
 
 	/**

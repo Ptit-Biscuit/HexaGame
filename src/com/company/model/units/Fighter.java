@@ -6,7 +6,6 @@ import javafx.util.Pair;
  * Class Fighter extends Unit represent a fighter
  */
 public class Fighter extends Unit {
-
     /**
      * The moral of a fighter
      */
@@ -26,9 +25,13 @@ public class Fighter extends Unit {
      * Constructor
      * @param armor Param of the super class Unit
      * @param mounted Param of the super class Unit
+     * @param race Param of he super class Unit
      * @param MP Param of the super class Unit
      * @param position Param of the super class Unit
      * @param deploymentCode Param of the super class Unit
+     * @param moral The moral of the fighter
+     * @param missileValue The missile value of the fighter
+     * @param meleeValue The melee value of the fighter
      */
     public Fighter(int armor, Boolean mounted, String race, int MP, Pair position, String deploymentCode, String moral, int missileValue, int meleeValue) {
         super(armor, mounted, race, MP, position, deploymentCode);
@@ -60,6 +63,4 @@ public class Fighter extends Unit {
     public int getMeleeValue() {
         return meleeValue;
     }
-
-
 }
