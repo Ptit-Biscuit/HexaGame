@@ -29,7 +29,7 @@ public class Hexagon extends Polygon {
 	/**
 	 * Width of the hexagon's sides
 	 */
-	private int hexWidth = 40;
+	private static int hexWidth = 70;
 
 	/**
 	 * Cubic coordinates of the hexagon
@@ -102,7 +102,7 @@ public class Hexagon extends Polygon {
 	 */
 	public Hexagon(Point2D.Double center, int width, Triplet coords, boolean orientation) {
 		this.center = center;
-		this.hexWidth = width;
+		hexWidth = width;
 		this.coords = coords;
 		this.orientation = orientation;
 		this.theme = this.colors.get(new Random().nextInt(5));
@@ -122,8 +122,8 @@ public class Hexagon extends Polygon {
 
 		for (int i = 0; i < 6; i++) {
 			int radAngle = 60 * i + orientationAngle;
-			points.add(this.center.getX() + this.hexWidth * cos(PI / 180 * radAngle));
-			points.add(this.center.getY() + this.hexWidth * sin(PI / 180 * radAngle));
+			points.add(this.center.getX() + hexWidth * cos(PI / 180 * radAngle));
+			points.add(this.center.getY() + hexWidth * sin(PI / 180 * radAngle));
 		}
 
 		this.getPoints().addAll(points);
@@ -169,16 +169,16 @@ public class Hexagon extends Polygon {
 	 * Getter of the hexagon's sides width
 	 * @return The hexagon's sides width
 	 */
-	public int getHexWidth() {
+	public static int getHexWidth() {
 		return hexWidth;
 	}
 
 	/**
 	 * Setter of the hexagon's sides width
-	 * @param hexWidth the new hexagon's sides width
+	 * @param newHexWidth the new hexagon's sides width
 	 */
-	public void setHexWidth(int hexWidth) {
-		this.hexWidth = hexWidth;
+	public static void setHexWidth(int newHexWidth) {
+		hexWidth = newHexWidth;
 	}
 
 	/**

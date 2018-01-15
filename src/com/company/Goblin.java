@@ -7,8 +7,11 @@ import com.company.model.TileManager;
 import com.company.model.TileType;
 import com.company.system.Triplet;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.Event;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -37,6 +40,9 @@ public class Goblin extends Application {
 	 */
 	private static HashMap<Triplet, Hexagon> hexagons = new HashMap<>();
 
+	@FXML
+	public ScrollPane scrollPane;
+
 	/**
 	 * Main
 	 * @param args Arguments
@@ -52,11 +58,10 @@ public class Goblin extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("board.fxml"));
 
-            Scene scene = new Scene(root, 640, 400);
-            ScrollPane scrollPane = (ScrollPane) scene.lookup("#scrollPane");
+            Scene scene = new Scene(root, 1280, 720);
 
-            float height = (float) sqrt(3) * 40;
-            float distHorizontal = 40 * 1.5f;
+            float height = (float) sqrt(3) * Hexagon.getHexWidth();
+            float distHorizontal = 1.5f * Hexagon.getHexWidth();
 
             Pair<Integer, Integer> size = MapManager.getMapSize();
 
@@ -65,11 +70,11 @@ public class Goblin extends Application {
                     Triplet coordinates = new Triplet(row, col, - row - col);
 
                     Hexagon hexagon = new Hexagon(
-                            new Point2D.Double(
-                                    distHorizontal * col,
-                                    height * (row + ((col % 2 == 0) ? 0.5f : 0))),
-                            coordinates,
-                            Hexagon.FLAT);
+                        new Point2D.Double(
+                            distHorizontal * col,
+                            height * (row + ((col % 2 == 0) ? 0.5f : 0))),
+                        coordinates,
+                        Hexagon.FLAT);
                     BufferedImage tile = TileManager.getInstance().getTile(MapManager.get(row, col));
                     if (tile != null)
                         hexagon.setTheme(tile);
@@ -85,6 +90,8 @@ public class Goblin extends Application {
 
 	        Pane pane = new Pane(hexagons.values().toArray(new Hexagon[0]));
 
+
+	        scrollPane = (ScrollPane) scene.lookup("#scrollPane");
             scrollPane.setContent(pane);
             scrollPane.addEventFilter(ScrollEvent.SCROLL, Event::consume);
             primaryStage.setScene(scene);
@@ -94,33 +101,60 @@ public class Goblin extends Application {
         }
     }
 
+	/**
+	 * The preferences
+	 */
+	@FXML
+	public void preferences() {
+		Platform.runLater(() -> {
+			try {
+				Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
+				Stage stage = new Stage();
+				stage.setTitle("My New Stage Title");
+				stage.setScene(new Scene(root, 450, 450));
+				stage.show();
+			}
+            catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+    }
+
+	/**
+	 * Exit the application
+	 */
+	@FXML
+	public void quit() {
+		Platform.exit();
+    }
+
     /**
      * Initialize the TileManager with the tiles
      */
     private void initTile() {
         TileType[] list = new TileType[]{
-                CA, FOREST, CC, CD, CE, CF, CG, CH, CI, CJ, CK, CL, LAKE, CN, CO, CP, CQ, CR, CS, MOUNTAIN, CU, HILL, CW, CX, FIELD, CZ,
-                AA, AB, AC, AD, ABBEY, AF, AG, AH, AI, AJ, KEEP, AL, AM, AN, AO, AP, AQ, HAMLET, AS, AT, AU, AV, AW, AX, AY, AZ,
-                BA, BB, CITY, VILLAGE, BE, BF, BG, BH, BI, BJ, BK, BL, BM, BN, BO, BP, BQ, BR, BS, BT, BU, BV, BW, BX, BY, BZ
+            CA, FOREST, CC, CD, CE, CF, CG, CH, CI, CJ, CK, CL, LAKE, CN, CO, CP, CQ, CR, CS, MOUNTAIN, CU, HILL, CW, CX, FIELD, CZ,
+            AA, AB, AC, AD, ABBEY, AF, AG, AH, AI, AJ, KEEP, AL, AM, AN, AO, AP, AQ, HAMLET, AS, AT, AU, AV, AW, AX, AY, AZ,
+            BA, BB, CITY, VILLAGE, BE, BF, BG, BH, BI, BJ, BK, BL, BM, BN, BO, BP, BQ, BR, BS, BT, BU, BV, BW, BX, BY, BZ
         };
 
         ArrayList<TileType> names = new ArrayList<>(Arrays.asList(list));
         File map = null;
         try {
             map = new File((
-                    getClass()
-                            .getClassLoader()
-                            .getResource("map.png")
-                            .toURI()));
+                getClass()
+                    .getClassLoader()
+                    .getResource("map.png")
+                    .toURI()));
         } catch (Exception e) {
-			      LogManager.getLogger(Goblin.class).error(e.getMessage());
+		      LogManager.getLogger(Goblin.class).error(e.getMessage());
         }
         
         TileManager.getInstance().parsePicture(
-                map,
-                180,
-                155,
-                names);
+            map,
+            180,
+            155,
+            names);
     }
 
 	/**
