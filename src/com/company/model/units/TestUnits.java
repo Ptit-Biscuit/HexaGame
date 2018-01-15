@@ -6,11 +6,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- *
+ * Used to test the unit behavior
  */
 public class TestUnits {
 
-    public void fight(ArrayList<Fighter> attackFighterList, ArrayList<Fighter> defendFighterList, ArrayList<Leader> attackLeaderList, ArrayList<Leader> defendLeaderList, Tile attackerPosition, Tile defenderPosition){
+    /**
+     * Calculate the result of a battle
+     * @param attackFighterList The list of the attacker fighter
+     * @param defendFighterList The list of the defender fighter
+     * @param attackLeader The leader who attack
+     * @param defendLeader The leader who defend
+     * @param attackerPosition The tile of the attacker
+     * @param defenderPosition The tile of the defender
+     */
+    public void fight(ArrayList<Fighter> attackFighterList, ArrayList<Fighter> defendFighterList, Leader attackLeader, Leader defendLeader, Tile attackerPosition, Tile defenderPosition){
 
     }
 
