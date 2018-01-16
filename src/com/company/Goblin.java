@@ -2,8 +2,8 @@ package com.company;
 
 import com.company.fxcomponent.Hexagon;
 import com.company.handler.MyHandler;
-import com.company.model.MapManager;
-import com.company.model.TileManager;
+import com.company.model.Map;
+import com.company.model.managers.TileManager;
 import com.company.model.TileType;
 import com.company.system.Triplet;
 import javafx.application.Application;
@@ -64,7 +64,7 @@ public class Goblin extends Application {
             float height = (float) sqrt(3) * Hexagon.getHexWidth();
             float distHorizontal = 1.5f * Hexagon.getHexWidth();
 
-            Pair<Integer, Integer> size = MapManager.getMapSize();
+            Pair<Integer, Integer> size = Map.getMapSize();
 
             for (int col = 0; col < size.getValue(); col++) {
                 for (int row = 0; row < size.getKey(); row++) {
@@ -77,7 +77,7 @@ public class Goblin extends Application {
                         coordinates,
                         Hexagon.FLAT);
 
-                    BufferedImage tile = TileManager.getInstance().getTile(MapManager.get(row, col));
+                    BufferedImage tile = TileManager.getInstance().getTile(Map.get(row, col));
 
                     if (tile != null)
                         hexagon.setTheme(tile);

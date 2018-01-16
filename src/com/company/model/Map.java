@@ -7,7 +7,7 @@ import static com.company.model.TileType.*;
 /**
  * Have a Map
  */
-public class MapManager {
+public class Map {
     /**
      * Map of the game
      */
