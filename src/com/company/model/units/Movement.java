@@ -5,14 +5,17 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
 /**
- * Class Movement represent a movemement
+ * Class Movement represent a movement
  */
 public class Movement {
-
-/*
-    public Boolean detectMove(Pair selected, ArrayList<Pair> movementList) {
+	/**
+	 *
+	 * @param selected
+	 * @param movementList
+	 * @return
+	 */
+    /*public Boolean detectMove(Pair selected, ArrayList<Pair> movementList) {
         Unit unit;
 
         if (!containUnit(selected)){
@@ -45,7 +48,5 @@ public class Movement {
 
     public void move(){
 
-    }
-
-*/
+    }*/
 }

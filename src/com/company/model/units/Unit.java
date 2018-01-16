@@ -5,7 +5,7 @@ import javafx.util.Pair;
 /**
  * Class Unit represent a unit
  */
-public class Unit {
+public abstract class Unit {
 
     /**
      * Unit armor
@@ -35,7 +35,7 @@ public class Unit {
     /**
      * A pair that represents the position of the unit
      */
-    private Pair position;
+    private Pair<Integer, Integer> position;
 
     /**
      * Deployment code of the unit
@@ -51,7 +51,7 @@ public class Unit {
      * @param position The position of the unit
      * @param deploymentCode The deployment code of the unit
      */
-    public Unit(int armor, Boolean mounted, String race, int MP, Pair position, String deploymentCode) {
+    public Unit(int armor, Boolean mounted, String race, int MP, Pair<Integer, Integer> position, String deploymentCode) {
         this.armor = armor;
         this.mounted = mounted;
         this.race = race;
@@ -137,7 +137,7 @@ public class Unit {
      * Setter of position
      * @param position The new position
      */
-    public  void setPosition(Pair position) {
+    public  void setPosition(Pair<Integer, Integer> position) {
         this.position = position;
     }
 
@@ -148,6 +148,4 @@ public class Unit {
     public  String getDeploymentCode() {
         return deploymentCode;
     }
-
-
 }

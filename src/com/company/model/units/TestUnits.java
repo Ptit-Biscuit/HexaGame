@@ -14,13 +14,11 @@ public class TestUnits {
      * Calculate the result of a battle
      * @param attackFighterList The list of the attacker fighter
      * @param defendFighterList The list of the defender fighter
-     * @param attackLeader The leader who attack
-     * @param defendLeader The leader who defend
      * @param attackerPosition The tile of the attacker
      * @param defenderPosition The tile of the defender
      */
-    public void fight(ArrayList<Fighter> attackFighterList, ArrayList<Fighter> defendFighterList,
-                      Leader attackLeader, Leader defendLeader, Tile attackerPosition, Tile defenderPosition){
+    public void fight(ArrayList<? extends Unit> attackFighterList, ArrayList<? extends Unit> defendFighterList,
+                      Tile attackerPosition, Tile defenderPosition){
 
     }
 
@@ -29,24 +27,28 @@ public class TestUnits {
      * @param args The arguments
      */
     public static void main (String[] args){
-        Fighter feudal1 = new Fighter(1, Boolean.FALSE, "feudal", 10,
-                new Pair(0,0),"RE", "A", 3, 3);
-        Fighter feudal2 = new Fighter(3, Boolean.FALSE, "feudal", 10,
-                new Pair(0,0),"", "C", 3, 3);
-        Fighter feudal3 = new Fighter(3, Boolean.FALSE, "feudal", 10,
-                new Pair(0,0),"", "C", 3, 3);
-        Fighter feudal4 = new Fighter(3, Boolean.FALSE, "feudal", 10,
-                new Pair(0,0),"", "C", 3, 3);
+        Leader feudalLeader = new Leader(5, true, "feudal", 15,
+                new Pair<>(0, 0), "RE", "Count X", 3, 5);
+        Fighter feudal1 = new Fighter(1, false, "feudal", 10,
+                new Pair<>(0,0),"RE", "A", 3, 3);
+        Fighter feudal2 = new Fighter(3, false, "feudal", 10,
+                new Pair<>(0,0),"", "C", 3, 3);
+        Fighter feudal3 = new Fighter(3, false, "feudal", 10,
+                new Pair<>(0,0),"", "C", 3, 3);
+        Fighter feudal4 = new Fighter(3, false, "feudal", 10,
+                new Pair<>(0,0),"", "C", 3, 3);
 
-        ArrayList<Fighter> feudalList = new ArrayList<Fighter>(Arrays.asList(feudal1, feudal2, feudal3, feudal4));
+        ArrayList<? extends Unit> feudalList = new ArrayList<>(Arrays.asList(feudalLeader, feudal1, feudal2, feudal3, feudal4));
 
-        Fighter goblin1 = new Fighter(2, Boolean.FALSE, "goblin", 10,
-                new Pair(0,0),"RE", "B", 3, 3);
-        Fighter goblin2 = new Fighter(2, Boolean.FALSE, "goblin", 10,
-                new Pair(0,0),"RE", "B", 3, 3);
-        Fighter goblin3 = new Fighter(3, Boolean.FALSE, "goblin", 10,
-                new Pair(0,0),"RE", "B", 0, 3);
+        Leader goblinLeader = new Leader(6, false, "goblin", 13,
+                new Pair<>(0, 0), "RE", "King G", 4, 6);
+        Fighter goblin1 = new Fighter(2, false, "goblin", 10,
+                new Pair<>(0,0),"RE", "B", 3, 3);
+        Fighter goblin2 = new Fighter(2, false, "goblin", 10,
+                new Pair<>(0,0),"RE", "B", 3, 3);
+        Fighter goblin3 = new Fighter(3, false, "goblin", 10,
+                new Pair<>(0,0),"RE", "B", 0, 3);
 
-        ArrayList<Fighter> goblinList = new ArrayList<Fighter>(Arrays.asList(goblin1, goblin2, goblin3));
+        ArrayList<? extends Unit> goblinList = new ArrayList<>(Arrays.asList(goblinLeader, goblin1, goblin2, goblin3));
     }
 }

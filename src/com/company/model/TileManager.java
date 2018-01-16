@@ -54,7 +54,7 @@ public class TileManager {
 
 	/**
 	 * Parse a tileset in a file and initialize all the tiles
-	 * @param tilesetFile The file contaning the tileset
+	 * @param tilesetFile The file containing the tileset
 	 * @param width The width of a tile
 	 * @param height The height of a tile
 	 * @param names The names of the tiles
