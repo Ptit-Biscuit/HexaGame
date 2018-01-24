@@ -27,7 +27,7 @@ public class Hexagon extends Polygon {
 	/**
 	 * Width of the hexagon's sides
 	 */
-	private static int hexWidth = 70;
+	private static int hexWidth = 75;
 
 	/**
 	 * Cubic coordinates of the hexagon
@@ -230,11 +230,10 @@ public class Hexagon extends Polygon {
 
 	/**
 	 * Set the theme with a bufferedImage
-	 * @param image The bufferedImage for the theme
+	 * @param image The image for the hexagone
 	 */
 	public void setTheme(BufferedImage image) {
 		this.setFill(new ImagePattern(SwingFXUtils.toFXImage(image, null)));
-
 	}
 
 	/**
@@ -247,6 +246,6 @@ public class Hexagon extends Polygon {
 
 	@Override
 	public String toString() {
-		return "Hexagon{" + "center=" + this.center + ", hexWidth=" + this.hexWidth + ", orientation=" + this.orientation + ", theme=" + this.theme + '}';
+		return "Hexagon{" + "center=" + this.center + ", hexWidth=" + hexWidth + ", orientation=" + this.orientation + ", theme=" + this.theme + '}';
 	}
 }

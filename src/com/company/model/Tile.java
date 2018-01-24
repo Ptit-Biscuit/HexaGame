@@ -1,5 +1,7 @@
 package com.company.model;
 
+import com.company.model.enums.Facing;
+import com.company.model.enums.TileType;
 import com.company.model.units.Unit;
 
 import java.awt.image.BufferedImage;

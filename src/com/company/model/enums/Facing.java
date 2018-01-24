@@ -1,4 +1,4 @@
-package com.company.model;
+package com.company.model.enums;
 
 /**
  * Indicates the facing of a tile element

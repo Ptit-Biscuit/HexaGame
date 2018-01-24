@@ -1,8 +1,9 @@
 package com.company.model;
 
+import com.company.model.enums.TileType;
 import javafx.util.Pair;
 
-import static com.company.model.TileType.*;
+import static com.company.model.enums.TileType.*;
 
 /**
  * Have a Map

@@ -1,4 +1,4 @@
-package com.company.model;
+package com.company.model.enums;
 
 /**
  * The base type possible for a tile.

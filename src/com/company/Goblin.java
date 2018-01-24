@@ -1,10 +1,12 @@
 package com.company;
 
 import com.company.fxcomponent.Hexagon;
-import com.company.handler.MyHandler;
+import com.company.handler.HexaHandler;
 import com.company.model.Map;
+import com.company.model.enums.TileType;
+import com.company.model.enums.UnitType;
 import com.company.model.managers.TileManager;
-import com.company.model.TileType;
+import com.company.model.managers.UnitManager;
 import com.company.system.Triplet;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -30,7 +33,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import static com.company.model.TileType.*;
+import static com.company.model.enums.TileType.*;
+import static com.company.model.enums.UnitType.COUNT;
+import static com.company.model.enums.UnitType.SIR;
 import static java.lang.StrictMath.sqrt;
 
 public class Goblin extends Application {
@@ -88,8 +93,8 @@ public class Goblin extends Application {
             }
 
             new Thread(() -> hexagons.values().forEach(h -> {
-	            h.addEventHandler(MouseEvent.MOUSE_ENTERED, new MyHandler());
-	            h.addEventHandler(MouseEvent.MOUSE_EXITED, new MyHandler());
+	            h.addEventHandler(MouseEvent.MOUSE_ENTERED, new HexaHandler());
+	            h.addEventHandler(MouseEvent.MOUSE_EXITED, new HexaHandler());
             })).start();
 
 	        Pane pane = new Pane(hexagons.values().toArray(new Hexagon[0]));
@@ -122,24 +127,73 @@ public class Goblin extends Application {
             BA, BB, CITY, VILLAGE, BE, BF, BG, BH, BI, BJ, BK, BL, BM, BN, BO, BP, BQ, BR, BS, BT, BU, BV, BW, BX, BY, BZ
         };
 
+	    UnitType[] units = new UnitType[]{
+			    UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB,
+			    UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AB, UnitType.AB,
+			    UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB,
+			    UnitType.AB, UnitType.AA, UnitType.AB, SIR, UnitType.AB, UnitType.AA,
+			    UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB,
+			    UnitType.AB, UnitType.AA, COUNT, UnitType.AB, UnitType.AB, UnitType.AB,
+			    UnitType.AA, UnitType.AB, UnitType.AA, UnitType.AA, UnitType.AB, UnitType.AB,
+			    UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AB, UnitType.AA,
+			    UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB,
+			    UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AA, UnitType.AB
+	    };
+
         ArrayList<TileType> names = new ArrayList<>(Arrays.asList(list));
+	    ArrayList<UnitType> unitsNames = new ArrayList<>(Arrays.asList(units));
+
         File map = null;
+	    File unitsFile = null;
         try {
-            map = new File((
-                getClass()
-                    .getClassLoader()
-                    .getResource("map.png")
-                    .toURI()));
+	        map = new File((
+			        getClass()
+					        .getClassLoader()
+					        .getResource("map.png")
+					        .toURI()));
+
+	        unitsFile = new File((
+			        getClass()
+					        .getClassLoader()
+					        .getResource("char.png")
+					        .toURI()));
         } catch (Exception e) {
 		      LogManager.getLogger(Goblin.class).error(e.getMessage());
         }
-        
-        TileManager.getInstance().parsePicture(
-            map,
-            180,
-            155,
-            names);
+
+	    TileManager.getInstance().parsePicture(
+			    map,
+			    180,
+			    155,
+			    names);
+
+	    UnitManager.getInstance().parsePicture(
+			    unitsFile,
+			    180,
+			    155,
+			    unitsNames);
+
+	    TileManager.getInstance().addTile(PLAIN,
+			    createComposite(TileManager.getInstance().getTile(AA),
+					    UnitManager.getInstance().getTile(COUNT), 0.8f));
     }
+
+	public BufferedImage createComposite(BufferedImage tileBase, BufferedImage tileDecoration, float alpha) {
+		BufferedImage buffer = new BufferedImage(Math.max(tileBase.getWidth(), tileDecoration.getWidth()),
+				Math.max(tileBase.getHeight(), tileDecoration.getHeight()),
+				BufferedImage.TYPE_INT_ARGB);
+
+		Graphics2D g2 = buffer.createGraphics();
+		Composite newComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+
+		g2.drawImage(tileBase, null, null);
+		g2.setComposite(newComposite);
+		g2.drawImage(tileDecoration, null, null);
+		g2.dispose();
+
+		return buffer;
+	}
+
 
 	/**
 	 * Getter of the hexagons
