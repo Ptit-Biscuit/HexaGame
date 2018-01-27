@@ -24,7 +24,9 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.Composite;
+import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -121,13 +123,23 @@ public class Goblin extends Application {
      * Initialize the TileManager with the tiles
      */
     private void initTile() {
-        TileType[] list = new TileType[]{
-            CA, FOREST, CC, CD, CE, CF, CG, CH, CI, CJ, CK, CL, LAKE, CN, CO, CP, CQ, CR, CS, MOUNTAIN, CU, HILL, CW, CX, FIELD, CZ,
-            AA, AB, AC, AD, ABBEY, AF, AG, AH, AI, AJ, KEEP, AL, AM, AN, AO, AP, AQ, HAMLET, AS, AT, AU, AV, AW, AX, AY, AZ,
-            BA, BB, CITY, VILLAGE, BE, BF, BG, BH, BI, BJ, BK, BL, BM, BN, BO, BP, BQ, BR, BS, BT, BU, BV, BW, BX, BY, BZ
+        TileType[] list = new TileType[] {
+            CA, FOREST, FOREST_LIGHT, CD, CE, CF,
+	        PATH_STRAIGHT, PATH_TURN, PATH_INTERSECTION, PATH_BRIDGE, PATH_END, CL,
+	        LAKE, RIVER, RIVER_2, RIVER_3, CQ, CR,
+	        MOUNTAIN, MOUNTAIN_2, HILL_2, HILL, CW, CX,
+	        FIELD, CZ, AA, AB, AC, AD,
+	        ABBEY, AF, AG, AH, AI, AJ,
+	        KEEP, AL, AM, AN, AO, AP,
+	        AQ, HAMLET, AS, AT, AU, AV,
+	        AW, AX, AY, AZ, BA, BB,
+	        CITY, VILLAGE, BE, BF, BG, BH,
+	        BI, BJ, BK, BL, BM, BN,
+	        BO, BP, BQ, BR, BS, BT,
+	        BU, BV, BW, BX, BY, BZ
         };
 
-	    UnitType[] units = new UnitType[]{
+	    UnitType[] units = new UnitType[] {
 			    UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB,
 			    UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AB, UnitType.AB,
 			    UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB,
@@ -173,9 +185,9 @@ public class Goblin extends Application {
 			    155,
 			    unitsNames);
 
-	    TileManager.getInstance().addTile(PLAIN,
+	    /*TileManager.getInstance().addTile(PLAIN,
 			    createComposite(TileManager.getInstance().getTile(AA),
-					    UnitManager.getInstance().getTile(COUNT), 0.8f));
+					    UnitManager.getInstance().getTile(COUNT), 0.8f));*/
     }
 
 	public BufferedImage createComposite(BufferedImage tileBase, BufferedImage tileDecoration, float alpha) {
@@ -193,7 +205,6 @@ public class Goblin extends Application {
 
 		return buffer;
 	}
-
 
 	/**
 	 * Getter of the hexagons

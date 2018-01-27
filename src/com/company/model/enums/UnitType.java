@@ -5,6 +5,11 @@ package com.company.model.enums;
  * This goes <i>over</i> a tile
  */
 public enum UnitType {
+	PLUNDER1,
+	PLUNDER2,
+	PLUNDER3,
+	PLUNDER4,
+	END_TURN,
 	COUNT,
 	SIR,
 	A_RANK,
