@@ -5,6 +5,7 @@ package com.company.model.enums;
  * <i>Decorations like road, river, etc are added after the base</i>
  */
 public enum TileType {
+	// Map
 	ABBEY,
 	CITY,
 	CITY_2,
@@ -31,6 +32,9 @@ public enum TileType {
 	RUIN,
 	VILLAGE,
 	VILLAGE_2,
+
+	// Blank sprite
+	EMPTY_TILE,
 
 	// Special tilename for testing purpose
 	AA, AB, AC, AD, AE, AF, AG, AH, AI, AJ, AK, AL, AM, AN, AO, AP, AQ, AR, AS, AT, AU, AV, AW, AX, AY, AZ,

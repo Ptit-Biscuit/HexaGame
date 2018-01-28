@@ -24,20 +24,19 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 
-import java.awt.AlphaComposite;
-import java.awt.Composite;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
 import static com.company.model.enums.TileType.*;
-import static com.company.model.enums.UnitType.COUNT;
-import static com.company.model.enums.UnitType.SIR;
+import static com.company.model.enums.TileType.AA;
+import static com.company.model.enums.UnitType.*;
 import static java.lang.StrictMath.sqrt;
 
 public class Goblin extends Application {
@@ -63,6 +62,15 @@ public class Goblin extends Application {
     @Override
     public void start(Stage primaryStage) {
         initTile();
+        initFeudalUnits();
+        initGoblinUnits();
+
+        TileManager.getInstance().addTile(
+            PLAIN,
+	        createComposite(
+	        		TileManager.getInstance().getTile(PLAIN),
+			        UnitManager.getInstance().getTile(BARON), 0.8f)
+        );
 
         try {
             Parent root = FXMLLoader.load(getClass().getResource("board.fxml"));
@@ -123,51 +131,26 @@ public class Goblin extends Application {
      * Initialize the TileManager with the tiles
      */
     private void initTile() {
-        TileType[] list = new TileType[] {
-            CA, FOREST, FOREST_LIGHT, CD, CE, CF,
-	        PATH_STRAIGHT, PATH_TURN, PATH_INTERSECTION, PATH_BRIDGE, PATH_END, CL,
-	        LAKE, RIVER, RIVER_2, RIVER_3, CQ, CR,
-	        MOUNTAIN, MOUNTAIN_2, HILL_2, HILL, CW, CX,
-	        FIELD, CZ, AA, AB, AC, AD,
-	        ABBEY, AF, AG, AH, AI, AJ,
-	        KEEP, AL, AM, AN, AO, AP,
-	        AQ, HAMLET, AS, AT, AU, AV,
-	        AW, AX, AY, AZ, BA, BB,
-	        CITY, VILLAGE, BE, BF, BG, BH,
-	        BI, BJ, BK, BL, BM, BN,
-	        BO, BP, BQ, BR, BS, BT,
-	        BU, BV, BW, BX, BY, BZ
+	    TileType[] list = new TileType[] {
+	        EMPTY_TILE, FOREST, FOREST_LIGHT, PLAIN, EMPTY_TILE, EMPTY_TILE,
+	        PATH_STRAIGHT, PATH_TURN, PATH_INTERSECTION, PATH_BRIDGE, PATH_END, EMPTY_TILE,
+	        LAKE, RIVER, RIVER_2, RIVER_3, EMPTY_TILE, EMPTY_TILE,
+	        MOUNTAIN, MOUNTAIN_2, HILL_2, HILL, EMPTY_TILE, EMPTY_TILE,
+	        FIELD, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE,
+	        ABBEY, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE,
+	        KEEP, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE,
+	        EMPTY_TILE, HAMLET, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE,
+	        EMPTY_TILE, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE,
+	        CITY, VILLAGE, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE, EMPTY_TILE,
         };
-
-	    UnitType[] units = new UnitType[] {
-			    UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB,
-			    UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AB, UnitType.AB,
-			    UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB,
-			    UnitType.AB, UnitType.AA, UnitType.AB, SIR, UnitType.AB, UnitType.AA,
-			    UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB,
-			    UnitType.AB, UnitType.AA, COUNT, UnitType.AB, UnitType.AB, UnitType.AB,
-			    UnitType.AA, UnitType.AB, UnitType.AA, UnitType.AA, UnitType.AB, UnitType.AB,
-			    UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AB, UnitType.AA,
-			    UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB,
-			    UnitType.AB, UnitType.AA, UnitType.AB, UnitType.AB, UnitType.AA, UnitType.AB
-	    };
-
-        ArrayList<TileType> names = new ArrayList<>(Arrays.asList(list));
-	    ArrayList<UnitType> unitsNames = new ArrayList<>(Arrays.asList(units));
+	    ArrayList<TileType> names = new ArrayList<>(Arrays.asList(list));
 
         File map = null;
-	    File unitsFile = null;
         try {
 	        map = new File((
 			        getClass()
 					        .getClassLoader()
 					        .getResource("map.png")
-					        .toURI()));
-
-	        unitsFile = new File((
-			        getClass()
-					        .getClassLoader()
-					        .getResource("char.png")
 					        .toURI()));
         } catch (Exception e) {
 		      LogManager.getLogger(Goblin.class).error(e.getMessage());
@@ -178,16 +161,72 @@ public class Goblin extends Application {
 			    180,
 			    155,
 			    names);
+    }
+
+    public void initFeudalUnits() {
+	    UnitType[] feudalUnits = new UnitType[] {
+			    PLUNDER1, PLUNDER2, PLUNDER3, PLUNDER4, END_TURN, EMPTY_UNIT,
+			    FEUDAL_C_RANK, FEUDAL_B_RANK, FEUDAL_B_RANK_2, FEUDAL_A_RANK, FEUDAL_A_RANK_2, FEUDAL_A_RANK_3,
+			    FEUDAL_C_RANK_ZOOM, FEUDAL_B_RANK_ZOOM, FEUDAL_B_RANK_2_ZOOM, FEUDAL_A_RANK_ZOOM, FEUDAL_A_RANK_2_ZOOM, FEUDAL_A_RANK_3_ZOOM,
+			    JOHN_GORDON, ROBERT_KEITH, THOPMAS_BRUCE, FRIAR_SIMON, SIR_RANDOLPH, SIR_GODFREY,
+			    JOHN_GORDON_ZOOM, ROBERT_KEITH_ZOOM, THOPMAS_BRUCE_ZOOM, FRIAR_SIMON_ZOOM, SIR_RANDOLPH_ZOOM, SIR_GODFREY_ZOOM,
+			    SIR_HILBERT, COUNT, BARON, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT,
+			    SIR_HILBERT_ZOOM, COUNT_ZOOM, BARON_ZOOM, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT,
+			    EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT,
+			    EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT,
+			    EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT
+	    };
+	    ArrayList<UnitType> feudalNames = new ArrayList<>(Arrays.asList(feudalUnits));
+
+	    File unitsFeudalFile = null;
+	    try {
+		    unitsFeudalFile = new File((
+				    getClass()
+						    .getClassLoader()
+						    .getResource("char.png")
+						    .toURI()));
+	    } catch (URISyntaxException e) {
+		    LogManager.getLogger(Goblin.class).error(e.getMessage());
+	    }
 
 	    UnitManager.getInstance().parsePicture(
-			    unitsFile,
+			    unitsFeudalFile,
 			    180,
 			    155,
-			    unitsNames);
+			    feudalNames);
+    }
 
-	    /*TileManager.getInstance().addTile(PLAIN,
-			    createComposite(TileManager.getInstance().getTile(AA),
-					    UnitManager.getInstance().getTile(COUNT), 0.8f));*/
+    public void initGoblinUnits() {
+	    UnitType[] goblinUnits = new UnitType[] {
+			    EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT,
+			    GOBLIN_C_RANK, GOBLIN_C_RANK_2, GOBLIN_B_RANK, GOBLIN_B_RANK_2, EMPTY_UNIT, EMPTY_UNIT,
+			    GOBLIN_C_RANK_ZOOM, GOBLIN_C_RANK_2_ZOOM, GOBLIN_B_RANK_ZOOM, GOBLIN_B_RANK_2_ZOOM, EMPTY_UNIT, EMPTY_UNIT,
+			    PHINLOC, UGLOP, GRINPHAR, KASBOSH, ARGBARG, MARGLUSH,
+			    PHINLOC_ZOOM, UGLOP_ZOOM, GRINPHAR_ZOOM, KASBOSH_ZOOM, ARGBARG_ZOOM, MARGLUSH_ZOOM,
+			    KING, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT,
+			    KING_ZOOM, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT,
+			    EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT,
+			    EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT,
+			    EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT, EMPTY_UNIT,
+	    };
+	    ArrayList<UnitType> goblinNames = new ArrayList<>(Arrays.asList(goblinUnits));
+
+	    File unitsGoblinFile = null;
+	    try {
+		    unitsGoblinFile = new File((
+				    getClass()
+						    .getClassLoader()
+						    .getResource("char2.png")
+						    .toURI()));
+	    } catch (URISyntaxException e) {
+		    LogManager.getLogger(Goblin.class).error(e.getMessage());
+	    }
+
+	    UnitManager.getInstance().parsePicture(
+			    unitsGoblinFile,
+			    180,
+			    155,
+			    goblinNames);
     }
 
 	public BufferedImage createComposite(BufferedImage tileBase, BufferedImage tileDecoration, float alpha) {
