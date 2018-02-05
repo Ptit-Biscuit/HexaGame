@@ -1,22 +1,40 @@
-package com.company.model;
+package com.company.model.enums;
 
 /**
  * The base type possible for a tile.
  * <i>Decorations like road, river, etc are added after the base</i>
  */
 public enum TileType {
-	MOUNTAIN,
-	PLAIN,
-	HILL,
-	FOREST,
-	FIELD,
-	LAKE,
-	CITY,
-	VILLAGE,
-	HAMLET,
-	RUIN,
-	KEEP,
+	// Map
 	ABBEY,
+	CITY,
+	CITY_2,
+	FIELD,
+	FOREST,
+	FOREST_LIGHT,
+	HAMLET,
+	HAMLET_2,
+	HILL,
+	HILL_2,
+	KEEP,
+	LAKE,
+	MOUNTAIN,
+	MOUNTAIN_2,
+	PATH_BRIDGE,
+	PATH_END,
+	PATH_INTERSECTION,
+	PATH_STRAIGHT,
+	PATH_TURN,
+	PLAIN,
+	RIVER,
+	RIVER_2,
+	RIVER_3,
+	RUIN,
+	VILLAGE,
+	VILLAGE_2,
+
+	// Blank sprite
+	EMPTY_TILE,
 
 	// Special tilename for testing purpose
 	AA, AB, AC, AD, AE, AF, AG, AH, AI, AJ, AK, AL, AM, AN, AO, AP, AQ, AR, AS, AT, AU, AV, AW, AX, AY, AZ,

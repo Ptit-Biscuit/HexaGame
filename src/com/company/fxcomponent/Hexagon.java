@@ -1,15 +1,14 @@
 package com.company.fxcomponent;
 
+import com.company.model.Tile;
 import com.company.system.Triplet;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +28,7 @@ public class Hexagon extends Polygon {
 	/**
 	 * Width of the hexagon's sides
 	 */
-	private int hexWidth = 40;
+	private static int hexWidth = 75;
 
 	/**
 	 * Cubic coordinates of the hexagon
@@ -37,35 +36,9 @@ public class Hexagon extends Polygon {
 	private Triplet coords;
 
 	/**
-	 * Horizontal orientation
+	 * Theme (i.e Actual image) of the hexagon
 	 */
-	public static final boolean FLAT = true;
-
-	/**
-	 * Vertical orientation
-	 */
-	public static final boolean POINTY = false;
-
-	/**
-	 * Used orientation
-	 */
-	private boolean orientation = FLAT;
-
-	/**
-	 * Usable colors for the hexagon
-	 */
-	private List<Color> colors = new ArrayList<>(
-			Arrays.asList(
-					Color.rgb(236, 240, 241),
-					Color.rgb(44, 62, 80),
-					Color.rgb(230,126,34),
-					Color.rgb(52, 152, 219),
-					Color.rgb(35, 243, 35)));
-
-	/**
-	 * Theme (i.e Actual color) of the hexagon
-	 */
-	private Color theme;
+	private BufferedImage theme;
 
 	/**
 	 * Coordinates of neighbors hexagons
@@ -76,39 +49,15 @@ public class Hexagon extends Polygon {
 	 * Constructor
 	 * @param center Center of the hexagon
 	 * @param coords Coordinates of the hexagon
-	 * @param orientation Orientation of the hexagon (Hexagon.FLAT or Hexagon.POINTY)
 	 * @see Point2D.Double
 	 */
-	public Hexagon(Point2D.Double center, Triplet coords, boolean orientation) {
+	public Hexagon(Point2D.Double center, Triplet coords) {
 		this.center = center;
 		this.coords = coords;
-		this.orientation = orientation;
-		this.theme = this.colors.get(new Random().nextInt(5));
 
-		this.setFill(this.theme);
+		this.setFill(Color.LIGHTGREY);
 		this.setStroke(Color.WHITE);
 		this.setStrokeWidth(2.5);
-		this.addPoints();
-		this.addNeighbors();
-	}
-
-	/**
-	 * Constructor
-	 * @param center Center of the hexagon
-	 * @param width Width of the hexagon
-	 * @param coords Coordinates of the hexagon
-	 * @param orientation Orientation of the hexagon (Hexagon.FLAT or Hexagon.POINTY)
-	 * @see Point2D.Double
-	 */
-	public Hexagon(Point2D.Double center, int width, Triplet coords, boolean orientation) {
-		this.center = center;
-		this.hexWidth = width;
-		this.coords = coords;
-		this.orientation = orientation;
-		this.theme = this.colors.get(new Random().nextInt(5));
-
-		this.setFill(this.theme);
-		this.setStroke(Color.GRAY);
 		this.addPoints();
 		this.addNeighbors();
 	}
@@ -117,13 +66,12 @@ public class Hexagon extends Polygon {
 	 * Adding points corresponding to vertices
 	 */
 	private void addPoints() {
-		int orientationAngle = (this.orientation ? 0 : 30);
 		List<Double> points = new ArrayList<>();
 
 		for (int i = 0; i < 6; i++) {
-			int radAngle = 60 * i + orientationAngle;
-			points.add(this.center.getX() + this.hexWidth * cos(PI / 180 * radAngle));
-			points.add(this.center.getY() + this.hexWidth * sin(PI / 180 * radAngle));
+			int radAngle = 60 * i;
+			points.add(this.center.getX() + hexWidth * cos(PI / 180 * radAngle));
+			points.add(this.center.getY() + hexWidth * sin(PI / 180 * radAngle));
 		}
 
 		this.getPoints().addAll(points);
@@ -169,16 +117,16 @@ public class Hexagon extends Polygon {
 	 * Getter of the hexagon's sides width
 	 * @return The hexagon's sides width
 	 */
-	public int getHexWidth() {
+	public static int getHexWidth() {
 		return hexWidth;
 	}
 
 	/**
 	 * Setter of the hexagon's sides width
-	 * @param hexWidth the new hexagon's sides width
+	 * @param newHexWidth the new hexagon's sides width
 	 */
-	public void setHexWidth(int hexWidth) {
-		this.hexWidth = hexWidth;
+	public static void setHexWidth(int newHexWidth) {
+		hexWidth = newHexWidth;
 	}
 
 	/**
@@ -198,45 +146,32 @@ public class Hexagon extends Polygon {
 	}
 
 	/**
-	 * Getter of the orientation
-	 * @return The orientation (i.e <code>Hexagon.FLAT</code> or <code>Hexagon.POINTY</code>)
-	 */
-	public boolean getOrientation() {
-		return orientation;
-	}
-
-	/**
-	 * Setter of the orientation
-	 * @param orientation The new orientation (i.e <code>Hexagon.FLAT</code> or <code>Hexagon.POINTY</code>)
-	 */
-	public void setOrientation(boolean orientation) {
-		this.orientation = orientation;
-	}
-
-	/**
 	 * Getter of the actual theme
 	 * @return The actual theme
 	 */
-	public Color getTheme() {
+	public BufferedImage getTheme() {
 		return this.theme;
 	}
 
 	/**
-	 * Setter of the theme
+	 * Setter of the color of the hexagon
 	 * @param color The color for the theme
 	 */
 	public void setTheme(Color color) {
-		this.theme = color;
-		this.setFill(this.theme);
+		this.setFill(color);
 	}
 
 	/**
-	 * Set the theme with a bufferedImage
-	 * @param image The bufferedImage for the theme
+	 * Set the theme
+	 * @param image The image for the hexagon
 	 */
 	public void setTheme(BufferedImage image) {
-		this.setFill(new ImagePattern(SwingFXUtils.toFXImage(image, null)));
+		this.theme = image;
+		this.setFill(new ImagePattern(SwingFXUtils.toFXImage(this.theme, null)));
+	}
 
+	public void setTheme(Tile tile) {
+		this.setFill(new ImagePattern(SwingFXUtils.toFXImage(tile.getTile(), null)));
 	}
 
 	/**
@@ -249,6 +184,6 @@ public class Hexagon extends Polygon {
 
 	@Override
 	public String toString() {
-		return "Hexagon{" + "center=" + this.center + ", hexWidth=" + this.hexWidth + ", orientation=" + this.orientation + ", theme=" + this.theme + '}';
+		return "Hexagon{" + "center=" + this.center + ", hexWidth=" + hexWidth + ", theme=" + this.theme + '}';
 	}
 }

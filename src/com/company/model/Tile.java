@@ -1,6 +1,18 @@
 package com.company.model;
 
+import com.company.Goblin;
+import com.company.model.enums.Facing;
+import com.company.model.enums.TileType;
+import com.company.model.managers.TileManager;
+import com.company.model.units.Unit;
+import com.company.system.TileUtil;
+
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Tile of the map
@@ -9,12 +21,17 @@ public class Tile {
 	/**
 	 * Image representing the tile
 	 */
-    public BufferedImage tile;
+    private BufferedImage tile;
 
 	/**
 	 * Type of the tile
 	 */
 	private TileType type;
+
+	/**
+	 * Units of the tile
+	 */
+	private List<Unit> units;
 
 	/**
 	 * River on the tile
@@ -32,7 +49,7 @@ public class Tile {
 	private Facing forest[];
 
 	/**
-	 * Entrance on the tile (Moutain only)
+	 * Entrance on the tile (Mountain only)
 	 */
 	private Facing entrance[];
 
@@ -82,6 +99,31 @@ public class Tile {
 	}
 
 	/**
+	 * Getter of the units of the tile
+	 * @return The units of the tile
+	 */
+	public List<Unit> getUnits() {
+		return this.units;
+	}
+
+	/**
+	 * Setter of the units of the tile
+	 * @param unit The unit to add on the tile
+	 */
+	public void setUnits(Unit unit) {
+		if ( unit != null)
+			this.units.add(unit);
+	}
+
+	/**
+	 * Remove a unit from the tile
+	 * @param unit The unit to be remove
+	 */
+	public boolean removeUnit(Unit unit) {
+		return units.contains(unit) && units.remove(unit);
+	}
+
+	/**
 	 * Getter of the orientation of the river
 	 * @return The orientation of the river
 	 */
@@ -95,6 +137,22 @@ public class Tile {
 	 */
 	public void setRiver(Facing[] river) {
 		this.river = river;
+		BufferedImage riverImage = TileManager.getInstance().getTile(TileType.RIVER);
+		Graphics2D g2d = riverImage.createGraphics();
+		AffineTransform tx = new AffineTransform();
+		tx.rotate(Math.PI/3, riverImage.getWidth() / 2, riverImage.getHeight() / 2);
+
+		AffineTransformOp op = new AffineTransformOp(tx,
+				AffineTransformOp.TYPE_BILINEAR);
+		riverImage = op.filter(riverImage, null);
+
+		this.setTile(
+				TileUtil.createComposite(
+						this.getTile(),
+						riverImage,
+						0.8f));
+
+		g2d.dispose();
 	}
 
 	/**
