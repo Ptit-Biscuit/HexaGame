@@ -3,6 +3,8 @@ package com.company;
 import com.company.fxcomponent.Hexagon;
 import com.company.handler.HexaHandler;
 import com.company.model.Map;
+import com.company.model.Tile;
+import com.company.model.enums.Facing;
 import com.company.model.enums.TileType;
 import com.company.model.enums.UnitType;
 import com.company.model.managers.TileManager;
@@ -65,13 +67,6 @@ public class Goblin extends Application {
         initFeudalUnits();
         initGoblinUnits();
 
-        TileManager.getInstance().addTile(
-            PLAIN,
-	        createComposite(
-	        		TileManager.getInstance().getTile(PLAIN),
-			        UnitManager.getInstance().getTile(BARON), 0.8f)
-        );
-
         try {
             Parent root = FXMLLoader.load(getClass().getResource("board.fxml"));
             Scene scene = new Scene(root, 1280, 720);
@@ -89,22 +84,29 @@ public class Goblin extends Application {
                         new Point2D.Double(
 		                        Hexagon.getHexWidth() + distHorizontal * col,
 		                        height/2 + height * (row + ((col % 2 == 0) ? 0 : 0.5f))),
-                        coordinates,
-                        Hexagon.FLAT);
+                        coordinates);
 
                     BufferedImage tile = TileManager.getInstance().getTile(Map.get(row, col));
 
-                    if (tile != null)
-                        hexagon.setTheme(tile);
+	                if (tile != null) {
+		                Tile t = new Tile(tile);
+		                t.setType(Map.get(row, col));
+		                t.setRiver(new Facing[]{Facing.SOUTH, Facing.SOUTH_EAST});
+
+		                hexagon.setTheme(t);
+	                }
                     else hexagon.setTheme(Color.rgb(35, 243, 35));
 
                     hexagons.put(coordinates, hexagon);
                 }
             }
 
+            HexaHandler handler = new HexaHandler();
+
             new Thread(() -> hexagons.values().forEach(h -> {
-	            h.addEventHandler(MouseEvent.MOUSE_ENTERED, new HexaHandler());
-	            h.addEventHandler(MouseEvent.MOUSE_EXITED, new HexaHandler());
+	            h.addEventHandler(MouseEvent.MOUSE_ENTERED, handler);
+	            h.addEventHandler(MouseEvent.MOUSE_EXITED, handler);
+	            h.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
             })).start();
 
 	        Pane pane = new Pane(hexagons.values().toArray(new Hexagon[0]));
@@ -228,22 +230,6 @@ public class Goblin extends Application {
 			    155,
 			    goblinNames);
     }
-
-	public BufferedImage createComposite(BufferedImage tileBase, BufferedImage tileDecoration, float alpha) {
-		BufferedImage buffer = new BufferedImage(Math.max(tileBase.getWidth(), tileDecoration.getWidth()),
-				Math.max(tileBase.getHeight(), tileDecoration.getHeight()),
-				BufferedImage.TYPE_INT_ARGB);
-
-		Graphics2D g2 = buffer.createGraphics();
-		Composite newComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
-
-		g2.drawImage(tileBase, null, null);
-		g2.setComposite(newComposite);
-		g2.drawImage(tileDecoration, null, null);
-		g2.dispose();
-
-		return buffer;
-	}
 
 	/**
 	 * Getter of the hexagons

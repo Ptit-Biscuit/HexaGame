@@ -1,10 +1,17 @@
 package com.company.model;
 
+import com.company.Goblin;
 import com.company.model.enums.Facing;
 import com.company.model.enums.TileType;
+import com.company.model.managers.TileManager;
 import com.company.model.units.Unit;
+import com.company.system.TileUtil;
 
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -130,6 +137,22 @@ public class Tile {
 	 */
 	public void setRiver(Facing[] river) {
 		this.river = river;
+		BufferedImage riverImage = TileManager.getInstance().getTile(TileType.RIVER);
+		Graphics2D g2d = riverImage.createGraphics();
+		AffineTransform tx = new AffineTransform();
+		tx.rotate(Math.PI/3, riverImage.getWidth() / 2, riverImage.getHeight() / 2);
+
+		AffineTransformOp op = new AffineTransformOp(tx,
+				AffineTransformOp.TYPE_BILINEAR);
+		riverImage = op.filter(riverImage, null);
+
+		this.setTile(
+				TileUtil.createComposite(
+						this.getTile(),
+						riverImage,
+						0.8f));
+
+		g2d.dispose();
 	}
 
 	/**
