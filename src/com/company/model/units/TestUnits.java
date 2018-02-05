@@ -32,11 +32,11 @@ public class TestUnits {
         Fighter feudal1 = new Fighter(1, false, "feudal", 10,
                 new Pair<>(0,0),"RE", "A", 3, 3);
         Fighter feudal2 = new Fighter(3, false, "feudal", 10,
-                new Pair<>(0,0),"", "C", 3, 3);
+                new Pair<>(0,0),"", "controller", 3, 3);
         Fighter feudal3 = new Fighter(3, false, "feudal", 10,
-                new Pair<>(0,0),"", "C", 3, 3);
+                new Pair<>(0,0),"", "controller", 3, 3);
         Fighter feudal4 = new Fighter(3, false, "feudal", 10,
-                new Pair<>(0,0),"", "C", 3, 3);
+                new Pair<>(0,0),"", "controller", 3, 3);
 
         ArrayList<? extends Unit> feudalList = new ArrayList<>(Arrays.asList(feudalLeader, feudal1, feudal2, feudal3, feudal4));
 

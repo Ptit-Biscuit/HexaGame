@@ -1,11 +1,6 @@
-package com.company.handler;
+package com.company.controller.handler;
 
-import com.company.Goblin;
-import com.company.fxcomponent.Hexagon;
-import com.company.model.enums.TileType;
-import com.company.model.enums.UnitType;
-import com.company.model.managers.TileManager;
-import com.company.model.managers.UnitManager;
+import com.company.view.fxcomponent.Hexagon;
 import javafx.event.EventHandler;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.MouseEvent;
@@ -31,7 +26,7 @@ public class HexaHandler implements EventHandler<MouseEvent> {
 
 		/*if (event.getEventType().equals(MouseEvent.MOUSE_CLICKED)) {
 			current.setTheme(
-					Goblin.createComposite(current.getTheme(),
+					Main.createComposite(current.getTheme(),
 					UnitManager.getInstance().getTile(UnitType.BARON),
 					0.8f));
 		}*/

@@ -44,7 +44,7 @@ public enum UnitType {
 	BARON,
 	BARON_ZOOM,
 
-	// Goblin units
+	// Main units
 	GOBLIN_C_RANK,
 	GOBLIN_C_RANK_ZOOM,
 	GOBLIN_C_RANK_2,

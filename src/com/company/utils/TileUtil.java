@@ -1,4 +1,4 @@
-package com.company.system;
+package com.company.utils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

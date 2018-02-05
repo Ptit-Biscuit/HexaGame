@@ -1,6 +1,6 @@
-package com.company.model.managers;
+package com.company.controller.manager;
 
-import com.company.model.enums.TileType;
+import com.company.model.enums.UnitType;
 import org.apache.logging.log4j.LogManager;
 
 import javax.imageio.ImageIO;
@@ -13,40 +13,40 @@ import java.util.HashMap;
 /**
  * Manager of the tiles
  */
-public class TileManager implements GraphicManager<TileType> {
+public class UnitManager implements GraphicManager<UnitType> {
 	/**
-	 * Unique instance of TileManager (Singleton Pattern)
+	 * Unique instance of UnitManager (Singleton Pattern)
 	 */
-    private static TileManager instance = new TileManager();
+    private static UnitManager instance = new UnitManager();
 
 	/**
 	 * Tileset containing all the tiles
 	 */
-	private HashMap<TileType, BufferedImage> tileset = new HashMap<>(); // (Tilename, Tile)
+	private HashMap<UnitType, BufferedImage> tileset = new HashMap<>(); // (Tilename, Tile)
 
 	/**
 	 * Default constructor
 	 */
-	private TileManager() {
+	private UnitManager() {
 	}
 
 	@Override
-	public void addTile(TileType name, BufferedImage tile) {
+	public void addTile(UnitType name, BufferedImage tile) {
 		tileset.put(name, tile);
 	}
 
 	@Override
-	public BufferedImage getTile(TileType name) {
+	public BufferedImage getTile(UnitType name) {
 		return tileset.get(name);
 	}
 
 	@Override
-	public void parsePicture(File tilesetFile, int width, ArrayList<TileType> names) {
+	public void parsePicture(File tilesetFile, int width, ArrayList<UnitType> names) {
 		parsePicture(tilesetFile, width, width, names);
 	}
 
 	@Override
-	public void parsePicture(File tilesetFile, int width, int height, ArrayList<TileType> names) {
+	public void parsePicture(File tilesetFile, int width, int height, ArrayList<UnitType> names) {
 		try {
 			BufferedImage tilemap = ImageIO.read(tilesetFile);
 			int xmax = tilemap.getWidth() / width;
@@ -54,7 +54,7 @@ public class TileManager implements GraphicManager<TileType> {
 
 			for (int x = 0; x < xmax; ++x)
 				for (int y = 0; y < ymax; ++y) {
-					TileType name = names.get(y + x * ymax);
+					UnitType name = names.get(y + x * ymax);
 					if (name != null)
 						tileset.put(name, tilemap.getSubimage(x * width, y * height, width, height));
 				}
@@ -65,11 +65,11 @@ public class TileManager implements GraphicManager<TileType> {
 
 	/**
 	 * Complementary method of singleton pattern
-	 * @return The unique instance of TileManager
+	 * @return The unique instance of UnitManager
 	 */
-	public static TileManager getInstance() {
+	public static UnitManager getInstance() {
 		if(instance == null)
-			instance = new TileManager();
+			instance = new UnitManager();
 		return instance;
 	}
 }

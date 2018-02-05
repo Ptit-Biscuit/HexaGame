@@ -1,7 +1,7 @@
-package com.company.fxcomponent;
+package com.company.view.fxcomponent;
 
 import com.company.model.Tile;
-import com.company.system.Triplet;
+import com.company.utils.Triplet;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -10,9 +10,7 @@ import javafx.scene.shape.Polygon;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 import static java.lang.Math.*;
 

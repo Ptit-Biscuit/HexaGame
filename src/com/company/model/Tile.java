@@ -1,17 +1,15 @@
 package com.company.model;
 
-import com.company.Goblin;
 import com.company.model.enums.Facing;
 import com.company.model.enums.TileType;
-import com.company.model.managers.TileManager;
+import com.company.controller.manager.TileManager;
 import com.company.model.units.Unit;
-import com.company.system.TileUtil;
+import com.company.utils.TileUtil;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.util.Arrays;
 import java.util.List;
 
 /**

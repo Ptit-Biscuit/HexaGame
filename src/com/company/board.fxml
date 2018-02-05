@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.company.Goblin">
+      fx:controller="com.company.Main">
   <MenuBar VBox.vgrow="NEVER">
     <Menu mnemonicParsing="false" text="File">
       <SeparatorMenuItem mnemonicParsing="false" />

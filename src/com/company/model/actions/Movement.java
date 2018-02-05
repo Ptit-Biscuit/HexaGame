@@ -1,8 +1,9 @@
-package com.company.system;
+package com.company.model.actions;
 
-import com.company.Goblin;
-import com.company.fxcomponent.Hexagon;
+import com.company.Main;
+import com.company.view.fxcomponent.Hexagon;
 import com.company.model.Tile;
+import com.company.utils.Triplet;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class Movement {
 			        previous[0].getNeighbors().contains(t);
 		        }
 
-		        previous[0] = Goblin.getHexagon(t);
+		        previous[0] = Main.getHexagon(t);
 		        mp.getAndDecrement();
         });
 

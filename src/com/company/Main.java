@@ -1,21 +1,20 @@
 package com.company;
 
-import com.company.fxcomponent.Hexagon;
-import com.company.handler.HexaHandler;
+import com.company.view.fxcomponent.Hexagon;
+import com.company.controller.handler.HexaHandler;
 import com.company.model.Map;
 import com.company.model.Tile;
 import com.company.model.enums.Facing;
 import com.company.model.enums.TileType;
 import com.company.model.enums.UnitType;
-import com.company.model.managers.TileManager;
-import com.company.model.managers.UnitManager;
-import com.company.system.Triplet;
+import com.company.controller.manager.TileManager;
+import com.company.controller.manager.UnitManager;
+import com.company.utils.Triplet;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.BoundingBox;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -27,7 +26,6 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 
-import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -38,11 +36,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import static com.company.model.enums.TileType.*;
-import static com.company.model.enums.TileType.AA;
 import static com.company.model.enums.UnitType.*;
 import static java.lang.StrictMath.sqrt;
 
-public class Goblin extends Application {
+public class Main extends Application {
 	/**
 	 * The hexagons
 	 */
@@ -118,7 +115,7 @@ public class Goblin extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
-            LogManager.getLogger(Goblin.class).error(e.getMessage());
+            LogManager.getLogger(Main.class).error(e.getMessage());
         }
     }
 
@@ -156,7 +153,7 @@ public class Goblin extends Application {
 					        .getResource("map.png")
 					        .toURI()));
         } catch (Exception e) {
-		      LogManager.getLogger(Goblin.class).error(e.getMessage());
+		      LogManager.getLogger(Main.class).error(e.getMessage());
         }
 
 	    TileManager.getInstance().parsePicture(
@@ -189,7 +186,7 @@ public class Goblin extends Application {
 						    .getResource("char.png")
 						    .toURI()));
 	    } catch (URISyntaxException e) {
-		    LogManager.getLogger(Goblin.class).error(e.getMessage());
+		    LogManager.getLogger(Main.class).error(e.getMessage());
 	    }
 
 	    UnitManager.getInstance().parsePicture(
@@ -222,7 +219,7 @@ public class Goblin extends Application {
 						    .getResource("char2.png")
 						    .toURI()));
 	    } catch (URISyntaxException e) {
-		    LogManager.getLogger(Goblin.class).error(e.getMessage());
+		    LogManager.getLogger(Main.class).error(e.getMessage());
 	    }
 
 	    UnitManager.getInstance().parsePicture(

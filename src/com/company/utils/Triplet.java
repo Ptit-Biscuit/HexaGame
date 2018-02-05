@@ -1,4 +1,4 @@
-package com.company.system;
+package com.company.utils;
 
 public class Triplet {
 	/**
