@@ -116,6 +116,11 @@ public class Main extends Application {
     }
 
 	/**
+	 *
+	 */
+	public static void update(){ hexagons.values().forEach(Hexagon::update); }
+
+	/**
 	 * Test the move
 	 */
     public void testMove(){
@@ -199,6 +204,4 @@ public class Main extends Application {
     public static Hexagon getHexagon(Triplet coordinates) {
         return hexagons.get(coordinates);
     }
-
-    public static void update(){ hexagons.values().forEach(Hexagon::update); }
 }

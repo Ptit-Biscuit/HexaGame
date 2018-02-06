@@ -21,7 +21,11 @@ import static java.lang.Math.*;
  * Represent an hexagon
  */
 public class Hexagon extends Polygon {
+	/**
+	 *
+	 */
 	private final Tile tileHolder;
+
 	/**
 	 * Center of the hexagon
 	 */
@@ -36,11 +40,6 @@ public class Hexagon extends Polygon {
 	 * Cubic coordinates of the hexagon
 	 */
 	private Triplet coords;
-
-	/**
-	 * Theme (i.e Actual image) of the hexagon
-	 */
-	private BufferedImage theme;
 
 	/**
 	 * Constructor
@@ -62,16 +61,30 @@ public class Hexagon extends Polygon {
 		update();
 	}
 
+	/**
+	 *
+	 */
 	public void update() {
 		BufferedImage image = TileManager.getInstance().getTile(tileHolder.getType()); // Get main image
-	/*	image = TileUtil.compose( // Add river
-				tileHolder.getRiver(),
-				TileType.RIVER,
-				image); */
+//		image = TileUtil.compose( // Add river
+//				tileHolder.getRiver(),
+//				TileType.RIVER,
+//				image);
 		image = TileUtil.compose( // Add forest
 				tileHolder.getForest(), // BOOLEAN
 				TileType.FOREST_LIGHT,
 				image);
+//		image = TileUtil.compose( // Add road
+//				tileHolder.getRoad(),
+//				TileType.ROAD_STRAIGHT,
+//				image);
+
+		// TODO : replace entrance mountain with type 2
+//		if (tileHolder.getType().equals(TileType.MOUNTAIN_2))
+//			image = TileUtil.compose( // Add entrance
+//					tileHolder.getEntrance(),
+//					TileType.MOUNTAIN_2,
+//					image);
 		// TODO : ADD AND COMPOSE ALL LAYERS
 		// TileUtil.compose()
 
@@ -92,7 +105,6 @@ public class Hexagon extends Polygon {
 
 		this.getPoints().addAll(points);
 	}
-
 
 	/**
 	 * Getter of the central point
@@ -163,8 +175,6 @@ public class Hexagon extends Polygon {
 
 	@Override
 	public String toString() {
-		return "Hexagon{" + "center=" + this.center + ", hexWidth=" + hexWidth + ", theme=" + this.theme + '}';
+		return "Hexagon : center=" + this.center + ", hexWidth=" + hexWidth;
 	}
-
-
 }
