@@ -47,4 +47,9 @@ public class TileUtil {
         }
         return composite;
     }
+
+    public static BufferedImage compose(boolean willcompose, TileType tile, BufferedImage composite) {
+        if (willcompose) return compose(new Facing[]{Facing.SOUTH}, tile, composite);
+        return composite;
+    }
 }

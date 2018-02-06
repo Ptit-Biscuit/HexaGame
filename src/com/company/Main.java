@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.view.Board;
 import com.company.view.TilesetInitializer;
 import com.company.view.fxcomponent.Hexagon;
 import com.company.controller.handler.HexaHandler;
@@ -32,29 +33,30 @@ import java.util.HashMap;
 import static java.lang.StrictMath.sqrt;
 
 public class Main extends Application {
-	/**
-	 * The hexagons
-	 */
-	private static HashMap<Triplet, Hexagon> hexagons = new HashMap<>();
+    /**
+     * The hexagons
+     */
+    private static HashMap<Triplet, Hexagon> hexagons = new HashMap<>();
 
-	/**
-	 * The scroll pane
-	 */
-	@FXML
-	public static ScrollPane scrollPane;
+    /**
+     * The scroll pane
+     */
+    @FXML
+    public static ScrollPane scrollPane;
 
-	/**
-	 * The H.U.D
-	 */
-	private static Hud hud = new Hud(0, 0, 355, 175);
+    /**
+     * The H.U.D
+     */
+    private static Hud hud = new Hud(0, 0, 355, 175);
 
-	/**
-	 * Main
-	 * @param args Arguments
-	 */
-	public static void main(String[] args) {
-		launch(args);
-	}
+    /**
+     * Main
+     *
+     * @param args Arguments
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -74,67 +76,59 @@ public class Main extends Application {
 
             Pair<Integer, Integer> size = Map.getMapSize();
 
-            for (int col = 0; col < size.getValue(); col++) {
+
+            Board tiles = Board.getInstance();
+            for (int col = 0; col < size.getValue(); col++)
                 for (int row = 0; row < size.getKey(); row++) {
-                    Triplet coordinates = new Triplet(row, col, - row - col);
-
+                    Triplet coordinates = new Triplet(row, col, -row - col);
                     Hexagon hexagon = new Hexagon(
-                        new Point2D.Double(
-		                        Hexagon.getHexWidth() + distHorizontal * col,
-		                        height/2 + height * (row + ((col % 2 == 0) ? 0 : 0.5f))),
-                        coordinates);
-
-                    BufferedImage tile = TileManager.getInstance().getTile(Map.get(row, col));
-
-	                if (tile != null) {
-		                Tile t = new Tile(tile);
-		                t.setType(Map.get(row, col));
-		                hexagon.setTheme(t);
-	                }
-                    else hexagon.setTheme(Color.rgb(35, 243, 35));
-
+                            new Point2D.Double(
+                                    Hexagon.getHexWidth() + distHorizontal * col,
+                                    height / 2 + height * (row + ((col % 2 == 0) ? 0 : 0.5f))),
+                            coordinates, tiles.getTile(coordinates));
                     hexagons.put(coordinates, hexagon);
                 }
-            }
+
 
             HexaHandler handler = new HexaHandler();
 
             new Thread(() -> hexagons.values().forEach(h -> {
-	            h.addEventHandler(MouseEvent.MOUSE_ENTERED, handler);
-	            h.addEventHandler(MouseEvent.MOUSE_EXITED, handler);
-	            h.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
+                h.addEventHandler(MouseEvent.MOUSE_ENTERED, handler);
+                h.addEventHandler(MouseEvent.MOUSE_EXITED, handler);
+                h.addEventHandler(MouseEvent.MOUSE_CLICKED, handler);
             })).start();
 
-	        Pane pane = new Pane(hexagons.values().toArray(new Hexagon[0]));
-	        pane.getChildren().add(hud);
-	        hud.setVisible(false);
+            Pane pane = new Pane(hexagons.values().toArray(new Hexagon[0]));
+            pane.getChildren().add(hud);
+            hud.setVisible(false);
 
-	        scrollPane = (ScrollPane) scene.lookup("#scrollPane");
-	        scrollPane.setContent(pane);
-	        scrollPane.addEventFilter(ScrollEvent.SCROLL, Event::consume);
-	        primaryStage.setScene(scene);
-	        primaryStage.show();
+            scrollPane = (ScrollPane) scene.lookup("#scrollPane");
+            scrollPane.setContent(pane);
+            scrollPane.addEventFilter(ScrollEvent.SCROLL, Event::consume);
+            primaryStage.setScene(scene);
+            primaryStage.show();
         } catch (IOException e) {
             LogManager.getLogger(Main.class).error(e.getMessage());
         }
     }
 
-	/**
-	 * Exit the application
-	 */
-	@FXML
-	public void quit() {
-		Platform.exit();
+    /**
+     * Exit the application
+     */
+    @FXML
+    public void quit() {
+        Platform.exit();
     }
 
 
-	/**
-	 * Getter of the H.U.D
-	 * @return the H.U.D
-	 */
-	public static Hud getHud() {
-		return hud;
-	}
+    /**
+     * Getter of the H.U.D
+     *
+     * @return the H.U.D
+     */
+    public static Hud getHud() {
+        return hud;
+    }
 
 	/**
 	 * Getter of the width of the scrollPane
@@ -152,20 +146,22 @@ public class Main extends Application {
 		return scrollPane.getHeight();
 	}
 
-	/**
-	 * Getter of the hexagons
-	 * @return The hexagons
-	 */
-	public static HashMap<Triplet, Hexagon> getHexagons() {
-		return hexagons;
-	}
+    /**
+     * Getter of the hexagons
+     *
+     * @return The hexagons
+     */
+    public static HashMap<Triplet, Hexagon> getHexagons() {
+        return hexagons;
+    }
 
-	/**
-	 * Getter of an hexagon from its coordinates
-	 * @param coordinates The hexagon's coordinates
-	 * @return The hexagon found, null otherwise
-	 */
-	public static Hexagon getHexagon(Triplet coordinates) {
-		return hexagons.get(coordinates);
-	}
+    /**
+     * Getter of an hexagon from its coordinates
+     *
+     * @param coordinates The hexagon's coordinates
+     * @return The hexagon found, null otherwise
+     */
+    public static Hexagon getHexagon(Triplet coordinates) {
+        return hexagons.get(coordinates);
+    }
 }

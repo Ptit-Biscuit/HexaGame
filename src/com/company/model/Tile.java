@@ -1,27 +1,16 @@
 package com.company.model;
 
-import com.company.controller.manager.TileManager;
 import com.company.model.enums.Facing;
 import com.company.model.enums.TileType;
 import com.company.model.units.Army;
 import com.company.model.units.Unit;
-import com.company.utils.TileUtil;
 
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageFilter;
 import java.util.List;
 
 /**
  * Tile of the map
  */
 public class Tile {
-    /**
-     * Image representing the tile
-     */
-    private BufferedImage tile;
 
     /**
      * Type of the tile
@@ -51,7 +40,7 @@ public class Tile {
     /**
      * Forest on the tile
      */
-    private Facing forest[];
+    private boolean forest;
 
     /**
      * Entrance on the tile (Mountain only)
@@ -65,12 +54,8 @@ public class Tile {
 
     /**
      * Constructor
-     *
-     * @param subimage Image representing the tile
      */
-    public Tile(BufferedImage subimage) {
-        tile = subimage;
-    }
+    public Tile() {}
 
     /**
      * Getter of the type
@@ -90,23 +75,6 @@ public class Tile {
         this.type = type;
     }
 
-    /**
-     * Getter of the tile
-     *
-     * @return The tile
-     */
-    public BufferedImage getTile() {
-        return this.tile;
-    }
-
-    /**
-     * Setter of the tile
-     *
-     * @param tile The new tile
-     */
-    public void setTile(BufferedImage tile) {
-        this.tile = tile;
-    }
 
 
     /**
@@ -164,8 +132,7 @@ public class Tile {
      */
     public void setRiver(Facing[] river) {
         this.river = river;
-        
-        this.setTile(TileUtil.compose(river, TileType.RIVER, this.getTile()));
+        // this.setTile(TileUtil.compose(river, TileType.RIVER, this.getTile()));
     }
 
     /**
@@ -191,7 +158,7 @@ public class Tile {
      *
      * @return The orientation of the forest
      */
-    public Facing[] getForest() {
+    public boolean getForest() {
         return this.forest;
     }
 
@@ -200,7 +167,7 @@ public class Tile {
      *
      * @param forest The new orientation of the forest
      */
-    public void setForest(Facing[] forest) {
+    public void setForest(boolean forest) {
         this.forest = forest;
     }
 
