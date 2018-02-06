@@ -32,20 +32,12 @@ public abstract class Unit {
      */
     private Tile position;
 
-    /**
-     * A tile that represents the ghost position of the unit
-     */
-    private Tile ghostPosition;
 
     /**
      * Deployment code of the unit
      */
     private String deploymentCode;
 
-    /**
-     * Number of ghost movement point of the unit
-     */
-    private int ghostMP;
 
     /**
      * Constructor
@@ -60,15 +52,8 @@ public abstract class Unit {
         this.mounted = mounted;
         this.race = race;
         this.position = position;
-        this.ghostPosition = position;
         this.deploymentCode = deploymentCode;
-        if (mounted) {
-            this.ghostMP = 15;
-            this.MP = 15;
-        } else {
-            this.ghostMP = 10;
-            this.MP = 10;
-        }
+        this.MP = 10;
     }
 
     /**
@@ -136,22 +121,6 @@ public abstract class Unit {
     }
 
     /**
-     * Getter of ghostPosition
-     * @return The ghost position
-     */
-    public  Tile getGhostPosition() {
-        return ghostPosition;
-    }
-
-    /**
-     * Setter of ghostPosition
-     * @param ghostPosition The new ghost position
-     */
-    public  void setGhostPosition(Tile ghostPosition) {
-        this.ghostPosition = ghostPosition;
-    }
-
-    /**
      * Getter of deployment code
      * @return The deployment code
      */
@@ -159,20 +128,5 @@ public abstract class Unit {
         return deploymentCode;
     }
 
-    /**
-     * Getter of ghostMP
-     * @return The ghost movement point
-     */
-    public  int getGhostMP() {
-        return ghostMP;
-    }
-
-    /**
-     * Setter of the ghostMP
-     * @param ghostMP The new value of ghostMP
-     */
-    public  void setGhostMP(int ghostMP) {
-        this.ghostMP = ghostMP;
-    }
 
 }

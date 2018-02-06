@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.model.Board;
 import com.company.model.Tile;
+import com.company.model.units.Army;
 import com.company.view.TilesetInitializer;
 import com.company.model.actions.Movement;
 import com.company.model.units.Fighter;
@@ -138,16 +139,28 @@ public class Main extends Application {
         tileList.add(tile5);
 
 		Leader feudalLeader = new Leader(5,true,"feudal", Board.getInstance().getTile(new Triplet(1,3,-4)) , "RE", "Count", 3, 5);
-        Fighter feudal1 = new Fighter(3,false,"feudal", Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3, feudalLeader);
-        Fighter feudal2 = new Fighter(3,false,"feudal",Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3, feudalLeader);
-        Fighter feudal3 = new Fighter(3,false,"feudal",Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3, feudalLeader);
-        Fighter feudal4 = new Fighter(3,false,"feudal",Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3, feudalLeader);
+        Fighter feudal1 = new Fighter(3,false,"feudal", Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3);
+        Fighter feudal2 = new Fighter(3,false,"feudal",Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3);
+        Fighter feudal3 = new Fighter(3,false,"feudal",Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3);
+        Fighter feudal4 = new Fighter(3,false,"feudal",Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3);
 
-		Boolean valid = Movement.isValidMove(feudalLeader,tileList);
+        List<Leader> leaders = new ArrayList<Leader>();
+        leaders.add(feudalLeader);
+
+        List<Fighter> fighters = new ArrayList<Fighter>();
+        fighters.add(feudal1);
+        fighters.add(feudal2);
+        fighters.add(feudal3);
+        fighters.add(feudal4);
+
+
+        Army army = new Army(leaders, fighters, Board.getInstance().getTile(new Triplet(1,3,-4)));
+
+		Boolean valid = Movement.isValidMove(army,tileList);
 		System.out.println(valid);
 		System.out.println(feudalLeader.getPosition().getCoordinates());
 		if (valid){
-			Movement.move(feudalLeader);
+			Movement.move(army);
 		}
 		System.out.println(feudalLeader.getPosition().getCoordinates());
 	}
