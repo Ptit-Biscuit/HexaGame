@@ -36,12 +36,16 @@ public class Movement {
 	}
 
 	public static void move(Leader leader){
+		leader.getPosition().removeUnit(leader);
 		leader.setMP(leader.getGhostMP());
 		leader.setPosition(leader.getGhostPosition());
+		leader.getPosition().setUnits(leader);
 
 		for (Fighter fighter:leader.getFightersList()) {
+			fighter.getPosition().removeUnit(fighter);
 			fighter.setMP(leader.getMP());
 			fighter.setPosition(leader.getPosition());
+			fighter.getPosition().setUnits(fighter);
 		}
 
 	}
