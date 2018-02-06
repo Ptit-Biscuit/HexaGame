@@ -46,7 +46,7 @@ public class Board {
                 tile.setType(Map.get(row, col));
                 // tile.setCostMP(costMP.getOrDefault(tile.getType(), 1));
                 tile.setForest(Map.getForest(row, col));
-                tile.setRiver(Map.getRiver(row, col));
+            //    tile.setRiver(Map.getRiver(row, col));
                 // tile.setBridge();
                 // tile.setRoad();
                 // tile.setEntrance();

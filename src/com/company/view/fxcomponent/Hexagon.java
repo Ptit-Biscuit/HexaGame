@@ -64,10 +64,10 @@ public class Hexagon extends Polygon {
 
 	public void update() {
 		BufferedImage image = TileManager.getInstance().getTile(tileHolder.getType()); // Get main image
-		image = TileUtil.compose( // Add river
+	/*	image = TileUtil.compose( // Add river
 				tileHolder.getRiver(),
 				TileType.RIVER,
-				image);
+				image); */
 		image = TileUtil.compose( // Add forest
 				tileHolder.getForest(), // BOOLEAN
 				TileType.FOREST_LIGHT,

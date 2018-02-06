@@ -84,12 +84,6 @@ public class Fighter extends Unit {
      * @param leader The new leader
      */
     public void setLeader(Leader leader) {
-        if(this.leader != null){
-            this.leader.deleteAssociateFighter(this);
-        }
         this.leader = leader;
-        if(leader!=null) {
-            leader.addAssociateFighter(this);
-        }
     }
 }

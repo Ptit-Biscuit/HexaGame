@@ -20,8 +20,8 @@ public class Movement {
 	 */
 	public static Boolean isValidMove(Leader leader, ArrayList<Tile> tileList) {
 		for (Tile tile:tileList) {
-			List<Triplet> neighbors = leader.getGhostPosition().getNeighbors();
-			if (neighbors.contains(tile.getCoords())){
+			List<Triplet> neighbors = Triplet.getNeighbors(leader.getGhostPosition().getCoordinates());
+			if (neighbors.contains(tile.getCoordinates())){
 				leader.setGhostPosition(tile);
 				leader.setGhostMP(leader.getGhostMP()-1);
 				if(leader.getGhostMP()<0){

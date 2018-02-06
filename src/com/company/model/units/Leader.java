@@ -84,7 +84,6 @@ public class Leader extends Unit {
     public void deleteAssociateFighter(Fighter fighter) {
         if (this.fightersList.contains(fighter)) {
             this.fightersList.remove(fighter);
-            fighter.setLeader(null);
         }
     }
 
@@ -94,8 +93,9 @@ public class Leader extends Unit {
      * @param fighter The fighter to add
      */
     public void addAssociateFighter(Fighter fighter) {
-        fighter.setLeader(this);
-        this.fightersList.add(fighter);
+        if (!this.getFightersList().contains(fighter)) {
+            this.fightersList.add(fighter);
+        }
     }
 
     /**
