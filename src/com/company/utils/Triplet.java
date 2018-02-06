@@ -91,6 +91,11 @@ public class Triplet {
 		return x == triplet.x && y == triplet.y && z == triplet.z;
 	}
 
-
-
+	@Override
+	public int hashCode() {
+		int result = x;
+		result = 31 * result + y;
+		result = 31 * result + z;
+		return result;
+	}
 }

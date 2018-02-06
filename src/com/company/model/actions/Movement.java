@@ -1,43 +1,50 @@
 package com.company.model.actions;
 
-import com.company.Main;
-import com.company.view.fxcomponent.Hexagon;
-import com.company.model.Tile;
+import com.company.model.units.Fighter;
+import com.company.model.units.Leader;
+import com.company.model.units.Unit;
 import com.company.utils.Triplet;
-import javafx.util.Pair;
+import com.company.view.fxcomponent.Hexagon;
 
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.List;
 
 /**
  * Class Movement represent a movement
  */
 public class Movement {
+
 	/**
 	 *
-	 * @param selected
-	 * @param movementList
-	 * @return
+	 * @param hexaList
+	 * @return If the movement is valid
 	 */
-    public Boolean move(Tile selected, ArrayList<Pair> movementList) {
-        if (selected.getUnits().isEmpty() || movementList.isEmpty()) {
-	        return false;
-        }
+	public static Boolean isValidMove(Leader leader, ArrayList<Hexagon> hexaList) {
+		for (Hexagon hexa:hexaList) {
+			List<Triplet> neighbors = leader.getGhostPosition().getNeighbors();
+			if (neighbors.contains(hexa.getCoords())){
+				leader.setGhostPosition(hexa);
+				leader.setGhostMP(leader.getGhostMP()-1);
+				if(leader.getGhostMP()<0){
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
+		System.out.println(leader.getGhostMP());
+		return true;
+	}
 
-	    AtomicInteger mp = new AtomicInteger(selected.getUnits().get(0).getMP());
-        final Hexagon[] previous = new Hexagon[1];
+	public static void move(Leader leader){
+		leader.setMP(leader.getGhostMP());
+		leader.setPosition(leader.getGhostPosition());
 
-        movementList.stream()
-	        .map(p -> new Triplet((int) p.getKey(), (int) p.getValue(), - (int) p.getKey() - (int) p.getValue()))
-	        .forEach(t -> {
-		        if (previous[0] != null) {
-			        previous[0].getNeighbors().contains(t);
-		        }
+		for (Fighter fighter:leader.getFightersList()) {
+			fighter.setMP(leader.getMP());
+			fighter.setPosition(leader.getPosition());
+		}
 
-		        previous[0] = Main.getHexagon(t);
-		        mp.getAndDecrement();
-        });
+	}
 
-        return true;
-    }
 }
