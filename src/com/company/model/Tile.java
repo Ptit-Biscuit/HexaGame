@@ -4,6 +4,7 @@ import com.company.model.enums.Facing;
 import com.company.model.enums.TileType;
 import com.company.model.units.Army;
 import com.company.model.units.Unit;
+import com.company.utils.Triplet;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  */
 public class Tile {
 
+    private final Triplet coordinates;
     /**
      * Type of the tile
      */
@@ -55,7 +57,9 @@ public class Tile {
     /**
      * Constructor
      */
-    public Tile() {}
+    public Tile(Triplet coordinates) {
+        this.coordinates = coordinates;
+    }
 
     /**
      * Getter of the type
@@ -205,5 +209,9 @@ public class Tile {
      */
     public void setBridge(Facing[] bridge) {
         this.bridge = bridge;
+    }
+
+    public Triplet getCoordinates() {
+        return coordinates;
     }
 }
