@@ -6,14 +6,18 @@ import com.company.model.units.Army;
 import com.company.model.units.Unit;
 import com.company.utils.Triplet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Tile of the map
  */
 public class Tile {
-
+    /**
+     *
+     */
     private final Triplet coordinates;
+
     /**
      * Type of the tile
      */
@@ -59,6 +63,7 @@ public class Tile {
      */
     public Tile(Triplet coordinates) {
         this.coordinates = coordinates;
+        this.units = new ArrayList<>();
     }
 
     /**
