@@ -1,7 +1,6 @@
 package com.company.model.units;
 
-
-import com.company.view.fxcomponent.Hexagon;
+import com.company.model.Tile;
 
 /**
  * Class Unit represent a unit
@@ -31,12 +30,12 @@ public abstract class Unit {
     /**
      * A tile that represents the position of the unit
      */
-    private Hexagon position;
+    private Tile position;
 
     /**
      * A tile that represents the ghost position of the unit
      */
-    private Hexagon ghostPosition;
+    private Tile ghostPosition;
 
     /**
      * Deployment code of the unit
@@ -56,7 +55,7 @@ public abstract class Unit {
      * @param position The position of the unit
      * @param deploymentCode The deployment code of the unit
      */
-    public Unit(int armor, Boolean mounted, String race, Hexagon position, String deploymentCode) {
+    public Unit(int armor, Boolean mounted, String race, Tile position, String deploymentCode) {
         this.armor = armor;
         this.mounted = mounted;
         this.race = race;
@@ -124,7 +123,7 @@ public abstract class Unit {
      * Getter of position
      * @return The position
      */
-    public  Hexagon getPosition() {
+    public  Tile getPosition() {
         return position;
     }
 
@@ -132,7 +131,7 @@ public abstract class Unit {
      * Setter of position
      * @param position The new position
      */
-    public  void setPosition(Hexagon position) {
+    public  void setPosition(Tile position) {
         this.position = position;
     }
 
@@ -140,7 +139,7 @@ public abstract class Unit {
      * Getter of ghostPosition
      * @return The ghost position
      */
-    public  Hexagon getGhostPosition() {
+    public  Tile getGhostPosition() {
         return ghostPosition;
     }
 
@@ -148,7 +147,7 @@ public abstract class Unit {
      * Setter of ghostPosition
      * @param ghostPosition The new ghost position
      */
-    public  void setGhostPosition(Hexagon ghostPosition) {
+    public  void setGhostPosition(Tile ghostPosition) {
         this.ghostPosition = ghostPosition;
     }
 

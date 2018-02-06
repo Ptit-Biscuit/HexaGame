@@ -1,7 +1,7 @@
 package com.company.model.units;
 
 
-import com.company.view.fxcomponent.Hexagon;
+import com.company.model.Tile;
 import java.util.ArrayList;
 
 /**
@@ -40,7 +40,7 @@ public class Leader extends Unit {
      * @param moralModifier  The moral modifier of the leader
      * @param commandLimit   The command limit of the leader
      */
-    public Leader(int armor, Boolean mounted, String race, Hexagon position, String deploymentCode, String name, int moralModifier, int commandLimit) {
+    public Leader(int armor, Boolean mounted, String race, Tile position, String deploymentCode, String name, int moralModifier, int commandLimit) {
         super(armor, mounted, race, position, deploymentCode);
         this.name = name;
         this.moralModifier = moralModifier;
@@ -98,5 +98,12 @@ public class Leader extends Unit {
         this.fightersList.add(fighter);
     }
 
-
+    /**
+     * Getter of the fighterList
+     *
+     * @return The list of the fighters under command
+     */
+    public ArrayList<Fighter> getFightersList() {
+        return fightersList;
+    }
 }

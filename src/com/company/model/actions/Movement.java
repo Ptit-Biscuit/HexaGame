@@ -1,10 +1,9 @@
 package com.company.model.actions;
 
+import com.company.model.Tile;
 import com.company.model.units.Fighter;
 import com.company.model.units.Leader;
-import com.company.model.units.Unit;
 import com.company.utils.Triplet;
-import com.company.view.fxcomponent.Hexagon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +15,14 @@ public class Movement {
 
 	/**
 	 *
-	 * @param hexaList
+	 * @param tileList
 	 * @return If the movement is valid
 	 */
-	public static Boolean isValidMove(Leader leader, ArrayList<Hexagon> hexaList) {
-		for (Hexagon hexa:hexaList) {
+	public static Boolean isValidMove(Leader leader, ArrayList<Tile> tileList) {
+		for (Tile tile:tileList) {
 			List<Triplet> neighbors = leader.getGhostPosition().getNeighbors();
-			if (neighbors.contains(hexa.getCoords())){
-				leader.setGhostPosition(hexa);
+			if (neighbors.contains(tile.getCoords())){
+				leader.setGhostPosition(tile);
 				leader.setGhostMP(leader.getGhostMP()-1);
 				if(leader.getGhostMP()<0){
 					return false;

@@ -1,7 +1,7 @@
 package com.company.model.units;
 
 
-import com.company.view.fxcomponent.Hexagon;
+import com.company.model.Tile;
 
 /**
  * Class Fighter extends Unit represent a fighter
@@ -38,7 +38,7 @@ public class Fighter extends Unit {
      * @param missileValue The missile value of the fighter
      * @param meleeValue The melee value of the fighter
      */
-    public Fighter(int armor, Boolean mounted, String race, Hexagon position, String deploymentCode, String moral, int missileValue, int meleeValue, Leader leader) {
+    public Fighter(int armor, Boolean mounted, String race, Tile position, String deploymentCode, String moral, int missileValue, int meleeValue, Leader leader) {
         super(armor, mounted, race, position, deploymentCode);
         this.moral = moral;
         this.missileValue = missileValue;
