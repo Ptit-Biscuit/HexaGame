@@ -1,6 +1,8 @@
 package com.company;
 
 import com.company.model.Board;
+import com.company.model.Tile;
+import com.company.model.units.Army;
 import com.company.view.TilesetInitializer;
 import com.company.model.actions.Movement;
 import com.company.model.units.Fighter;
@@ -9,8 +11,6 @@ import com.company.view.fxcomponent.Hexagon;
 import com.company.controller.handler.HexaHandler;
 import com.company.model.Map;
 import com.company.utils.Triplet;
-import com.company.view.TilesetInitializer;
-import com.company.view.fxcomponent.Hexagon;
 import com.company.view.fxcomponent.Hud;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -117,35 +117,52 @@ public class Main extends Application {
     }
 
 	/**
+	 *
+	 */
+	public static void update(){ hexagons.values().forEach(Hexagon::update); }
+
+	/**
 	 * Test the move
 	 */
     public void testMove(){
 		//z=-x-y
-		Hexagon hexa1 = Main.getHexagon(new Triplet(1,4,-5));
-		Hexagon hexa2 = Main.getHexagon(new Triplet(1,5,-6));
-		Hexagon hexa3 = Main.getHexagon(new Triplet(2,5,-7));
-		Hexagon hexa4 = Main.getHexagon(new Triplet(2,6,-8));
-		Hexagon hexa5 = Main.getHexagon(new Triplet(1,5,-6));
-		ArrayList<Hexagon> hexaList = new ArrayList<>();
-		hexaList.add(hexa1);
-		hexaList.add(hexa2);
-		hexaList.add(hexa3);
-		hexaList.add(hexa4);
-		hexaList.add(hexa5);
+		Tile tile1 = Board.getInstance().getTile(new Triplet(1,4,-5));
+        Tile tile2 = Board.getInstance().getTile(new Triplet(1,5,-6));
+        Tile tile3 = Board.getInstance().getTile(new Triplet(2,5,-7));
+        Tile tile4 = Board.getInstance().getTile(new Triplet(2,6,-8));
+        Tile tile5 = Board.getInstance().getTile(new Triplet(2,7,-9));
+		ArrayList<Tile> tileList = new ArrayList<>();
+        tileList.add(tile1);
+        tileList.add(tile2);
+        tileList.add(tile3);
+        tileList.add(tile4);
+        tileList.add(tile5);
 
-		Leader feudalLeader = new Leader(5,true,"feudal", Main.getHexagon(new Triplet(1,3,-4)) , "RE", "Count", 3, 5);
-        Fighter feudal1 = new Fighter(3,false,"feudal",Main.getHexagon(new Triplet(1,3,-4)),"","C",3,3, feudalLeader);
-        Fighter feudal2 = new Fighter(3,false,"feudal",Main.getHexagon(new Triplet(1,3,-4)),"","C",3,3, feudalLeader);
-        Fighter feudal3 = new Fighter(3,false,"feudal",Main.getHexagon(new Triplet(1,3,-4)),"","C",3,3, feudalLeader);
-        Fighter feudal4 = new Fighter(3,false,"feudal",Main.getHexagon(new Triplet(1,3,-4)),"","C",3,3, feudalLeader);
+		Leader feudalLeader = new Leader(5,true,"feudal", Board.getInstance().getTile(new Triplet(1,3,-4)) , "RE", "Count", 3, 5);
+        Fighter feudal1 = new Fighter(3,false,"feudal", Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3);
+        Fighter feudal2 = new Fighter(3,false,"feudal",Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3);
+        Fighter feudal3 = new Fighter(3,false,"feudal",Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3);
+        Fighter feudal4 = new Fighter(3,false,"feudal",Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3);
 
-		Boolean valid = Movement.isValidMove(feudalLeader,hexaList);
+        List<Leader> leaders = new ArrayList<Leader>();
+        leaders.add(feudalLeader);
+
+        List<Fighter> fighters = new ArrayList<Fighter>();
+        fighters.add(feudal1);
+        fighters.add(feudal2);
+        fighters.add(feudal3);
+        fighters.add(feudal4);
+
+
+        Army army = new Army(leaders, fighters, Board.getInstance().getTile(new Triplet(1,3,-4)));
+
+		Boolean valid = Movement.isValidMove(army,tileList);
 		System.out.println(valid);
-		System.out.println(feudalLeader.getPosition().getCoords());
+		System.out.println(feudalLeader.getPosition().getCoordinates());
 		if (valid){
-			Movement.move(feudalLeader);
+			Movement.move(army);
 		}
-		System.out.println(feudalLeader.getPosition().getCoords());
+		System.out.println(feudalLeader.getPosition().getCoordinates());
 	}
 
 	/**
@@ -200,6 +217,4 @@ public class Main extends Application {
     public static Hexagon getHexagon(Triplet coordinates) {
         return hexagons.get(coordinates);
     }
-
-    public static void update(){ hexagons.values().forEach(Hexagon::update); }
 }

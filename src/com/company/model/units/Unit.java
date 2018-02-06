@@ -1,7 +1,6 @@
 package com.company.model.units;
 
-
-import com.company.view.fxcomponent.Hexagon;
+import com.company.model.Tile;
 
 /**
  * Class Unit represent a unit
@@ -31,22 +30,14 @@ public abstract class Unit {
     /**
      * A tile that represents the position of the unit
      */
-    private Hexagon position;
+    private Tile position;
 
-    /**
-     * A tile that represents the ghost position of the unit
-     */
-    private Hexagon ghostPosition;
 
     /**
      * Deployment code of the unit
      */
     private String deploymentCode;
 
-    /**
-     * Number of ghost movement point of the unit
-     */
-    private int ghostMP;
 
     /**
      * Constructor
@@ -56,20 +47,13 @@ public abstract class Unit {
      * @param position The position of the unit
      * @param deploymentCode The deployment code of the unit
      */
-    public Unit(int armor, Boolean mounted, String race, Hexagon position, String deploymentCode) {
+    public Unit(int armor, Boolean mounted, String race, Tile position, String deploymentCode) {
         this.armor = armor;
         this.mounted = mounted;
         this.race = race;
         this.position = position;
-        this.ghostPosition = position;
         this.deploymentCode = deploymentCode;
-        if (mounted) {
-            this.ghostMP = 15;
-            this.MP = 15;
-        } else {
-            this.ghostMP = 10;
-            this.MP = 10;
-        }
+        this.MP = 10;
     }
 
     /**
@@ -124,7 +108,7 @@ public abstract class Unit {
      * Getter of position
      * @return The position
      */
-    public  Hexagon getPosition() {
+    public  Tile getPosition() {
         return position;
     }
 
@@ -132,24 +116,8 @@ public abstract class Unit {
      * Setter of position
      * @param position The new position
      */
-    public  void setPosition(Hexagon position) {
+    public  void setPosition(Tile position) {
         this.position = position;
-    }
-
-    /**
-     * Getter of ghostPosition
-     * @return The ghost position
-     */
-    public  Hexagon getGhostPosition() {
-        return ghostPosition;
-    }
-
-    /**
-     * Setter of ghostPosition
-     * @param ghostPosition The new ghost position
-     */
-    public  void setGhostPosition(Hexagon ghostPosition) {
-        this.ghostPosition = ghostPosition;
     }
 
     /**
@@ -160,20 +128,5 @@ public abstract class Unit {
         return deploymentCode;
     }
 
-    /**
-     * Getter of ghostMP
-     * @return The ghost movement point
-     */
-    public  int getGhostMP() {
-        return ghostMP;
-    }
-
-    /**
-     * Setter of the ghostMP
-     * @param ghostMP The new value of ghostMP
-     */
-    public  void setGhostMP(int ghostMP) {
-        this.ghostMP = ghostMP;
-    }
 
 }

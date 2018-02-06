@@ -1,7 +1,7 @@
 package com.company.model.units;
 
 
-import com.company.view.fxcomponent.Hexagon;
+import com.company.model.Tile;
 import java.util.ArrayList;
 
 /**
@@ -24,11 +24,6 @@ public class Leader extends Unit {
     private int commandLimit;
 
     /**
-     * List of the fighter under the command of the leader
-     */
-    private ArrayList<Fighter> fightersList;
-
-    /**
      * Constructor
      *
      * @param armor          Param of the super class Unit
@@ -40,7 +35,7 @@ public class Leader extends Unit {
      * @param moralModifier  The moral modifier of the leader
      * @param commandLimit   The command limit of the leader
      */
-    public Leader(int armor, Boolean mounted, String race, Hexagon position, String deploymentCode, String name, int moralModifier, int commandLimit) {
+    public Leader(int armor, Boolean mounted, String race, Tile position, String deploymentCode, String name, int moralModifier, int commandLimit) {
         super(armor, mounted, race, position, deploymentCode);
         this.name = name;
         this.moralModifier = moralModifier;
@@ -73,46 +68,5 @@ public class Leader extends Unit {
     public int getCommandLimit() {
         return commandLimit;
     }
-
-    /**
-     * Getter of the fighters list
-     *
-     * @return The list of the fighter under the leader's command
-     */
-    public ArrayList<Fighter> getFightersList() {
-        return fightersList;
-    }
-
-    /**
-     * Setter of the fighters list
-     *
-     * @param fightersList The new list of the fighter under the leader's command
-     */
-    public void setFightersList(ArrayList<Fighter> fightersList) {
-        this.fightersList = fightersList;
-    }
-
-    /**
-     * Delete a fighter of the control of the leader
-     *
-     * @param fighter The fighter to delete
-     */
-    public void deleteAssociateFighter(Fighter fighter) {
-        if (this.fightersList.contains(fighter)) {
-            this.fightersList.remove(fighter);
-            fighter.setLeader(null);
-        }
-    }
-
-    /**
-     * Add a new fighter under the control of the leader
-     *
-     * @param fighter The fighter to add
-     */
-    public void addAssociateFighter(Fighter fighter) {
-        fighter.setLeader(this);
-        this.fightersList.add(fighter);
-    }
-
 
 }

@@ -1,10 +1,10 @@
 package com.company.model.actions;
 
+import com.company.model.Tile;
+import com.company.model.units.Army;
 import com.company.model.units.Fighter;
 import com.company.model.units.Leader;
-import com.company.model.units.Unit;
 import com.company.utils.Triplet;
-import com.company.view.fxcomponent.Hexagon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,33 +16,44 @@ public class Movement {
 
 	/**
 	 *
-	 * @param hexaList
+	 * @param tileList
 	 * @return If the movement is valid
 	 */
-	public static Boolean isValidMove(Leader leader, ArrayList<Hexagon> hexaList) {
-		for (Hexagon hexa:hexaList) {
-			List<Triplet> neighbors = leader.getGhostPosition().getNeighbors();
-			if (neighbors.contains(hexa.getCoords())){
-				leader.setGhostPosition(hexa);
-				leader.setGhostMP(leader.getGhostMP()-1);
-				if(leader.getGhostMP()<0){
+	public static Boolean isValidMove(Army army, ArrayList<Tile> tileList) {
+		for (Tile tile:tileList) {
+			List<Triplet> neighbors = Triplet.getNeighbors(army.getGhostPosition().getCoordinates());
+			if (neighbors.contains(tile.getCoordinates())){
+				army.setGhostPosition(tile);
+				army.setGhostMP(army.getGhostMP()-1);
+				if(army.getGhostMP()<0){
 					return false;
 				}
 			} else {
 				return false;
 			}
 		}
-		System.out.println(leader.getGhostMP());
+		System.out.println(army.getGhostMP());
 		return true;
 	}
 
-	public static void move(Leader leader){
-		leader.setMP(leader.getGhostMP());
-		leader.setPosition(leader.getGhostPosition());
+	public static void move(Army army){
+        //move the army
+        army.setMP(army.getGhostMP());
+        army.setPosition(army.getGhostPosition());
 
-		for (Fighter fighter:leader.getFightersList()) {
-			fighter.setMP(leader.getMP());
-			fighter.setPosition(leader.getPosition());
+	    //move the leader
+		Leader leader = army.getLeader().get(0);
+		//leader.getPosition().removeUnit(leader);
+        leader.setMP(army.getMP());
+        leader.setPosition(army.getPosition());
+		//leader.getPosition().setUnits(leader);
+
+		//move the fighters
+		for (Fighter fighter:army.getFighters()) {
+			//fighter.getPosition().removeUnit(fighter);
+			fighter.setMP(army.getMP());
+			fighter.setPosition(army.getPosition());
+			//fighter.getPosition().setUnits(fighter);
 		}
 
 	}
