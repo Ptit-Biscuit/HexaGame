@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.view.Board;
+import com.company.model.Board;
 import com.company.view.TilesetInitializer;
 import com.company.model.actions.Movement;
 import com.company.model.units.Fighter;
@@ -8,8 +8,6 @@ import com.company.model.units.Leader;
 import com.company.view.fxcomponent.Hexagon;
 import com.company.controller.handler.HexaHandler;
 import com.company.model.Map;
-import com.company.model.Tile;
-import com.company.controller.manager.TileManager;
 import com.company.utils.Triplet;
 import com.company.view.fxcomponent.Hud;
 import javafx.application.Application;
@@ -23,16 +21,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 
 import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
-import java.net.URISyntaxException;
 import java.util.*;
 
 import static java.lang.StrictMath.sqrt;
@@ -204,4 +199,6 @@ public class Main extends Application {
     public static Hexagon getHexagon(Triplet coordinates) {
         return hexagons.get(coordinates);
     }
+
+    public static void update(){ hexagons.values().forEach(Hexagon::update); }
 }

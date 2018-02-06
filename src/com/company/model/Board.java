@@ -1,7 +1,5 @@
-package com.company.view;
+package com.company.model;
 
-import com.company.model.Map;
-import com.company.model.Tile;
 import com.company.utils.Triplet;
 import javafx.util.Pair;
 
@@ -50,4 +48,5 @@ public class Board {
     public Tile getTile(Triplet coordinate) {
         return tiles.get(coordinate);
     }
+
 }

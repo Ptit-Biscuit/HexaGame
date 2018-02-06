@@ -30,7 +30,7 @@ public class Hexagon extends Polygon {
 	/**
 	 * Width of the hexagon's sides
 	 */
-	private static int hexWidth = 75;
+	private static int hexWidth = 55;
 
 	/**
 	 * Cubic coordinates of the hexagon
@@ -68,16 +68,17 @@ public class Hexagon extends Polygon {
 		update();
 	}
 
-	private void update() {
+	public void update() {
 		BufferedImage image = TileManager.getInstance().getTile(tileHolder.getType()); // Get main image
-		TileUtil.compose( // Add river
+		image = TileUtil.compose( // Add river
 				tileHolder.getRiver(),
 				TileType.RIVER,
 				image);
-		TileUtil.compose( // Add forest
+		image = TileUtil.compose( // Add forest
 				tileHolder.getForest(), // BOOLEAN
 				TileType.FOREST_LIGHT,
 				image);
+		// TODO : ADD AND COMPOSE ALL LAYERS
 		// TileUtil.compose()
 
 		this.setFill(new ImagePattern(SwingFXUtils.toFXImage(image, null)));
