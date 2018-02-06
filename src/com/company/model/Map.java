@@ -11,6 +11,11 @@ import static com.company.model.enums.TileType.*;
  */
 public class Map {
     /**
+     * empty facing
+     */
+    private static Facing[] EMPTY = new Facing[]{};
+
+    /**
      * Map of the game
      */
     private static TileType[][] map = new TileType[][]{
@@ -36,28 +41,104 @@ public class Map {
     };
 
     /**
-     * Map of the game
+     * Map of all light forests of the game
      */
     private static boolean[][] forest = new boolean[][]{
-            new boolean[]{false, false, false, false, false, true,  true,  false, false, false, true,  true,  false, false, false, false, false, false, false, false, false, true,  true,  true,  true,  false},
-            new boolean[]{false, false, false, false, true,  true,  true,  true,  false, false, false, false, false, false, true,  false, false, false, false, false, false, false, true,  true,  true,  false},
-            new boolean[]{false, false, false, false, true,  true,  true,  false, true,  true,  false, false, false, false, true,  false, false, false, false, false, false, false, false, false, true,  false},
-            new boolean[]{false, false, false, false, false, false, false, true,  false, true,  true,  false, false, false, true,  false, false, false, false, false, false, true,  false, false, false, true },
-            new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, true,  false, false, false, true,  false, false, true,  true,  true,  false, false, false, true },
-            new boolean[]{false, false, false, true,  true,  true,  false, false, false, false, true,  false, false, false, true,  true,  false, false, false, false, true,  false, true,  true,  true,  true },
-            new boolean[]{false, false, false, false, true,  true,  false, true,  false, true,  true,  false, false, false, false, true,  false, false, false, false, false, false, true,  false, false, false},
-            new boolean[]{false, false, false, false, true,  false, true,  true,  true,  true,  true,  false, false, false, false, false, true,  true,  false, false, false, false, false, true,  false, false},
-            new boolean[]{false, false, false, true,  false, false, false, false, false, false, false, false, false, true,  false, false, false, true,  false, false, false, false, false, true,  false, false},
-            new boolean[]{false, false, false, false, true,  true,  true,  false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false},
-            new boolean[]{false, false, false, false, false, true,  false, false, false, true,  true,  false, true,  false, false, false, false, true,  true,  true,  false, true,  false, false, false, false},
-            new boolean[]{false, false, false, false, false, true,  true,  false, true,  false, false, false, true,  false, false, true,  true,  false, true,  true,  true,  true,  false, false, false, false},
-            new boolean[]{false, false, false, false, true,  false, true,  true,  true,  false, false, false, false, false, false, false, false, false, false, true,  true,  false, true,  false, false, false},
-            new boolean[]{false, false, false, false, false, false, true,  true,  false, false, false, false, false, false, false, false, false, false, false, true,  false, false, false, true,  true,  true },
-            new boolean[]{false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true,  true },
-            new boolean[]{false, false, false, false, true,  true,  true,  true,  false, false, false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, true },
-            new boolean[]{false, false, false, false, true,  true,  true,  false, true,  true,  true,  false, false, false, false, true,  true,  false, false, false, false, false, false, false, false, false},
-            new boolean[]{false, false, false, true,  false, true,  false, false, false, false, false, true,  true,  false, false, true,  false, false, false, true,  true,  false, false, false, false, false},
-            new boolean[]{false, false, false, false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, true,  true,  true,  false, false, false}};
+        new boolean[]{false, false, false, false, false, true,  true,  false, false, false, true,  true,  false, false, false, false, false, false, false, false, false, true,  true,  true,  true,  false},
+        new boolean[]{false, false, false, false, true,  true,  true,  true,  false, false, false, false, false, false, true,  false, false, false, false, false, false, false, true,  true,  true,  false},
+        new boolean[]{false, false, false, false, true,  true,  true,  false, true,  true,  false, false, false, false, true,  false, false, false, false, false, false, false, false, false, true,  false},
+        new boolean[]{false, false, false, false, false, false, false, true,  false, true,  true,  false, false, false, true,  false, false, false, false, false, false, true,  false, false, false, true },
+        new boolean[]{false, false, false, false, false, false, false, false, false, false, false, false, true,  false, false, false, true,  false, false, true,  true,  true,  false, false, false, true },
+        new boolean[]{false, false, false, true,  true,  true,  false, false, false, false, true,  false, false, false, true,  true,  false, false, false, false, true,  false, true,  true,  true,  true },
+        new boolean[]{false, false, false, false, true,  true,  false, true,  false, true,  true,  false, false, false, false, true,  false, false, false, false, false, false, true,  false, false, false},
+        new boolean[]{false, false, false, false, true,  false, true,  true,  true,  true,  true,  false, false, false, false, false, true,  true,  false, false, false, false, false, true,  false, false},
+        new boolean[]{false, false, false, true,  false, false, false, false, false, false, false, false, false, true,  false, false, false, true,  false, false, false, false, false, true,  false, false},
+        new boolean[]{false, false, false, false, true,  true,  true,  false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false},
+        new boolean[]{false, false, false, false, false, true,  false, false, false, true,  true,  false, true,  false, false, false, false, true,  true,  true,  false, true,  false, false, false, false},
+        new boolean[]{false, false, false, false, false, true,  true,  false, true,  false, false, false, true,  false, false, true,  true,  false, true,  true,  true,  true,  false, false, false, false},
+        new boolean[]{false, false, false, false, true,  false, true,  true,  true,  false, false, false, false, false, false, false, false, false, false, true,  true,  false, true,  false, false, false},
+        new boolean[]{false, false, false, false, false, false, true,  true,  false, false, false, false, false, false, false, false, false, false, false, true,  false, false, false, true,  true,  true },
+        new boolean[]{false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true,  true },
+        new boolean[]{false, false, false, false, true,  true,  true,  true,  false, false, false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, true },
+        new boolean[]{false, false, false, false, true,  true,  true,  false, true,  true,  true,  false, false, false, false, true,  true,  false, false, false, false, false, false, false, false, false},
+        new boolean[]{false, false, false, true,  false, true,  false, false, false, false, false, true,  true,  false, false, true,  false, false, false, true,  true,  false, false, false, false, false},
+        new boolean[]{false, false, false, false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, true,  true,  true,  false, false, false}
+    };
+
+    /**
+     * Map of all rivers of the game
+     */
+    private static Facing[][][] river = new Facing[][][]{
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+    };
+
+    /**
+     * Map of all roads of the game
+     */
+    private static Facing[][][] road = new Facing[][][]{
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+        new Facing[][]{},
+    };
+
+    /**
+     * Map of all roads of the game
+     */
+    private static Facing[][][] entrance = new Facing[][][]{
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+            new Facing[][]{},
+    };
 
     /**
      * Getter of map's size
@@ -77,10 +158,43 @@ public class Map {
         return map[x][y];
     }
 
-    public static Facing[] getRiver(int x, int y) {
-        // TODO : Store the river facing and get it
-        return new Facing[]{};
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
+    public static boolean getForest(int x, int y) {
+        return forest[x][y];
     }
 
-    public static boolean getForest(int x, int y) { return forest[x][y]; }
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
+    public static Facing[] getRiver(int x, int y) {
+        return river[x][y];
+    }
+
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
+    public static Facing[] getRoad(int x, int y) {
+        return road[x][y];
+    }
+
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
+    public static Facing[] getEntrance(int x, int y) {
+        return entrance[x][y];
+    }
 }
