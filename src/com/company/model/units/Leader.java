@@ -45,6 +45,7 @@ public class Leader extends Unit {
         this.name = name;
         this.moralModifier = moralModifier;
         this.commandLimit = commandLimit;
+        this.fightersList = new ArrayList<Fighter>();
     }
 
     /**
@@ -74,23 +75,6 @@ public class Leader extends Unit {
         return commandLimit;
     }
 
-    /**
-     * Getter of the fighters list
-     *
-     * @return The list of the fighter under the leader's command
-     */
-    public ArrayList<Fighter> getFightersList() {
-        return fightersList;
-    }
-
-    /**
-     * Setter of the fighters list
-     *
-     * @param fightersList The new list of the fighter under the leader's command
-     */
-    public void setFightersList(ArrayList<Fighter> fightersList) {
-        this.fightersList = fightersList;
-    }
 
     /**
      * Delete a fighter of the control of the leader
