@@ -42,7 +42,7 @@ public class Board {
                 Triplet coordinates = new Triplet(row, col, -row - col);
 
 
-                Tile tile = new Tile();
+                Tile tile = new Tile(coordinates);
                 tile.setType(Map.get(row, col));
                 // tile.setCostMP(costMP.getOrDefault(tile.getType(), 1));
                 tile.setForest(Map.getForest(row, col));

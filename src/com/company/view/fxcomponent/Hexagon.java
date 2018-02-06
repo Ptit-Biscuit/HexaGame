@@ -43,11 +43,6 @@ public class Hexagon extends Polygon {
 	private BufferedImage theme;
 
 	/**
-	 * Coordinates of neighbors hexagons
-	 */
-	private List<Triplet> neighbors;
-
-	/**
 	 * Constructor
 	 * @param center Center of the hexagon
 	 * @param coords Coordinates of the hexagon
@@ -63,7 +58,6 @@ public class Hexagon extends Polygon {
 		this.setStroke(Color.WHITE);
 		this.setStrokeWidth(2.5);
 		this.addPoints();
-		this.addNeighbors();
 
 		update();
 	}
@@ -99,23 +93,6 @@ public class Hexagon extends Polygon {
 		this.getPoints().addAll(points);
 	}
 
-	/**
-	 * Adding neighbors
-	 */
-	private void addNeighbors() {
-		this.neighbors = new ArrayList<>();
-
-		int coordX = this.getCoords().getX();
-		int coordY = this.getCoords().getY();
-		int coordZ = this.getCoords().getZ();
-
-		this.neighbors.add(new Triplet(coordX + 1, coordY - 1, coordZ));
-		this.neighbors.add(new Triplet(coordX, coordY + 1, coordZ - 1));
-		this.neighbors.add(new Triplet(coordX - 1, coordY, coordZ + 1));
-		this.neighbors.add(new Triplet(coordX + 1, coordY, coordZ - 1));
-		this.neighbors.add(new Triplet(coordX, coordY - 1, coordZ + 1));
-		this.neighbors.add(new Triplet(coordX - 1, coordY + 1, coordZ));
-	}
 
 	/**
 	 * Getter of the central point
@@ -181,7 +158,7 @@ public class Hexagon extends Polygon {
 	 * @return The neighbors hexagons' coordinates
 	 */
 	public List<Triplet> getNeighbors() {
-		return this.neighbors;
+		return Triplet.getNeighbors(this.coords);
 	}
 
 	@Override
