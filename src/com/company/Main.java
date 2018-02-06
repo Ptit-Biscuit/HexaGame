@@ -5,11 +5,7 @@ import com.company.view.fxcomponent.Hexagon;
 import com.company.controller.handler.HexaHandler;
 import com.company.model.Map;
 import com.company.model.Tile;
-import com.company.model.enums.Facing;
-import com.company.model.enums.TileType;
-import com.company.model.enums.UnitType;
 import com.company.controller.manager.TileManager;
-import com.company.controller.manager.UnitManager;
 import com.company.utils.Triplet;
 import com.company.view.fxcomponent.Hud;
 import javafx.application.Application;
@@ -30,15 +26,9 @@ import org.apache.logging.log4j.LogManager;
 
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
-import static com.company.model.enums.TileType.*;
-import static com.company.model.enums.UnitType.*;
 import static java.lang.StrictMath.sqrt;
 
 public class Main extends Application {
@@ -69,9 +59,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 		TilesetInitializer tilesetInit = new TilesetInitializer();
-		tilesetInit.initTile();
-		tilesetInit.initFeudalUnits();
-		tilesetInit.initGoblinUnits();
+		tilesetInit.initTileset();
+		tilesetInit.initUnits();
+		tilesetInit.initMarkers();
 
         //initBoard();
 
@@ -146,10 +136,18 @@ public class Main extends Application {
 		return hud;
 	}
 
+	/**
+	 * Getter of the width of the scrollPane
+	 * @return The width of the scrollPane
+	 */
 	public static double getWidth() {
 		return scrollPane.getWidth();
 	}
 
+	/**
+	 * Getter of the height of the scrollPane
+	 * @return The height of the scrollPane
+	 */
 	public static double getHeight() {
 		return scrollPane.getHeight();
 	}
