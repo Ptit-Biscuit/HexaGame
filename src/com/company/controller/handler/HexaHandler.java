@@ -1,6 +1,8 @@
 package com.company.controller.handler;
 
+import com.company.Main;
 import com.company.view.fxcomponent.Hexagon;
+import com.company.view.fxcomponent.Hud;
 import javafx.event.EventHandler;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.MouseEvent;
@@ -22,13 +24,23 @@ public class HexaHandler implements EventHandler<MouseEvent> {
 		if (event.getEventType().equals(MouseEvent.MOUSE_EXITED)) {
 			colorAdjust.setBrightness(0);
 			current.setEffect(colorAdjust);
+			Main.getHud().setVisible(false);
 		}
 
-		/*if (event.getEventType().equals(MouseEvent.MOUSE_CLICKED)) {
-			current.setTheme(
-					Main.createComposite(current.getTheme(),
-					UnitManager.getInstance().getTile(UnitType.BARON),
-					0.8f));
-		}*/
+		if (event.getEventType().equals(MouseEvent.MOUSE_CLICKED)) {
+			Main.getHud().setTranslateX(current.getCenter().getX() + 65);
+			Main.getHud().setTranslateY(current.getCenter().getY() - 210);
+
+			if (Main.getWidth() >= (Main.getWidth() - current.getCenter().getX() + Main.getHud().getWidth())) {
+				Main.getHud().setTranslateX(current.getCenter().getX() - 420);
+			}
+
+			if (Main.getHeight() <= (Main.getHeight() - current.getCenter().getY() + Main.getHud().getHeight() + 20)) {
+				Main.getHud().setTranslateY(current.getCenter().getY() + 35);
+			}
+
+			Main.getHud().setVisible(true);
+			Main.getHud().toFront();
+		}
 	}
 }

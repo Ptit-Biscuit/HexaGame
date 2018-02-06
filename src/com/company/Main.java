@@ -10,6 +10,7 @@ import com.company.model.enums.UnitType;
 import com.company.controller.manager.TileManager;
 import com.company.controller.manager.UnitManager;
 import com.company.utils.Triplet;
+import com.company.view.fxcomponent.Hud;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.Event;
@@ -49,7 +50,12 @@ public class Main extends Application {
 	 * The scroll pane
 	 */
 	@FXML
-	public ScrollPane scrollPane;
+	public static ScrollPane scrollPane;
+
+	/**
+	 * The H.U.D
+	 */
+	private static Hud hud = new Hud(0, 0, 355, 175);
 
 	/**
 	 * Main
@@ -89,8 +95,6 @@ public class Main extends Application {
 	                if (tile != null) {
 		                Tile t = new Tile(tile);
 		                t.setType(Map.get(row, col));
-		                t.setRiver(new Facing[]{Facing.SOUTH, Facing.SOUTH_EAST});
-
 		                hexagon.setTheme(t);
 	                }
                     else hexagon.setTheme(Color.rgb(35, 243, 35));
@@ -108,12 +112,14 @@ public class Main extends Application {
             })).start();
 
 	        Pane pane = new Pane(hexagons.values().toArray(new Hexagon[0]));
+	        pane.getChildren().add(hud);
+	        hud.setVisible(false);
 
 	        scrollPane = (ScrollPane) scene.lookup("#scrollPane");
-            scrollPane.setContent(pane);
-            scrollPane.addEventFilter(ScrollEvent.SCROLL, Event::consume);
-            primaryStage.setScene(scene);
-            primaryStage.show();
+	        scrollPane.setContent(pane);
+	        scrollPane.addEventFilter(ScrollEvent.SCROLL, Event::consume);
+	        primaryStage.setScene(scene);
+	        primaryStage.show();
         } catch (IOException e) {
             LogManager.getLogger(Main.class).error(e.getMessage());
         }
@@ -228,6 +234,22 @@ public class Main extends Application {
 			    155,
 			    goblinNames);
     }
+
+	/**
+	 * Getter of the H.U.D
+	 * @return the H.U.D
+	 */
+	public static Hud getHud() {
+		return hud;
+	}
+
+	public static double getWidth() {
+		return scrollPane.getWidth();
+	}
+
+	public static double getHeight() {
+		return scrollPane.getHeight();
+	}
 
 	/**
 	 * Getter of the hexagons
