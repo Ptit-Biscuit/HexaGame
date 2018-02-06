@@ -24,11 +24,6 @@ public class Leader extends Unit {
     private int commandLimit;
 
     /**
-     * List of the fighter under the command of the leader
-     */
-    private ArrayList<Fighter> fightersList;
-
-    /**
      * Constructor
      *
      * @param armor          Param of the super class Unit
@@ -45,7 +40,6 @@ public class Leader extends Unit {
         this.name = name;
         this.moralModifier = moralModifier;
         this.commandLimit = commandLimit;
-        this.fightersList = new ArrayList<Fighter>();
     }
 
     /**
@@ -75,35 +69,4 @@ public class Leader extends Unit {
         return commandLimit;
     }
 
-
-    /**
-     * Delete a fighter of the control of the leader
-     *
-     * @param fighter The fighter to delete
-     */
-    public void deleteAssociateFighter(Fighter fighter) {
-        if (this.fightersList.contains(fighter)) {
-            this.fightersList.remove(fighter);
-        }
-    }
-
-    /**
-     * Add a new fighter under the control of the leader
-     *
-     * @param fighter The fighter to add
-     */
-    public void addAssociateFighter(Fighter fighter) {
-        if (!this.getFightersList().contains(fighter)) {
-            this.fightersList.add(fighter);
-        }
-    }
-
-    /**
-     * Getter of the fighterList
-     *
-     * @return The list of the fighters under command
-     */
-    public ArrayList<Fighter> getFightersList() {
-        return fightersList;
-    }
 }
