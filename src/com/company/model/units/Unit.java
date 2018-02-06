@@ -1,6 +1,7 @@
 package com.company.model.units;
 
-import javafx.util.Pair;
+
+import com.company.view.fxcomponent.Hexagon;
 
 /**
  * Class Unit represent a unit
@@ -28,14 +29,14 @@ public abstract class Unit {
     private int MP;
 
     /**
-     * Number of MP after a movement test
+     * A tile that represents the position of the unit
      */
-    private int MPGhost;
+    private Hexagon position;
 
     /**
-     * A pair that represents the position of the unit
+     * A tile that represents the ghost position of the unit
      */
-    private Pair<Integer, Integer> position;
+    private Hexagon ghostPosition;
 
     /**
      * Deployment code of the unit
@@ -43,22 +44,32 @@ public abstract class Unit {
     private String deploymentCode;
 
     /**
+     * Number of ghost movement point of the unit
+     */
+    private int ghostMP;
+
+    /**
      * Constructor
      * @param armor The unit armor
      * @param mounted If the unit is mounted
      * @param race The race of the unit
-     * @param MP The movement points of the unit
      * @param position The position of the unit
      * @param deploymentCode The deployment code of the unit
      */
-    public Unit(int armor, Boolean mounted, String race, int MP, Pair<Integer, Integer> position, String deploymentCode) {
+    public Unit(int armor, Boolean mounted, String race, Hexagon position, String deploymentCode) {
         this.armor = armor;
         this.mounted = mounted;
         this.race = race;
-        this.MP = MP;
         this.position = position;
+        this.ghostPosition = position;
         this.deploymentCode = deploymentCode;
-        this.MPGhost = 0;
+        if (mounted) {
+            this.ghostMP = 15;
+            this.MP = 15;
+        } else {
+            this.ghostMP = 10;
+            this.MP = 10;
+        }
     }
 
     /**
@@ -110,26 +121,10 @@ public abstract class Unit {
     }
 
     /**
-     * Getter of MPGhost
-     * @return The MPGhost
-     */
-    public  int getMPGhost() {
-        return MPGhost;
-    }
-
-    /**
-     * Setter of MPGhost
-     * @param MPGhost The new value of MPGhost
-     */
-    public  void setMPGhost(int MPGhost) {
-        this.MPGhost = MPGhost;
-    }
-
-    /**
      * Getter of position
      * @return The position
      */
-    public  Pair getPosition() {
+    public  Hexagon getPosition() {
         return position;
     }
 
@@ -137,8 +132,24 @@ public abstract class Unit {
      * Setter of position
      * @param position The new position
      */
-    public  void setPosition(Pair<Integer, Integer> position) {
+    public  void setPosition(Hexagon position) {
         this.position = position;
+    }
+
+    /**
+     * Getter of ghostPosition
+     * @return The ghost position
+     */
+    public  Hexagon getGhostPosition() {
+        return ghostPosition;
+    }
+
+    /**
+     * Setter of ghostPosition
+     * @param ghostPosition The new ghost position
+     */
+    public  void setGhostPosition(Hexagon ghostPosition) {
+        this.ghostPosition = ghostPosition;
     }
 
     /**
@@ -148,4 +159,21 @@ public abstract class Unit {
     public  String getDeploymentCode() {
         return deploymentCode;
     }
+
+    /**
+     * Getter of ghostMP
+     * @return The ghost movement point
+     */
+    public  int getGhostMP() {
+        return ghostMP;
+    }
+
+    /**
+     * Setter of the ghostMP
+     * @param ghostMP The new value of ghostMP
+     */
+    public  void setGhostMP(int ghostMP) {
+        this.ghostMP = ghostMP;
+    }
+
 }
