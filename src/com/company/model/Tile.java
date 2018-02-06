@@ -3,6 +3,7 @@ package com.company.model;
 import com.company.controller.manager.TileManager;
 import com.company.model.enums.Facing;
 import com.company.model.enums.TileType;
+import com.company.model.units.Army;
 import com.company.model.units.Unit;
 import com.company.utils.TileUtil;
 
@@ -31,6 +32,11 @@ public class Tile {
      * Units of the tile
      */
     private List<Unit> units;
+
+    /**
+     * Army of the tile
+     */
+    private Army army;
 
     /**
      * River on the tile
@@ -101,6 +107,17 @@ public class Tile {
     public void setTile(BufferedImage tile) {
         this.tile = tile;
     }
+
+
+    /**
+     * Getter of the army of the tile
+     *
+     * @return The army of the tile
+     */
+    public Army getArmy() {
+        return this.army;
+    }
+
 
     /**
      * Getter of the units of the tile
