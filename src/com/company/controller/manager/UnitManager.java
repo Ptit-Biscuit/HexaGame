@@ -1,5 +1,6 @@
 package com.company.controller.manager;
 
+import com.company.model.enums.TileType;
 import com.company.model.enums.UnitType;
 import org.apache.logging.log4j.LogManager;
 
@@ -7,6 +8,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -41,12 +43,12 @@ public class UnitManager implements GraphicManager<UnitType> {
 	}
 
 	@Override
-	public void parsePicture(File tilesetFile, int width, ArrayList<UnitType> names) {
+	public void parsePicture(InputStream tilesetFile, int width, ArrayList<UnitType> names) {
 		parsePicture(tilesetFile, width, width, names);
 	}
 
 	@Override
-	public void parsePicture(File tilesetFile, int width, int height, ArrayList<UnitType> names) {
+	public void parsePicture(InputStream tilesetFile, int width, int height, ArrayList<UnitType> names) {
 		try {
 			BufferedImage tilemap = ImageIO.read(tilesetFile);
 			int xmax = tilemap.getWidth() / width;
