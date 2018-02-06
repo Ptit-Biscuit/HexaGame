@@ -1,6 +1,9 @@
 package com.company.view.fxcomponent;
 
+import com.company.controller.manager.TileManager;
 import com.company.model.Tile;
+import com.company.model.enums.TileType;
+import com.company.utils.TileUtil;
 import com.company.utils.Triplet;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.paint.Color;
@@ -18,6 +21,7 @@ import static java.lang.Math.*;
  * Represent an hexagon
  */
 public class Hexagon extends Polygon {
+	private final Tile tileHolder;
 	/**
 	 * Center of the hexagon
 	 */
@@ -26,7 +30,7 @@ public class Hexagon extends Polygon {
 	/**
 	 * Width of the hexagon's sides
 	 */
-	private static int hexWidth = 75;
+	private static int hexWidth = 55;
 
 	/**
 	 * Cubic coordinates of the hexagon
@@ -47,17 +51,37 @@ public class Hexagon extends Polygon {
 	 * Constructor
 	 * @param center Center of the hexagon
 	 * @param coords Coordinates of the hexagon
-	 * @see Point2D.Double
+	 * @param tile
+     * @see Point2D.Double
 	 */
-	public Hexagon(Point2D.Double center, Triplet coords) {
+	public Hexagon(Point2D.Double center, Triplet coords, Tile tile) {
 		this.center = center;
 		this.coords = coords;
 
-		this.setFill(Color.LIGHTGREY);
+		this.tileHolder = tile;
+
 		this.setStroke(Color.WHITE);
 		this.setStrokeWidth(2.5);
 		this.addPoints();
 		this.addNeighbors();
+
+		update();
+	}
+
+	public void update() {
+		BufferedImage image = TileManager.getInstance().getTile(tileHolder.getType()); // Get main image
+		image = TileUtil.compose( // Add river
+				tileHolder.getRiver(),
+				TileType.RIVER,
+				image);
+		image = TileUtil.compose( // Add forest
+				tileHolder.getForest(), // BOOLEAN
+				TileType.FOREST_LIGHT,
+				image);
+		// TODO : ADD AND COMPOSE ALL LAYERS
+		// TileUtil.compose()
+
+		this.setFill(new ImagePattern(SwingFXUtils.toFXImage(image, null)));
 	}
 
 	/**
@@ -143,13 +167,6 @@ public class Hexagon extends Polygon {
 		this.coords = coords;
 	}
 
-	/**
-	 * Getter of the actual theme
-	 * @return The actual theme
-	 */
-	public BufferedImage getTheme() {
-		return this.theme;
-	}
 
 	/**
 	 * Setter of the color of the hexagon
@@ -157,19 +174,6 @@ public class Hexagon extends Polygon {
 	 */
 	public void setTheme(Color color) {
 		this.setFill(color);
-	}
-
-	/**
-	 * Set the theme
-	 * @param image The image for the hexagon
-	 */
-	public void setTheme(BufferedImage image) {
-		this.theme = image;
-		this.setFill(new ImagePattern(SwingFXUtils.toFXImage(this.theme, null)));
-	}
-
-	public void setTheme(Tile tile) {
-		this.setFill(new ImagePattern(SwingFXUtils.toFXImage(tile.getTile(), null)));
 	}
 
 	/**
