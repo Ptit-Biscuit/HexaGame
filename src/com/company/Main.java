@@ -1,11 +1,13 @@
 package com.company;
 
-import com.company.controller.handler.HexaHandler;
-import com.company.model.Map;
+import com.company.model.Board;
+import com.company.view.TilesetInitializer;
 import com.company.model.actions.Movement;
 import com.company.model.units.Fighter;
 import com.company.model.units.Leader;
-import com.company.model.Board;
+import com.company.view.fxcomponent.Hexagon;
+import com.company.controller.handler.HexaHandler;
+import com.company.model.Map;
 import com.company.utils.Triplet;
 import com.company.view.TilesetInitializer;
 import com.company.view.fxcomponent.Hexagon;
@@ -29,6 +31,7 @@ import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.*;
 
 import static java.lang.StrictMath.sqrt;
 
@@ -197,4 +200,6 @@ public class Main extends Application {
     public static Hexagon getHexagon(Triplet coordinates) {
         return hexagons.get(coordinates);
     }
+
+    public static void update(){ hexagons.values().forEach(Hexagon::update); }
 }

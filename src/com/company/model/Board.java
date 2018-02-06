@@ -72,4 +72,5 @@ public class Board {
     public Tile getTile(Triplet coordinate) {
         return tiles.get(coordinate);
     }
+
 }
