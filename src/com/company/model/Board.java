@@ -1,24 +1,37 @@
-package com.company.view;
+package com.company.model;
 
-import com.company.model.Map;
-import com.company.model.Tile;
 import com.company.utils.Triplet;
 import javafx.util.Pair;
 
 import java.util.HashMap;
 
+/**
+ *
+ */
 public class Board {
-
+    /**
+     *
+     */
     private static Board ourInstance = null;
+
+    /**
+     *
+     * @return
+     */
     public static Board getInstance() {
         if(ourInstance == null)
             return new Board();
         return ourInstance;
     }
 
-
+    /**
+     *
+     */
     private HashMap<Triplet, Tile> tiles = new HashMap<>();
 
+    /**
+     *
+     */
     private Board() {
         ourInstance = this;
 
@@ -43,10 +56,19 @@ public class Board {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public HashMap<Triplet, Tile> getTiles() {
         return tiles;
     }
 
+    /**
+     *
+     * @param coordinate
+     * @return
+     */
     public Tile getTile(Triplet coordinate) {
         return tiles.get(coordinate);
     }

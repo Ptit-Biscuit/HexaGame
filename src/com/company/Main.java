@@ -1,16 +1,14 @@
 package com.company;
 
-import com.company.view.Board;
-import com.company.view.TilesetInitializer;
+import com.company.controller.handler.HexaHandler;
+import com.company.model.Map;
 import com.company.model.actions.Movement;
 import com.company.model.units.Fighter;
 import com.company.model.units.Leader;
-import com.company.view.fxcomponent.Hexagon;
-import com.company.controller.handler.HexaHandler;
-import com.company.model.Map;
-import com.company.model.Tile;
-import com.company.controller.manager.TileManager;
+import com.company.model.Board;
 import com.company.utils.Triplet;
+import com.company.view.TilesetInitializer;
+import com.company.view.fxcomponent.Hexagon;
 import com.company.view.fxcomponent.Hud;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -23,17 +21,14 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import org.apache.logging.log4j.LogManager;
 
 import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.net.URISyntaxException;
-import java.util.*;
 
 import static java.lang.StrictMath.sqrt;
 
@@ -81,7 +76,6 @@ public class Main extends Application {
 
             Pair<Integer, Integer> size = Map.getMapSize();
 
-
             Board tiles = Board.getInstance();
             for (int col = 0; col < size.getValue(); col++)
                 for (int row = 0; row < size.getKey(); row++) {
@@ -93,7 +87,6 @@ public class Main extends Application {
                             coordinates, tiles.getTile(coordinates));
                     hexagons.put(coordinates, hexagon);
                 }
-
 
             HexaHandler handler = new HexaHandler();
 
