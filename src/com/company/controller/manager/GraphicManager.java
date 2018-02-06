@@ -1,7 +1,10 @@
 package com.company.controller.manager;
 
+import com.company.model.enums.TileType;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -28,14 +31,14 @@ interface GraphicManager<T> {
 	 * @param width The width of a tile
 	 * @param names The names of the tiles
 	 */
-	void parsePicture(File tilesetFile, int width, ArrayList<T> names);
+	void parsePicture(InputStream tilesetFile, int width, ArrayList<T> names);
 
 	/**
 	 * Parse a tileset in a file and initialize all the tiles
-	 * @param tilesetFile The file containing the tileset
-	 * @param width The width of a tile
-	 * @param height The height of a tile
-	 * @param names The names of the tiles
-	 */
-	void parsePicture(File tilesetFile, int width, int height, ArrayList<T> names);
+     * @param tilesetFile The file containing the tileset
+     * @param width The width of a tile
+     * @param height The height of a tile
+     * @param names The names of the tiles
+     */
+	void parsePicture(InputStream tilesetFile, int width, int height, ArrayList<T> names);
 }

@@ -184,4 +184,6 @@ public class Hexagon extends Polygon {
 	public String toString() {
 		return "Hexagon{" + "center=" + this.center + ", hexWidth=" + hexWidth + ", theme=" + this.theme + '}';
 	}
+
+
 }
