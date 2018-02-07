@@ -1,6 +1,9 @@
 package com.company.controller.handler;
 
 import com.company.Main;
+import com.company.model.Tile;
+import com.company.model.actions.Movement;
+import com.company.model.units.Army;
 import com.company.view.fxcomponent.Hexagon;
 import com.company.view.fxcomponent.Hud;
 import javafx.event.EventHandler;
@@ -41,6 +44,10 @@ public class HexaHandler implements EventHandler<MouseEvent> {
 
 			Main.getHud().setVisible(true);
 			Main.getHud().toFront();
-		}
+
+			Tile tile = new Tile(current.getCoords());
+            Army army = tile.getArmy();
+            Movement.handleArmyToMove(army);
+        }
 	}
 }
