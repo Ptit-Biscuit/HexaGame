@@ -44,12 +44,9 @@ public class Board {
 
                 Tile tile = new Tile(coordinates);
                 tile.setType(Map.get(row, col));
-                //tile.setCostMP(costMP.getOrDefault(tile.getType(), 1));
                 tile.setForest(Map.getForest(row, col));
                 tile.setRiver(Map.getRiver(row, col));
                 tile.setRoad(Map.getRoad(row, col));
-//                tile.setEntrance(Map.getEntrance(row, col));
-//                tile.setBridge(Map.getBridge(row, col));
 
                 tiles.put(coordinates, tile);
             }
@@ -73,5 +70,4 @@ public class Board {
     public Tile getTile(Triplet coordinate) {
         return tiles.get(coordinate);
     }
-
 }

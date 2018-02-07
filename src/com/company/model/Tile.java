@@ -49,11 +49,6 @@ public class Tile {
     private boolean forest;
 
     /**
-     * Entrance on the tile (Mountain only)
-     */
-    private Facing entrance[];
-
-    /**
      * Bridge on the tile
      */
     private Facing bridge[];
@@ -83,8 +78,6 @@ public class Tile {
     public void setType(TileType type) {
         this.type = type;
     }
-
-
 
     /**
      * Getter of the army of the tile
@@ -141,7 +134,6 @@ public class Tile {
      */
     public void setRiver(Facing[] river) {
         this.river = river;
-        // this.setTile(TileUtil.compose(river, TileType.RIVER, this.getTile()));
     }
 
     /**
@@ -178,24 +170,6 @@ public class Tile {
      */
     public void setForest(boolean forest) {
         this.forest = forest;
-    }
-
-    /**
-     * Getter of the orientation of the entrance
-     *
-     * @return The orientation of the entrance
-     */
-    public Facing[] getEntrance() {
-        return this.entrance;
-    }
-
-    /**
-     * Setter of the orientation of the entrance
-     *
-     * @param entrance The new orientation of the entrance
-     */
-    public void setEntrance(Facing[] entrance) {
-        this.entrance = entrance;
     }
 
     /**

@@ -78,14 +78,7 @@ public class Hexagon extends Polygon {
 				tileHolder.getRoad(),
 				TileType.ROAD_STRAIGHT,
 				image);
-
-		// TODO : replace entrance mountain with type 2
-//		if (tileHolder.getType().equals(TileType.MOUNTAIN_2))
-//			image = TileUtil.compose( // Add entrance
-//					tileHolder.getEntrance(),
-//					TileType.MOUNTAIN_2,
-//					image);
-		// TODO : ADD AND COMPOSE ALL LAYERS
+		// TODO : ADD UNITS
 		// TileUtil.compose()
 
 		this.setFill(new ImagePattern(SwingFXUtils.toFXImage(image, null)));
