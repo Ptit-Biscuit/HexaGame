@@ -51,6 +51,7 @@ public class ActionHandler implements EventHandler<KeyEvent> {
 				System.out.println("fin du tour");
 				board.setNbTurns(board.getNbTurns() + 1);
 				board.setPhase(1);
+				System.out.println("phase de mouvement");
 			}
 			board.setSelectArmy(true);
 		}

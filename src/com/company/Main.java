@@ -94,7 +94,7 @@ public class Main extends Application {
                 }
 
             HexaHandler handler = new HexaHandler();
-
+            System.out.println("phase de mouvement");
             new Thread(() -> hexagons.values().forEach(h -> {
                 h.addEventHandler(MouseEvent.MOUSE_ENTERED, handler);
                 h.addEventHandler(MouseEvent.MOUSE_EXITED, handler);
@@ -179,9 +179,12 @@ public class Main extends Application {
         Board board = Board.getInstance();
         if (board.isSelectArmy()) {
             board.setArmyToMove(tile.getArmy());
+            if (tile.getArmy() != null) {
+                System.out.println("Armée selectionnée");
+            }
         } else {
             board.getPath().add(tile);
-            System.out.println(tile.toString());
+            System.out.println("Tile ajoutée au chemin");
         }
     }
 }
