@@ -1,6 +1,7 @@
 package com.company.controller.handler;
 
 import com.company.model.Board;
+import com.company.model.actions.Attack;
 import com.company.model.actions.Movement;
 import com.company.model.units.Army;
 import javafx.event.EventHandler;
@@ -45,7 +46,7 @@ public class ActionHandler implements EventHandler<KeyEvent> {
 					if (board.getAttackers() != null && board.getDefenders() != null) {
 						System.out.println("Bataille entre :");
 
-
+						Attack.initAttack();
 						System.out.println(board.getAttackers().toString());
 						System.out.println(board.getAttackers().toString());
 

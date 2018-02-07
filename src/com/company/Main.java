@@ -184,8 +184,13 @@ public class Main extends Application {
                     System.out.println("Armée selectionnée");
                 }
             } else {
-                board.getPath().add(tile);
-                System.out.println("Tile ajoutée au chemin");
+                if (!board.getPath().contains(tile)){
+                    board.getPath().add(tile);
+                    System.out.println("Tile ajoutée au chemin");
+                } else {
+                    System.out.println("Cette tile est déjà selectionnée");
+                }
+
             }
         } else {
             if (board.isSelectArmy()) {
