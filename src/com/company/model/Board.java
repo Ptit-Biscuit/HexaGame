@@ -50,6 +50,11 @@ public class Board {
     /**
      *
      */
+    private int nbTurns;
+
+    /**
+     *
+     */
     private static Board ourInstance = null;
 
     /**
@@ -76,6 +81,8 @@ public class Board {
         this.path = new ArrayList<Tile>();
         this.selectArmy = true;
         this.selectPath = false;
+        this.phase = 1;
+        this.nbTurns = 0;
 
         Pair<Integer, Integer> size = Map.getMapSize();
 
@@ -95,7 +102,6 @@ public class Board {
         }
 
         this.initUnits();
-        this.game(2);
 
     }
 
@@ -224,10 +230,26 @@ public class Board {
 
     public void setSelectPath(boolean selectPath) { this.selectPath = selectPath; }
 
+    public int getPhase() {
+        return phase;
+    }
+
+    public void setPhase(int phase) {
+        this.phase = phase;
+    }
+
+    public int getNbTurns() {
+        return nbTurns;
+    }
+
+    public void setNbTurns(int nbTurns) {
+        this.nbTurns = nbTurns;
+    }
+
     public void game(int totalTurns){
-        int nbTurns = 0;
+        this.nbTurns = 0;
         this.phase = 1;
-        while (totalTurns>nbTurns){
+        while (totalTurns>this.nbTurns){
             //phase 1
             this.phase = 1;
 

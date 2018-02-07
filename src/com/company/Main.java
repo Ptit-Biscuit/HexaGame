@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.model.Board;
 import com.company.model.Tile;
+import com.company.model.actions.Movement;
 import com.company.model.units.Army;
 import com.company.view.TilesetInitializer;
 import com.company.view.fxcomponent.Hexagon;
@@ -110,7 +111,39 @@ public class Main extends Application {
             scrollPane.addEventFilter(ScrollEvent.SCROLL, Event::consume);
             scrollPane.addEventHandler(KeyEvent.KEY_PRESSED, (event)->{
                 if (event.getCode()== KeyCode.ENTER){
+                    Board board = Board.getInstance();
+                    if (board.getPhase()==1 || board.getPhase()==3) {
+                        if (board.isSelectArmy()) {
+                            board.setSelectArmy(false);
+                            board.setSelectPath(true);
+                            System.out.println("Selection chemin");
+                        } else {
+                            Movement.move(board.getArmyToMove(), board.getPath());
+                            System.out.println("Selection armée");
+                            board.setSelectArmy(true);
+                            board.setSelectPath(false);
+                        }
+                    }
+                    if (board.getPhase()==2 || board.getPhase()==4) {
+                        //combat
+                    }
+                    if (board.getPhase()==5){
+                        System.out.println("Appuyez sur espace pour finir le tour");
+                    }
+                }
 
+                if (event.getCode()== KeyCode.SPACE){
+                    Board board = Board.getInstance();
+                    board.setPhase(board.getPhase()+1);
+                    if (board.getPhase()==1 || board.getPhase() == 3){
+                        System.out.println("phase de mouvement");
+                    } else if (board.getPhase()==2 || board.getPhase() == 4){
+                        System.out.println("phase de combat");
+                    } else {
+                        System.out.println("fin du tour");
+                        board.setNbTurns(board.getNbTurns()+1);
+                        board.setPhase(1);
+                    }
                 }
 
             });
@@ -185,7 +218,6 @@ public class Main extends Application {
         Board board = Board.getInstance();
         if (board.isSelectArmy()) {
             board.setArmyToMove(tile.getArmy());
-//            System.out.println(tile.getArmy().toString());
         } else if (board.isSelectPath()) {
             board.getPath().add(tile);
             System.out.println(tile.toString());

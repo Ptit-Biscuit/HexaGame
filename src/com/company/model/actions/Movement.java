@@ -65,7 +65,9 @@ public class Movement {
 			Leader leader = army.getLeader().get(0);
 			//leader.getPosition().removeUnit(leader);
 			leader.setMP(army.getMP());
+			System.out.println(leader.getPosition().toString());
 			leader.setPosition(army.getPosition());
+			System.out.println(leader.getPosition().toString());
 			//leader.getPosition().setUnits(leader);
 
 			//move the fighters
