@@ -5,9 +5,15 @@ import com.company.model.Tile;
 import java.util.List;
 
 public class Army {
+	/**
+	 *
+	 */
+	private List<Leader> leaders;
 
-	List<Leader> leaders;
-	List<Fighter> fighters;
+	/**
+	 *
+	 */
+	private List<Fighter> fighters;
 
 	/**
 	 * A tile that represents the position of the army
@@ -101,19 +107,15 @@ public class Army {
 	 * @return Themissile value
 	 */
 	public int getMissileValue(){
-		int count = 0;
-		for(Fighter fighter: this.fighters){
-			count += fighter.getMissileValue();
-		}
-		return count;
+		return this.fighters.stream().mapToInt(Fighter::getMissileValue).sum();
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public int getMeleeValue(){
-		int count = 0;
-		for(Fighter fighter: this.fighters){
-			count += fighter.getMeleeValue();
-		}
-		return count;
+		return this.fighters.stream().mapToInt(Fighter::getMeleeValue).sum();
 	}
 
 	/**
@@ -122,11 +124,7 @@ public class Army {
 	 * @return The armor value
 	 */
 	public int getArmorValue(){
-		int count = 0;
-		for(Fighter fighter: this.fighters){
-			count += fighter.getArmor();
-		}
-		return count;
+		return this.fighters.stream().mapToInt(Unit::getArmor).sum();
 	}
 
 	/**

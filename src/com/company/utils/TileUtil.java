@@ -9,7 +9,17 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
+/**
+ *
+ */
 public class TileUtil {
+    /**
+     *
+     * @param tileBase
+     * @param tileDecoration
+     * @param alpha
+     * @return
+     */
     public static BufferedImage createComposite(BufferedImage tileBase, BufferedImage tileDecoration, float alpha) {
         BufferedImage buffer = new BufferedImage(Math.max(tileBase.getWidth(), tileDecoration.getWidth()),
                 Math.max(tileBase.getHeight(), tileDecoration.getHeight()),
@@ -26,9 +36,14 @@ public class TileUtil {
         return buffer;
     }
 
+    /**
+     *
+     * @param orientation
+     * @param tile
+     * @param composite
+     * @return
+     */
     public static BufferedImage compose(Facing[] orientation, TileType tile, BufferedImage composite) {
-
-
         for (Facing facing : orientation) {
             BufferedImage backTile = TileManager.getInstance().getTile(tile);
             AffineTransform tx = new AffineTransform();
@@ -48,6 +63,13 @@ public class TileUtil {
         return composite;
     }
 
+    /**
+     *
+     * @param willcompose
+     * @param tile
+     * @param composite
+     * @return
+     */
     public static BufferedImage compose(boolean willcompose, TileType tile, BufferedImage composite) {
         if (willcompose) return compose(new Facing[]{Facing.SOUTH}, tile, composite);
         return composite;

@@ -3,6 +3,7 @@ package com.company.view.fxcomponent;
 import com.company.controller.manager.TileManager;
 import com.company.model.Tile;
 import com.company.model.enums.TileType;
+import com.company.model.units.Unit;
 import com.company.utils.TileUtil;
 import com.company.utils.Triplet;
 import javafx.embed.swing.SwingFXUtils;
@@ -66,26 +67,24 @@ public class Hexagon extends Polygon {
 	 */
 	public void update() {
 		BufferedImage image = TileManager.getInstance().getTile(tileHolder.getType()); // Get main image
-//		image = TileUtil.compose( // Add river
-//				tileHolder.getRiver(),
-//				TileType.RIVER,
-//				image);
+		image = TileUtil.compose( // Add river
+				tileHolder.getRiver(),
+				TileType.RIVER,
+				image);
 		image = TileUtil.compose( // Add forest
 				tileHolder.getForest(), // BOOLEAN
 				TileType.FOREST_LIGHT,
 				image);
-//		image = TileUtil.compose( // Add road
-//				tileHolder.getRoad(),
-//				TileType.ROAD_STRAIGHT,
-//				image);
+		image = TileUtil.compose( // Add road
+				tileHolder.getRoad(),
+				TileType.ROAD_STRAIGHT,
+				image);
 
-		// TODO : replace entrance mountain with type 2
-//		if (tileHolder.getType().equals(TileType.MOUNTAIN_2))
-//			image = TileUtil.compose( // Add entrance
-//					tileHolder.getEntrance(),
-//					TileType.MOUNTAIN_2,
-//					image);
-		// TODO : ADD AND COMPOSE ALL LAYERS
+		if (tileHolder.getArmy() != null) {
+			System.out.println(tileHolder.getUnits() != null);
+			image = TileUtil.createComposite(image, tileHolder.getUnits().get(0).getUnitImage(), 1);
+		}
+		// TODO : ADD UNITS
 		// TileUtil.compose()
 
 		this.setFill(new ImagePattern(SwingFXUtils.toFXImage(image, null)));

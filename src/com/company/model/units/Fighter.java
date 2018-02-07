@@ -3,6 +3,8 @@ package com.company.model.units;
 
 import com.company.model.Tile;
 
+import java.awt.image.BufferedImage;
+
 /**
  * Class Fighter extends Unit represent a fighter
  */
@@ -24,6 +26,7 @@ public class Fighter extends Unit {
 
     /**
      * Constructor
+     * @param fighterImage
      * @param armor Param of the super class Unit
      * @param mounted Param of the super class Unit
      * @param race Param of he super class Unit
@@ -33,8 +36,8 @@ public class Fighter extends Unit {
      * @param missileValue The missile value of the fighter
      * @param meleeValue The melee value of the fighter
      */
-    public Fighter(int armor, Boolean mounted, String race, Tile position, String deploymentCode, String moral, int missileValue, int meleeValue) {
-        super(armor, mounted, race, position, deploymentCode);
+    public Fighter(BufferedImage fighterImage, int armor, Boolean mounted, String race, Tile position, String deploymentCode, String moral, int missileValue, int meleeValue) {
+        super(fighterImage, armor, mounted, race, position, deploymentCode);
         this.moral = moral;
         this.missileValue = missileValue;
         this.meleeValue = meleeValue;

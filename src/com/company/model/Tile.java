@@ -1,19 +1,24 @@
 package com.company.model;
 
+import com.company.Main;
 import com.company.model.enums.Facing;
 import com.company.model.enums.TileType;
 import com.company.model.units.Army;
 import com.company.model.units.Unit;
 import com.company.utils.Triplet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Tile of the map
  */
 public class Tile {
-
+    /**
+     *
+     */
     private final Triplet coordinates;
+
     /**
      * Type of the tile
      */
@@ -45,11 +50,6 @@ public class Tile {
     private boolean forest;
 
     /**
-     * Entrance on the tile (Mountain only)
-     */
-    private Facing entrance[];
-
-    /**
      * Bridge on the tile
      */
     private Facing bridge[];
@@ -59,6 +59,7 @@ public class Tile {
      */
     public Tile(Triplet coordinates) {
         this.coordinates = coordinates;
+        this.units = new ArrayList<>();
     }
 
     /**
@@ -79,7 +80,15 @@ public class Tile {
         this.type = type;
     }
 
+    /**
+     *
+     */
+    public void setArmy(Army army) {
+        this.army = army;
 
+        this.army.getLeader().forEach(l -> Board.getInstance().getTile(army.getPosition().coordinates).setUnits(l));
+        this.army.getFighters().forEach(f -> Board.getInstance().getTile(army.getPosition().coordinates).setUnits(f));
+    }
 
     /**
      * Getter of the army of the tile
@@ -89,7 +98,6 @@ public class Tile {
     public Army getArmy() {
         return this.army;
     }
-
 
     /**
      * Getter of the units of the tile
@@ -106,8 +114,9 @@ public class Tile {
      * @param unit The unit to add on the tile
      */
     public void setUnits(Unit unit) {
-        if (unit != null)
-            this.units.add(unit);
+        if (unit != null) {
+	        this.units.add(unit);
+        }
     }
 
     /**
@@ -128,7 +137,6 @@ public class Tile {
         return this.river;
     }
 
-
     /**
      * Setter of the orientation of the river
      *
@@ -136,7 +144,6 @@ public class Tile {
      */
     public void setRiver(Facing[] river) {
         this.river = river;
-        // this.setTile(TileUtil.compose(river, TileType.RIVER, this.getTile()));
     }
 
     /**
@@ -176,24 +183,6 @@ public class Tile {
     }
 
     /**
-     * Getter of the orientation of the entrance
-     *
-     * @return The orientation of the entrance
-     */
-    public Facing[] getEntrance() {
-        return this.entrance;
-    }
-
-    /**
-     * Setter of the orientation of the entrance
-     *
-     * @param entrance The new orientation of the entrance
-     */
-    public void setEntrance(Facing[] entrance) {
-        this.entrance = entrance;
-    }
-
-    /**
      * Getter of the orientation of the bridge
      *
      * @return The orientation of the bridge
@@ -211,6 +200,10 @@ public class Tile {
         this.bridge = bridge;
     }
 
+    /**
+     *
+     * @return
+     */
     public Triplet getCoordinates() {
         return coordinates;
     }
