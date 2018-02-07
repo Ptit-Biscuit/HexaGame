@@ -1,14 +1,14 @@
 package com.company;
 
+import com.company.controller.handler.ActionHandler;
+import com.company.controller.handler.HexaHandler;
 import com.company.model.Board;
+import com.company.model.Map;
 import com.company.model.Tile;
-import com.company.model.actions.Movement;
 import com.company.model.units.Army;
+import com.company.utils.Triplet;
 import com.company.view.TilesetInitializer;
 import com.company.view.fxcomponent.Hexagon;
-import com.company.controller.handler.HexaHandler;
-import com.company.model.Map;
-import com.company.utils.Triplet;
 import com.company.view.fxcomponent.Hud;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -18,7 +18,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -109,52 +108,7 @@ public class Main extends Application {
 	        scrollPane = (ScrollPane) scene.lookup("#scrollPane");
             scrollPane.setContent(pane);
             scrollPane.addEventFilter(ScrollEvent.SCROLL, Event::consume);
-            scrollPane.addEventHandler(KeyEvent.KEY_PRESSED, (event)->{
-                if (event.getCode()== KeyCode.ENTER){
-                    Board board = Board.getInstance();
-                    if (board.getPhase()==1 || board.getPhase()==3) {
-                        if (board.isSelectArmy()) {
-                            board.setSelectArmy(false);
-                            System.out.println("Selection chemin");
-                        } else {
-                            if(Movement.isValidMove(board.getArmyToMove(), board.getPath())) {
-                                Movement.move(board.getArmyToMove(), board.getPath());
-                            } else {
-                                System.out.println("Mouvement non valide");
-                            }
-                            board.setSelectArmy(true);
-                            System.out.println("Selection armée");
-                        }
-                    }
-                    if (board.getPhase()==2 || board.getPhase()==4) {
-                        //combat
-                        if (board.isSelectArmy()) {
-                            // chose the army
-                        } else {
-                            //chose the enemy
-                        }
-                    }
-                    if (board.getPhase()==5){
-                        System.out.println("Appuyez sur espace pour finir le tour");
-                    }
-                }
-
-                if (event.getCode()== KeyCode.SPACE){
-                    Board board = Board.getInstance();
-                    board.setPhase(board.getPhase()+1);
-                    if (board.getPhase()==1 || board.getPhase() == 3){
-                        System.out.println("phase de mouvement");
-                    } else if (board.getPhase()==2 || board.getPhase() == 4){
-                        System.out.println("phase de combat");
-                    } else {
-                        System.out.println("fin du tour");
-                        board.setNbTurns(board.getNbTurns()+1);
-                        board.setPhase(1);
-                    }
-                    board.setSelectArmy(true);
-                }
-
-            });
+            scrollPane.addEventHandler(KeyEvent.KEY_PRESSED, new ActionHandler());
             primaryStage.setScene(scene);
             primaryStage.show();
 
