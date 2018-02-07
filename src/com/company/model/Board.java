@@ -25,6 +25,11 @@ public class Board {
     /**
      *
      */
+    private ArrayList<Army> armyMoved;
+
+    /**
+     *
+     */
     private ArrayList<Tile> path;
 
     /**
@@ -41,6 +46,16 @@ public class Board {
      *
      */
     private int nbTurns;
+
+    /**
+     *
+     */
+    private Tile attackers;
+
+    /**
+     *
+     */
+    private Tile defenders;
 
     /**
      *
@@ -68,10 +83,13 @@ public class Board {
     private Board() {
         ourInstance = this;
         this.armyToMove = null;
-        this.path = new ArrayList<>();
+        this.armyMoved = new ArrayList<Army>();
+        this.path = new ArrayList<Tile>();
         this.selectArmy = true;
         this.phase = 1;
         this.nbTurns = 0;
+        this.attackers = null;
+        this.defenders = null;
 
         Pair<Integer, Integer> size = Map.getMapSize();
 
@@ -213,6 +231,10 @@ public class Board {
         this.path.add(tile);
     }
 
+    public void emptyPath(){
+        this.path.clear();
+    }
+
     public boolean isSelectArmy() { return selectArmy; }
 
     public void setSelectArmy(boolean selectArmy) { this.selectArmy = selectArmy; }
@@ -233,4 +255,31 @@ public class Board {
         this.nbTurns = nbTurns;
     }
 
+    public Tile getAttackers() {
+        return attackers;
+    }
+
+    public void setAttackers(Tile attackers) {
+        this.attackers = attackers;
+    }
+
+    public Tile getDefenders() {
+        return defenders;
+    }
+
+    public void setDefenders(Tile defenders) {
+        this.defenders = defenders;
+    }
+
+    public void emptyArmyMoved(){
+        this.armyMoved.clear();
+    }
+
+    public void addArmyMoved(Army army){
+        this.armyMoved.add(army);
+    }
+
+    public ArrayList<Army> getArmyMoved() {
+        return armyMoved;
+    }
 }

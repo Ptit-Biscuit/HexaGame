@@ -177,14 +177,28 @@ public class Main extends Application {
 
     public static void handleTile(Tile tile){
         Board board = Board.getInstance();
-        if (board.isSelectArmy()) {
-            board.setArmyToMove(tile.getArmy());
-            if (tile.getArmy() != null) {
-                System.out.println("Armée selectionnée");
+        if (board.getPhase() % 2==1) {
+            if (board.isSelectArmy()) {
+                if (tile.getArmy() != null) {
+                    board.setArmyToMove(tile.getArmy());
+                    System.out.println("Armée selectionnée");
+                }
+            } else {
+                board.getPath().add(tile);
+                System.out.println("Tile ajoutée au chemin");
             }
         } else {
-            board.getPath().add(tile);
-            System.out.println("Tile ajoutée au chemin");
+            if (board.isSelectArmy()) {
+                if (tile.getArmy() != null) {
+                    board.setAttackers(tile);
+                    System.out.println("Armée alliée selectionnée");
+                }
+            } else {
+                if (tile.getArmy() != null) {
+                    board.setDefenders(tile);
+                    System.out.println("Armée ennemie selectionnée");
+                }
+            }
         }
     }
 }
