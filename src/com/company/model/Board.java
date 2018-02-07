@@ -6,6 +6,8 @@ import com.company.model.enums.UnitType;
 import com.company.model.units.Army;
 import com.company.model.units.Fighter;
 import com.company.model.units.Leader;
+import com.company.model.actions.Movement;
+import com.company.model.units.Army;
 import com.company.utils.Triplet;
 import com.company.view.TilesetInitializer;
 import javafx.util.Pair;
@@ -62,6 +64,8 @@ public class Board {
         }
 
         this.initUnits();
+        this.game(2);
+
     }
 
     /**
@@ -162,5 +166,35 @@ public class Board {
      */
     public Tile getTile(Triplet coordinate) {
         return tiles.get(coordinate);
+    }
+
+
+    public void game(int totalTurns){
+        int nbTurns = 0;
+        int phase = 1;
+        while (totalTurns>nbTurns){
+            //phase 1
+            phase = 1;
+            //get which army to move and the path
+            //Movement.isValidMove(army, tileList);
+            //validation of the movement
+            //Movement.move(army,tileList);
+
+
+            //phase 2
+            phase = 2;
+
+            //phase 3
+            phase = 3;
+
+            //phase 4
+            phase = 4;
+
+
+            //phase 5
+            phase = 5;
+            nbTurns ++;
+
+        }
     }
 }

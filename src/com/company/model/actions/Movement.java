@@ -1,10 +1,13 @@
 package com.company.model.actions;
 
+import com.company.controller.handler.HexaHandler;
 import com.company.model.Tile;
 import com.company.model.units.Army;
 import com.company.model.units.Fighter;
 import com.company.model.units.Leader;
 import com.company.utils.Triplet;
+import com.company.view.fxcomponent.Hexagon;
+import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,12 @@ import java.util.List;
  * Class Movement represent a movement
  */
 public class Movement {
+
+    /**
+     *
+     */
+    private Army armyToMove;
+
 
 	/**
 	 *
@@ -78,5 +87,17 @@ public class Movement {
         }
 
 	}
+
+    public Army getArmyToMove() {
+        return armyToMove;
+    }
+
+    public void setArmyToMove(Army armyToMove) {
+        this.armyToMove = armyToMove;
+    }
+
+    public static void handleArmyToMove(Army army){
+	    System.out.println("army");
+    }
 
 }
