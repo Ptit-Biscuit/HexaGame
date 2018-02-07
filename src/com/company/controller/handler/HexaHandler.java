@@ -53,7 +53,7 @@ public class HexaHandler implements EventHandler<MouseEvent> {
 			Main.getHud().updateStats("name", image,1,2,3);
 			Main.getHud().setVisible(true);
 			Main.getHud().toFront();
-			Tile tile = new Tile(current.getCoords());
+			Tile tile = Board.getInstance().getTile(current.getCoords());
             Main.handleTile(tile);
 
             //TODO link units
