@@ -77,7 +77,7 @@ public class AttackUtil {
 			val = 8;
 		}
 
-		return missile[dice][val];
+		return missile[dice-1][val];
 	}
 
 	/**
@@ -163,6 +163,6 @@ public class AttackUtil {
 	 * @return
 	 */
 	public static int getMoralTable(int moralClass, int dice){
-		return moral[moralClass][dice];
+		return moral[moralClass][dice-1];
 	}
 }
