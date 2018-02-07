@@ -20,6 +20,7 @@ public class ActionHandler implements EventHandler<KeyEvent> {
 				} else {
 					if (Movement.isValidMove(board.getArmyToMove(), board.getPath())) {
 						Movement.move(board.getArmyToMove(), board.getPath());
+						System.out.println("mouvement effectué");
 					} else {
 						System.out.println("Mouvement non valide");
 					}
