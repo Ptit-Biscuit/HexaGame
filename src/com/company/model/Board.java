@@ -6,13 +6,8 @@ import com.company.model.enums.UnitType;
 import com.company.model.units.Army;
 import com.company.model.units.Fighter;
 import com.company.model.units.Leader;
-import com.company.model.actions.Movement;
-import com.company.model.units.Army;
 import com.company.utils.Triplet;
-import com.company.view.TilesetInitializer;
-import javafx.scene.input.KeyEvent;
 import javafx.util.Pair;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

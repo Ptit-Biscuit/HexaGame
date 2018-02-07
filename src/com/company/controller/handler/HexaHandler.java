@@ -2,7 +2,6 @@ package com.company.controller.handler;
 
 import com.company.Main;
 import com.company.model.Tile;
-import com.company.model.units.Army;
 import com.company.view.fxcomponent.Hexagon;
 import javafx.event.EventHandler;
 import javafx.scene.effect.ColorAdjust;

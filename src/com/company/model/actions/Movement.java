@@ -1,13 +1,10 @@
 package com.company.model.actions;
 
-import com.company.controller.handler.HexaHandler;
 import com.company.model.Tile;
 import com.company.model.units.Army;
 import com.company.model.units.Fighter;
 import com.company.model.units.Leader;
 import com.company.utils.Triplet;
-import com.company.view.fxcomponent.Hexagon;
-import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.List;
