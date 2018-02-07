@@ -21,6 +21,8 @@ public class Movement {
 	 */
 	public static Boolean isValidMove(Army army, ArrayList<Tile> tileList) {
 		int mpCost = 1;
+		army.setGhostPosition(army.getPosition());
+		army.setGhostMP(army.getMP());
 		for (Tile tile:tileList) {
 			List<Triplet> neighbors = Triplet.getNeighbors(army.getGhostPosition().getCoordinates());
 			if (neighbors.contains(tile.getCoordinates())){
@@ -33,6 +35,8 @@ public class Movement {
 						break;
 					case HILL_2:  mpCost = 2;
 						break;
+					case LAKE:
+						return false;
 					default: mpCost = 1;
 						break;
 				}
@@ -48,25 +52,30 @@ public class Movement {
 		return true;
 	}
 
-	public static void move(Army army){
-        //move the army
-        army.setMP(army.getGhostMP());
-        army.setPosition(army.getGhostPosition());
+	public static boolean move(Army army, ArrayList<Tile> tileList){
+	    if (isValidMove(army, tileList)){
+            //move the army
+            army.setMP(army.getGhostMP());
+            army.setPosition(army.getGhostPosition());
 
-	    //move the leader
-		Leader leader = army.getLeader().get(0);
-		//leader.getPosition().removeUnit(leader);
-        leader.setMP(army.getMP());
-        leader.setPosition(army.getPosition());
-		//leader.getPosition().setUnits(leader);
+            //move the leader
+            Leader leader = army.getLeader().get(0);
+            //leader.getPosition().removeUnit(leader);
+            leader.setMP(army.getMP());
+            leader.setPosition(army.getPosition());
+            //leader.getPosition().setUnits(leader);
 
-		//move the fighters
-		for (Fighter fighter:army.getFighters()) {
-			//fighter.getPosition().removeUnit(fighter);
-			fighter.setMP(army.getMP());
-			fighter.setPosition(army.getPosition());
-			//fighter.getPosition().setUnits(fighter);
-		}
+            //move the fighters
+            for (Fighter fighter:army.getFighters()) {
+                //fighter.getPosition().removeUnit(fighter);
+                fighter.setMP(army.getMP());
+                fighter.setPosition(army.getPosition());
+                //fighter.getPosition().setUnits(fighter);
+            }
+            return true;
+        } else {
+	        return false;
+        }
 
 	}
 
