@@ -109,6 +109,7 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
 
+
 			testMove();
 
         } catch (IOException e) {
@@ -122,7 +123,7 @@ public class Main extends Application {
 	public static void update(){ hexagons.values().forEach(Hexagon::update); }
 
 	/**
-	 * Test the move
+	 * Test the movement
 	 */
     public void testMove(){
 		//z=-x-y
