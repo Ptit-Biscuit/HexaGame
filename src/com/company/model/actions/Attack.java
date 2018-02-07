@@ -7,6 +7,10 @@ import com.company.utils.AttackUtil;
 
 public class Attack {
 
+	/**
+	 * Supposed to init the attack, Todo
+	 *
+	 */
 	public void initAttack(Tile location, Army defenser){
 		if (!validLocation(location)){
 			return;
@@ -14,6 +18,11 @@ public class Attack {
 		//attack(location.getArmy(), defenser);
 	}
 
+	/**
+	 * Verify if the location to fight is correct
+	 *
+	 * @return True if the loaction is correct, else false
+	 */
 	public Boolean validLocation(Tile location){
 		Boolean result = true;
 		if(location.getUnits().isEmpty()){
@@ -27,6 +36,10 @@ public class Attack {
 		return result;
 	}
 
+	/**
+	 * Method used to check the battle actions
+	 *
+	 */
 	public void attack(Army attackers, Army defensers, String type){
 		int moralValue = 0;
 
@@ -50,6 +63,11 @@ public class Attack {
 		}
 	}
 
+	/**
+	 * Method used to check the result of a moral decay
+	 *
+	 * @return The moral result
+	 */
 	public int checkMoral(Fighter fighter){
 		int moralClass = 0;
 		if(fighter.getMoral() == "A"){
