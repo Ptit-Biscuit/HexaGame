@@ -119,12 +119,11 @@ public class Tile {
     }
 
     /**
-     * Remove a unit from the tile
+     * Remove a army from the tile
      *
-     * @param unit The unit to be remove
      */
-    public boolean removeUnit(Unit unit) {
-        return units.contains(unit) && units.remove(unit);
+    public void removeArmy() {
+        this.army = null;
     }
 
     /**

@@ -60,7 +60,6 @@ public class Movement {
 				return false;
 			}
 		}
-		System.out.println(army.getGhostMP());
 		return true;
 	}
 
@@ -68,29 +67,26 @@ public class Movement {
 		if (isValidMove(army, tileList)) {
 			//move the army
 			army.setMP(army.getGhostMP());
+			Tile oldPosition = army.getPosition();
 			army.setPosition(army.getGhostPosition());
 
 			//move the leader
 			Leader leader = army.getLeader().get(0);
-			//leader.getPosition().removeUnit(leader);
 			leader.setMP(army.getMP());
-			System.out.println(leader.getPosition().toString());
 			leader.setPosition(army.getPosition());
-			System.out.println(leader.getPosition().toString());
-			//leader.getPosition().setUnits(leader);
 
 			//move the fighters
 			for (Fighter fighter : army.getFighters()) {
-				//fighter.getPosition().removeUnit(fighter);
 				fighter.setMP(army.getMP());
 				fighter.setPosition(army.getPosition());
-				//fighter.getPosition().setUnits(fighter);
 			}
 
-			/*Tile newLocation = Board.getInstance().getTile(army.getPosition().getCoordinates());
-			Army newArmy = new Army(army.getLeader(), army.getFighters(), newLocation);
-			newLocation.setArmy(newArmy);
-			Main.update();*/
+			//move image
+			Tile newLocation = Board.getInstance().getTile(army.getPosition().getCoordinates());
+			army.setPosition(newLocation);
+			newLocation.setArmy(army);
+			oldPosition.removeArmy();
+			Main.update();
 
 
 			return true;
