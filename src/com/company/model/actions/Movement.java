@@ -20,11 +20,23 @@ public class Movement {
 	 * @return If the movement is valid
 	 */
 	public static Boolean isValidMove(Army army, ArrayList<Tile> tileList) {
+		int mpCost = 1;
 		for (Tile tile:tileList) {
 			List<Triplet> neighbors = Triplet.getNeighbors(army.getGhostPosition().getCoordinates());
 			if (neighbors.contains(tile.getCoordinates())){
 				army.setGhostPosition(tile);
-				army.setGhostMP(army.getGhostMP()-1);
+				//define the cost of the Tile
+				switch (tile.getType()){
+					case FOREST:  mpCost = 3;
+						break;
+					case HILL:  mpCost = 2;
+						break;
+					case HILL_2:  mpCost = 2;
+						break;
+					default: mpCost = 1;
+						break;
+				}
+				army.setGhostMP(army.getGhostMP()-mpCost);
 				if(army.getGhostMP()<0){
 					return false;
 				}

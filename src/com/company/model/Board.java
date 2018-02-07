@@ -44,7 +44,7 @@ public class Board {
 
                 Tile tile = new Tile(coordinates);
                 tile.setType(Map.get(row, col));
-                // tile.setCostMP(costMP.getOrDefault(tile.getType(), 1));
+                //tile.setCostMP(costMP.getOrDefault(tile.getType(), 1));
                 tile.setForest(Map.getForest(row, col));
                 tile.setRiver(Map.getRiver(row, col));
                 tile.setRoad(Map.getRoad(row, col));
@@ -54,6 +54,7 @@ public class Board {
                 tiles.put(coordinates, tile);
             }
         }
+
     }
 
     /**
