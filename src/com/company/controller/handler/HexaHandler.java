@@ -44,11 +44,14 @@ public class HexaHandler implements EventHandler<MouseEvent> {
 
 			Main.setHud("name",1,2,3);//TODO fix?
 
+
 			Main.getHud().setVisible(true);
 			Main.getHud().toFront();
 
 			Tile tile = new Tile(current.getCoords());
             Army army = tile.getArmy();
+
+			System.out.println(army.getTrueLeader().getName());
             Movement.handleArmyToMove(army);
         }
 	}
