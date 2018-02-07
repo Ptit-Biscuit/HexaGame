@@ -1,5 +1,7 @@
 package com.company.model.actions;
 
+import com.company.Main;
+import com.company.model.Board;
 import com.company.model.Tile;
 import com.company.model.units.Army;
 import com.company.model.units.Fighter;
@@ -84,6 +86,13 @@ public class Movement {
 				fighter.setPosition(army.getPosition());
 				//fighter.getPosition().setUnits(fighter);
 			}
+
+			/*Tile newLocation = Board.getInstance().getTile(army.getPosition().getCoordinates());
+			Army newArmy = new Army(army.getLeader(), army.getFighters(), newLocation);
+			newLocation.setArmy(newArmy);
+			Main.update();*/
+
+
 			return true;
 		} else {
 			return false;

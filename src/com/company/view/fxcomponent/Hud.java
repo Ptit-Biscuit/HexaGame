@@ -57,14 +57,14 @@ public class Hud extends Pane {
 
 	}
 
-	public void updateStats(String text_name, Image image_portrait, int text_stat1, int text_stat2, int text_stat3, int text_stat4, int text_stat5, int text_stat6){
+	public void updateStats(String text_name, Image image_portrait, int text_MP_Lead, int text_Armor_Lead, int text_Command_Lead, int text_Missile_Fighter, int text_Melee_Fighter, int text_Armor_Fighter){
 		name.setText(text_name);
 		portrait.setImage(image_portrait);
-		stat_1.setText("MP modifier: "+String.valueOf(text_stat1));
-		stat_2.setText("Armor: "+String.valueOf(text_stat2));
-		stat_3.setText("Command limit: "+String.valueOf(text_stat3));
-		stat_4.setText("Missile: "+String.valueOf(text_stat4));
-		stat_5.setText("Melee: "+String.valueOf(text_stat5));
-		stat_6.setText("Armor: "+String.valueOf(text_stat6));
+		stat_1.setText("MP modifier: "+String.valueOf(text_MP_Lead));
+		stat_2.setText("Command limit: "+String.valueOf(text_Command_Lead));
+		stat_3.setText("Armor: "+String.valueOf(text_Armor_Lead));
+		stat_4.setText("Missile: "+String.valueOf(text_Missile_Fighter));
+		stat_5.setText("Melee: "+String.valueOf(text_Melee_Fighter));
+		stat_6.setText("Armor: "+String.valueOf(text_Armor_Fighter));
 	}
 }
