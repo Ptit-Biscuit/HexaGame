@@ -12,11 +12,11 @@ public class Attack {
 	 * Supposed to init the attack, Todo
 	 *
 	 */
-	public void initAttack(Tile location, Army defensers){
+	public static void initAttack(Tile location, Army defenders){
 		if (!validLocation(location)) {
 			return;
 		}
-		attackCycle(location.getArmy(), defensers);
+		attackCycle(location.getArmy(), defenders);
 	}
 
 	/**
@@ -24,7 +24,7 @@ public class Attack {
 	 *
 	 * @return True if the location is correct, else false
 	 */
-	public Boolean validLocation(Tile location){
+	public static Boolean validLocation(Tile location){
 		if(location.getUnits().isEmpty()){
 			return false;
 		}
@@ -38,33 +38,33 @@ public class Attack {
 	 * Method used to cycle the attacks
 	 *
 	 */
-	public void attackCycle(Army attackers, Army defensers){
-		attack(defensers, attackers, "missile");
-		attack(attackers,defensers,"missile");
-		attack(attackers,defensers,"melee");
-		attack(defensers,attackers,"melee");
+	public static void attackCycle(Army attackers, Army defenders){
+		attack(defenders, attackers, "missile");
+		attack(attackers,defenders,"missile");
+		attack(attackers,defenders,"melee");
+		attack(defenders,attackers,"melee");
 	}
 
 	/**
 	 * Method used to check the battle actions
 	 *
 	 */
-	public void attack(Army attackers, Army defensers, String type){
+	public static void attack(Army attackers, Army defenders, String type){
 
 		switch (type) {
 			case ("missile"):
-				int armorCheck = AttackUtil.getMissileTable(new DiceRoll(8).getDiceRoll(), defensers.getMissileValue());
-				defensers.getFighters().forEach(defenser -> {
-					if (defenser.getArmor() >= armorCheck) {
-						checkMoral(defenser);
+				int armorCheck = AttackUtil.getMissileTable(new DiceRoll(8).getDiceRoll(), defenders.getMissileValue());
+				defenders.getFighters().forEach(defender -> {
+					if (defender.getArmor() >= armorCheck) {
+						checkMoral(defender);
 					}
 				});
 				break;
 			case ("melee"):
-				int meleeCheck = AttackUtil.getMissileTable(attackers.getMeleeValue(), defensers.getMeleeValue());
-				defensers.getFighters().forEach(defenser -> {
+				int meleeCheck = AttackUtil.getMissileTable(attackers.getMeleeValue(), defenders.getMeleeValue());
+				defenders.getFighters().forEach(defender -> {
 					if (new DiceRoll(8).getDiceRoll() >= meleeCheck) {
-						checkMoral(defenser);
+						checkMoral(defender);
 					}
 				});
 				break;
@@ -76,7 +76,7 @@ public class Attack {
 	 *
 	 * @return The moral result
 	 */
-	public int checkMoral(Fighter fighter){
+	public static int checkMoral(Fighter fighter){
 		int moralClass = 0;
 		if(fighter.getMoral() == "A"){
 			moralClass = 0;
