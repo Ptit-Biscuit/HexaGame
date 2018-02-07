@@ -52,7 +52,7 @@ public class Main extends Application {
     /**
      * The H.U.D
      */
-    private static Hud hud = new Hud(0, 0, 355, 175);
+    private static Hud hud  = new Hud(0, 0, 355, 175, "default", 1,1,1);;
 
     /**
      * Main
@@ -136,6 +136,18 @@ public class Main extends Application {
      */
     public static Hud getHud() {
         return hud;
+    }
+
+    /**
+     * Setter of the H.U.D
+     *
+     * @param name Name of the leader/unit
+     * @param stat1 Stats of the unit
+     * @param stat2 Stats of the unit
+     * @param stat3 Stats of the unit
+     */
+    public static void setHud(String name, int stat1, int stat2, int stat3){
+        hud = new Hud(0, 0, 355, 175, name, stat1, stat2, stat3);
     }
 
 	/**

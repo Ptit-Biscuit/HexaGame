@@ -4,6 +4,7 @@ import com.company.model.Tile;
 import com.company.model.units.Army;
 import com.company.model.units.Fighter;
 import com.company.utils.AttackUtil;
+import com.company.utils.Triplet;
 
 public class Attack {
 
@@ -21,19 +22,16 @@ public class Attack {
 	/**
 	 * Verify if the location to fight is correct
 	 *
-	 * @return True if the loaction is correct, else false
+	 * @return True if the location is correct, else false
 	 */
 	public Boolean validLocation(Tile location){
-		Boolean result = true;
 		if(location.getUnits().isEmpty()){
-			result = false;
+			return false;
 		}
-		/*for (Tile neighbour : location.getNeighbours()) {
-			if(neighbour.getUnits().isEmpty()){
-				result = false;
-			}
-		}*/
-		return result;
+		if (Triplet.getNeighbors(location.getCoordinates()).isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -52,7 +50,6 @@ public class Attack {
 	 *
 	 */
 	public void attack(Army attackers, Army defensers, String type){
-		int moralValue = 0;
 
 		switch (type) {
 			case ("missile"):

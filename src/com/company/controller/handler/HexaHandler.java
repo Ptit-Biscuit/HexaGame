@@ -42,6 +42,8 @@ public class HexaHandler implements EventHandler<MouseEvent> {
 				Main.getHud().setTranslateY(current.getCenter().getY() + 35);
 			}
 
+			Main.setHud("name",1,2,3);//TODO fix?
+
 			Main.getHud().setVisible(true);
 			Main.getHud().toFront();
 
