@@ -86,8 +86,8 @@ public class Tile {
     public void setArmy(Army army) {
         this.army = army;
 
-        this.army.getLeader().forEach(l -> Board.getInstance().getTile(new Triplet(11,13,-24)).setUnits(l));
-        this.army.getFighters().forEach(f -> Board.getInstance().getTile(new Triplet(11,13,-24)).setUnits(f));
+        this.army.getLeader().forEach(l -> Board.getInstance().getTile(army.getPosition().coordinates).setUnits(l));
+        this.army.getFighters().forEach(f -> Board.getInstance().getTile(army.getPosition().coordinates).setUnits(f));
     }
 
     /**

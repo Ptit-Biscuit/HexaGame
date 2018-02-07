@@ -80,8 +80,10 @@ public class Hexagon extends Polygon {
 				TileType.ROAD_STRAIGHT,
 				image);
 
-		if (tileHolder.getArmy() != null)
-			image = TileUtil.compose(true, tileHolder.getType(), tileHolder.getArmy().getLeader().get(0).getUnitImage());
+		if (tileHolder.getArmy() != null) {
+			System.out.println(tileHolder.getUnits() != null);
+			image = TileUtil.createComposite(image, tileHolder.getUnits().get(0).getUnitImage(), 1);
+		}
 		// TODO : ADD UNITS
 		// TileUtil.compose()
 
