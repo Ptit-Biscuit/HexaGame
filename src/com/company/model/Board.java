@@ -40,11 +40,6 @@ public class Board {
     /**
      *
      */
-    private boolean selectPath;
-
-    /**
-     *
-     */
     private int phase;
 
     /**
@@ -80,7 +75,6 @@ public class Board {
         this.armyToMove = null;
         this.path = new ArrayList<Tile>();
         this.selectArmy = true;
-        this.selectPath = false;
         this.phase = 1;
         this.nbTurns = 0;
 
@@ -226,10 +220,6 @@ public class Board {
 
     public void setSelectArmy(boolean selectArmy) { this.selectArmy = selectArmy; }
 
-    public boolean isSelectPath() { return selectPath; }
-
-    public void setSelectPath(boolean selectPath) { this.selectPath = selectPath; }
-
     public int getPhase() {
         return phase;
     }
@@ -244,36 +234,6 @@ public class Board {
 
     public void setNbTurns(int nbTurns) {
         this.nbTurns = nbTurns;
-    }
-
-    public void game(int totalTurns){
-        this.nbTurns = 0;
-        this.phase = 1;
-        while (totalTurns>this.nbTurns){
-            //phase 1
-            this.phase = 1;
-
-            //get which army to move and the path
-            //Movement.isValidMove(army, tileList);
-            //validation of the movement
-            //Movement.move(army,tileList);
-
-
-            //phase 2
-            this.phase = 2;
-
-            //phase 3
-            this.phase = 3;
-
-            //phase 4
-            this.phase = 4;
-
-
-            //phase 5
-            this.phase = 5;
-            nbTurns ++;
-
-        }
     }
 
 }

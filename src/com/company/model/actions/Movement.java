@@ -45,9 +45,13 @@ public class Movement {
 				}
 				army.setGhostMP(army.getGhostMP()-mpCost);
 				if(army.getGhostMP()<0){
+					army.setGhostMP(army.getMP());
+					army.setGhostPosition(army.getPosition());
 					return false;
 				}
 			} else {
+				army.setGhostMP(army.getMP());
+				army.setGhostPosition(army.getPosition());
 				return false;
 			}
 		}

@@ -115,17 +115,24 @@ public class Main extends Application {
                     if (board.getPhase()==1 || board.getPhase()==3) {
                         if (board.isSelectArmy()) {
                             board.setSelectArmy(false);
-                            board.setSelectPath(true);
                             System.out.println("Selection chemin");
                         } else {
-                            Movement.move(board.getArmyToMove(), board.getPath());
-                            System.out.println("Selection armée");
+                            if(Movement.isValidMove(board.getArmyToMove(), board.getPath())) {
+                                Movement.move(board.getArmyToMove(), board.getPath());
+                            } else {
+                                System.out.println("Mouvement non valide");
+                            }
                             board.setSelectArmy(true);
-                            board.setSelectPath(false);
+                            System.out.println("Selection armée");
                         }
                     }
                     if (board.getPhase()==2 || board.getPhase()==4) {
                         //combat
+                        if (board.isSelectArmy()) {
+                            // chose the army
+                        } else {
+                            //chose the enemy
+                        }
                     }
                     if (board.getPhase()==5){
                         System.out.println("Appuyez sur espace pour finir le tour");
@@ -144,6 +151,7 @@ public class Main extends Application {
                         board.setNbTurns(board.getNbTurns()+1);
                         board.setPhase(1);
                     }
+                    board.setSelectArmy(true);
                 }
 
             });
@@ -214,11 +222,10 @@ public class Main extends Application {
     }
 
     public static void handleTile(Tile tile){
-        System.out.println("test");
         Board board = Board.getInstance();
         if (board.isSelectArmy()) {
             board.setArmyToMove(tile.getArmy());
-        } else if (board.isSelectPath()) {
+        } else {
             board.getPath().add(tile);
             System.out.println(tile.toString());
         }
