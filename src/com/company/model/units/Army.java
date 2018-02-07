@@ -5,9 +5,15 @@ import com.company.model.Tile;
 import java.util.List;
 
 public class Army {
+	/**
+	 *
+	 */
+	private List<Leader> leaders;
 
-	List<Leader> leaders;
-	List<Fighter> fighters;
+	/**
+	 *
+	 */
+	private List<Fighter> fighters;
 
 	/**
 	 * A tile that represents the position of the army
@@ -29,6 +35,12 @@ public class Army {
 	 */
 	private int ghostMP;
 
+	/**
+	 *
+	 * @param leader
+	 * @param fighters
+	 * @param position
+	 */
 	public Army(List<Leader> leader, List<Fighter> fighters, Tile position){
 		this.leaders = leader;
 		this.fighters = fighters;
@@ -38,59 +50,87 @@ public class Army {
 		this.ghostPosition = position;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public List<Fighter> getFighters(){
 		return this.fighters;
 	}
+
+	/**
+	 *
+	 * @return
+	 */
 	public List<Leader> getLeader(){
 		return this.leaders;
 	}
 
+	/**
+	 *
+	 * @param fighter
+	 */
 	public void addUnit(Fighter fighter){
 		this.fighters.add(fighter);
 	}
 
+	/**
+	 *
+	 * @param leader
+	 */
 	public void addLeader(Leader leader){
 		this.leaders.add(leader);
 	}
 
+	/**
+	 *
+	 * @param unit
+	 * @return
+	 */
 	public Boolean removeUnit(Fighter unit){
 		return fighters.contains(unit) && this.fighters.remove(unit);
 	}
 
+	/**
+	 *
+	 * @param leader
+	 * @return
+	 */
 	public Boolean removeLeader(Leader leader){
 		return leaders.contains(leader) && this.leaders.remove(leader);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public int getMissileValue(){
-		int count = 0;
-		for(Fighter fighter: this.fighters){
-			count += fighter.getMissileValue();
-		}
-		return count;
+		return this.fighters.stream().mapToInt(Fighter::getMissileValue).sum();
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public int getMeleeValue(){
-		int count = 0;
-		for(Fighter fighter: this.fighters){
-			count += fighter.getMeleeValue();
-		}
-		return count;
+		return this.fighters.stream().mapToInt(Fighter::getMeleeValue).sum();
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public int getArmorValue(){
-		int count = 0;
-		for(Fighter fighter: this.fighters){
-			count += fighter.getArmor();
-		}
-		return count;
+		return this.fighters.stream().mapToInt(Unit::getArmor).sum();
 	}
 
+	/**
+	 *
+	 * @param attackValue
+	 */
 	public void decreaseMoral(int attackValue){
-		this.fighters.stream().forEach(fighter -> {
-			fighter.setMP(0);
-		});
+		this.fighters.forEach(fighter -> fighter.setMP(0));
 	}
-
 
     /**
      * Getter of MP

@@ -1,9 +1,18 @@
 package com.company.model;
 
+import com.company.Main;
+import com.company.controller.manager.UnitManager;
+import com.company.model.enums.UnitType;
+import com.company.model.units.Army;
+import com.company.model.units.Fighter;
+import com.company.model.units.Leader;
 import com.company.utils.Triplet;
+import com.company.view.TilesetInitializer;
 import javafx.util.Pair;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -52,6 +61,34 @@ public class Board {
             }
         }
 
+        this.initUnits();
+    }
+
+    /**
+     *
+     */
+    private void initUnits() {
+        Leader feudalLeader = new Leader(UnitManager.getInstance().getTile(UnitType.COUNT),5,true,"feudal", Board.getInstance().getTile(new Triplet(11,13,-24)) , "RE", "Count", 3, 5);
+        Fighter feudal1 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_C_RANK),3,false,"feudal", Board.getInstance().getTile(new Triplet(11,13,-24)),"","C",3,3);
+        Fighter feudal2 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_C_RANK),3,false,"feudal",Board.getInstance().getTile(new Triplet(11,13,-24)),"","C",3,3);
+        Fighter feudal3 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_C_RANK),3,false,"feudal",Board.getInstance().getTile(new Triplet(11,13,-24)),"","C",3,3);
+        Fighter feudal4 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_C_RANK),3,false,"feudal",Board.getInstance().getTile(new Triplet(11,13,-24)),"","C",3,3);
+
+        List<Leader> leaders = new ArrayList<>();
+        leaders.add(feudalLeader);
+
+        List<Fighter> fighters = new ArrayList<>();
+        fighters.add(feudal1);
+        fighters.add(feudal2);
+        fighters.add(feudal3);
+        fighters.add(feudal4);
+
+        Board.getInstance().getTile(new Triplet(11,13,-24)).setUnits(feudalLeader);
+
+
+//        Army army = new Army(leaders, fighters, Board.getInstance().getTile(new Triplet(11,13,-24)));
+//        Board.getInstance().getTile(new Triplet(11,13,-24)).setArmy(army);
+//        Main.update();
     }
 
     /**

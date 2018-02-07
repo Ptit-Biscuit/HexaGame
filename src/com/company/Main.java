@@ -1,7 +1,9 @@
 package com.company;
 
+import com.company.controller.manager.UnitManager;
 import com.company.model.Board;
 import com.company.model.Tile;
+import com.company.model.enums.UnitType;
 import com.company.model.units.Army;
 import com.company.view.TilesetInitializer;
 import com.company.model.actions.Movement;
@@ -108,10 +110,6 @@ public class Main extends Application {
             scrollPane.addEventFilter(ScrollEvent.SCROLL, Event::consume);
             primaryStage.setScene(scene);
             primaryStage.show();
-
-
-			testMove();
-
         } catch (IOException e) {
             LogManager.getLogger(Main.class).error(e.getMessage());
         }
@@ -121,50 +119,6 @@ public class Main extends Application {
 	 *
 	 */
 	public static void update(){ hexagons.values().forEach(Hexagon::update); }
-
-	/**
-	 * Test the movement
-	 */
-    public void testMove(){
-		//z=-x-y
-		Tile tile1 = Board.getInstance().getTile(new Triplet(1,4,-5));
-        Tile tile2 = Board.getInstance().getTile(new Triplet(1,5,-6));
-        Tile tile3 = Board.getInstance().getTile(new Triplet(2,5,-7));
-        Tile tile4 = Board.getInstance().getTile(new Triplet(2,6,-8));
-        Tile tile5 = Board.getInstance().getTile(new Triplet(2,7,-9));
-		ArrayList<Tile> tileList = new ArrayList<>();
-        tileList.add(tile1);
-        tileList.add(tile2);
-        tileList.add(tile3);
-        tileList.add(tile4);
-        tileList.add(tile5);
-
-		Leader feudalLeader = new Leader(5,true,"feudal", Board.getInstance().getTile(new Triplet(1,3,-4)) , "RE", "Count", 3, 5);
-        Fighter feudal1 = new Fighter(3,false,"feudal", Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3);
-        Fighter feudal2 = new Fighter(3,false,"feudal",Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3);
-        Fighter feudal3 = new Fighter(3,false,"feudal",Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3);
-        Fighter feudal4 = new Fighter(3,false,"feudal",Board.getInstance().getTile(new Triplet(1,3,-4)),"","C",3,3);
-
-        List<Leader> leaders = new ArrayList<Leader>();
-        leaders.add(feudalLeader);
-
-        List<Fighter> fighters = new ArrayList<Fighter>();
-        fighters.add(feudal1);
-        fighters.add(feudal2);
-        fighters.add(feudal3);
-        fighters.add(feudal4);
-
-
-        Army army = new Army(leaders, fighters, Board.getInstance().getTile(new Triplet(1,3,-4)));
-
-		Boolean valid = Movement.isValidMove(army,tileList);
-		System.out.println(valid);
-		System.out.println(feudalLeader.getPosition().getCoordinates());
-		if (valid){
-			Movement.move(army);
-		}
-		System.out.println(feudalLeader.getPosition().getCoordinates());
-	}
 
 	/**
 	 * Exit the application

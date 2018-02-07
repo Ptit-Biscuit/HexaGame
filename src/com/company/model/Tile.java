@@ -1,5 +1,6 @@
 package com.company.model;
 
+import com.company.Main;
 import com.company.model.enums.Facing;
 import com.company.model.enums.TileType;
 import com.company.model.units.Army;
@@ -80,6 +81,16 @@ public class Tile {
     }
 
     /**
+     *
+     */
+    public void setArmy(Army army) {
+        this.army = army;
+
+        this.army.getLeader().forEach(l -> Board.getInstance().getTile(new Triplet(11,13,-24)).setUnits(l));
+        this.army.getFighters().forEach(f -> Board.getInstance().getTile(new Triplet(11,13,-24)).setUnits(f));
+    }
+
+    /**
      * Getter of the army of the tile
      *
      * @return The army of the tile
@@ -87,7 +98,6 @@ public class Tile {
     public Army getArmy() {
         return this.army;
     }
-
 
     /**
      * Getter of the units of the tile
@@ -104,8 +114,9 @@ public class Tile {
      * @param unit The unit to add on the tile
      */
     public void setUnits(Unit unit) {
-        if (unit != null)
-            this.units.add(unit);
+        if (unit != null) {
+	        this.units.add(unit);
+        }
     }
 
     /**
@@ -125,7 +136,6 @@ public class Tile {
     public Facing[] getRiver() {
         return this.river;
     }
-
 
     /**
      * Setter of the orientation of the river
@@ -190,6 +200,10 @@ public class Tile {
         this.bridge = bridge;
     }
 
+    /**
+     *
+     * @return
+     */
     public Triplet getCoordinates() {
         return coordinates;
     }

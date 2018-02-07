@@ -2,6 +2,8 @@ package com.company.model.units;
 
 
 import com.company.model.Tile;
+
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -25,7 +27,7 @@ public class Leader extends Unit {
 
     /**
      * Constructor
-     *
+     * @param leaderImage
      * @param armor          Param of the super class Unit
      * @param mounted        Param of the super class Unit
      * @param race           Param of the super class Unit
@@ -35,8 +37,8 @@ public class Leader extends Unit {
      * @param moralModifier  The moral modifier of the leader
      * @param commandLimit   The command limit of the leader
      */
-    public Leader(int armor, Boolean mounted, String race, Tile position, String deploymentCode, String name, int moralModifier, int commandLimit) {
-        super(armor, mounted, race, position, deploymentCode);
+    public Leader(BufferedImage leaderImage, int armor, Boolean mounted, String race, Tile position, String deploymentCode, String name, int moralModifier, int commandLimit) {
+        super(leaderImage, armor, mounted, race, position, deploymentCode);
         this.name = name;
         this.moralModifier = moralModifier;
         this.commandLimit = commandLimit;

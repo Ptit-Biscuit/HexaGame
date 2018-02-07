@@ -3,6 +3,7 @@ package com.company.view.fxcomponent;
 import com.company.controller.manager.TileManager;
 import com.company.model.Tile;
 import com.company.model.enums.TileType;
+import com.company.model.units.Unit;
 import com.company.utils.TileUtil;
 import com.company.utils.Triplet;
 import javafx.embed.swing.SwingFXUtils;
@@ -78,6 +79,9 @@ public class Hexagon extends Polygon {
 				tileHolder.getRoad(),
 				TileType.ROAD_STRAIGHT,
 				image);
+
+		if (tileHolder.getArmy() != null)
+			image = TileUtil.compose(true, tileHolder.getType(), tileHolder.getArmy().getLeader().get(0).getUnitImage());
 		// TODO : ADD UNITS
 		// TileUtil.compose()
 
