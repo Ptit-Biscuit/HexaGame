@@ -1,12 +1,17 @@
 package com.company.controller.handler;
 
 import com.company.Main;
+import com.company.controller.manager.UnitManager;
 import com.company.model.Tile;
 import com.company.model.actions.Movement;
+import com.company.model.enums.UnitType;
 import com.company.model.units.Army;
 import com.company.view.fxcomponent.Hexagon;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class HexaHandler implements EventHandler<MouseEvent> {
@@ -41,12 +46,15 @@ public class HexaHandler implements EventHandler<MouseEvent> {
 				Main.getHud().setTranslateY(current.getCenter().getY() + 35);
 			}
 
-			Main.getHud().updateStats("name",1,2,3);
+			Image image = SwingFXUtils.toFXImage(UnitManager.getInstance().getTile(UnitType.BARON_ZOOM), null);
+
+			Main.getHud().updateStats("name", image,1,2,3);
 			Main.getHud().setVisible(true);
 			Main.getHud().toFront();
-
 			Tile tile = new Tile(current.getCoords());
             Main.handleTile(tile);
+
+            //TODO link units
         }
 	}
 }
