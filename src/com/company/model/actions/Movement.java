@@ -87,10 +87,10 @@ public class Movement {
 				//fighter.getPosition().setUnits(fighter);
 			}
 
-			/*Tile newLocation = Board.getInstance().getTile(army.getPosition().getCoordinates());
+			Tile newLocation = Board.getInstance().getTile(army.getPosition().getCoordinates());
 			Army newArmy = new Army(army.getLeader(), army.getFighters(), newLocation);
 			newLocation.setArmy(newArmy);
-			Main.update();*/
+			Main.update();
 
 
 			return true;
