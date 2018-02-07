@@ -87,10 +87,22 @@ public class Army {
 
 	public void decreaseMoral(int attackValue){
 		this.fighters.stream().forEach(fighter -> {
+			fighter.setMP(fighter.getMP() + getTrueLeader().getMoralModifier());
 			fighter.setMP(0);
 		});
 	}
 
+	public Leader getTrueLeader(){
+		final int[] maxCommand = {0};
+		final Leader[] topLeader = {null};
+		this.leaders.forEach(leader -> {
+			if(leader.getCommandLimit() > maxCommand[0]){
+				maxCommand[0] = leader.getCommandLimit();
+				topLeader[0] = leader;
+			}
+		});
+		return topLeader[0];
+	}
 
     /**
      * Getter of MP

@@ -26,17 +26,19 @@ public class Attack {
 	}
 
 	public void attack(Army attacker, Army defenser){
+		int moralValue = 0;
+
 		if(defenser.getMissileValue() > attacker.getArmorValue()){
-			attacker.decreaseMoral(defenser.getMissileValue());
+			attacker.decreaseMoral(moralValue);
 		}
 		if(attacker.getMissileValue() > defenser.getArmorValue()){
-			defenser.decreaseMoral(attacker.getMissileValue());
+			defenser.decreaseMoral(moralValue);
 		}
 		if(attacker.getMeleeValue() > defenser.getMeleeValue()){
-			defenser.decreaseMoral(attacker.getMeleeValue());
+			defenser.decreaseMoral(moralValue);
 		}
 		if(defenser.getMeleeValue() > attacker.getMeleeValue()){
-			attacker.decreaseMoral(defenser.getMeleeValue());
+			attacker.decreaseMoral(moralValue);
 		}
 	}
 }
