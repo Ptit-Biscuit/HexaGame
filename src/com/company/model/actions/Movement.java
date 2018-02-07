@@ -81,7 +81,6 @@ public class Movement {
 				fighter.setPosition(army.getPosition());
 			}
 
-			//move image
 			Tile newLocation = Board.getInstance().getTile(army.getPosition().getCoordinates());
 			army.setPosition(newLocation);
 			newLocation.setArmy(army);
