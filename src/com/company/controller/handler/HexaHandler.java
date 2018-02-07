@@ -48,15 +48,25 @@ public class HexaHandler implements EventHandler<MouseEvent> {
 				Main.getHud().setTranslateY(current.getCenter().getY() + 35);
 			}
 
-			Image image = SwingFXUtils.toFXImage(UnitManager.getInstance().getTile(UnitType.BARON_ZOOM), null);
 
-			Main.getHud().updateStats("name", image,1,2,3);
-			Main.getHud().setVisible(true);
-			Main.getHud().toFront();
 			Tile tile = Board.getInstance().getTile(current.getCoords());
             Main.handleTile(tile);
 
-            //TODO link units
+
+            if(tile.getArmy() != null){
+                if(tile.getArmy().getTrueLeader()!=null){
+                    Image image = SwingFXUtils.toFXImage(tile.getArmy().getTrueLeader().getUnitZoom(), null);
+                    Main.getHud().updateStats(tile.getArmy().getTrueLeader().getName(), image,tile.getArmy().getTrueLeader().getMoralModifier(),tile.getArmy().getTrueLeader().getArmor(),tile.getArmy().getTrueLeader().getCommandLimit(), tile.getArmy().getMissileValue(), tile.getArmy().getMeleeValue(), tile.getArmy().getArmorValue());
+                    Main.getHud().setVisible(true);
+                    Main.getHud().toFront();
+                }else{
+                    Image image = SwingFXUtils.toFXImage(tile.getArmy().getFirstFighter().getUnitZoom(), null);
+                    Main.getHud().updateStats("Fighters", image, 0, 0, 0, tile.getArmy().getMissileValue(), tile.getArmy().getMeleeValue(), tile.getArmy().getArmorValue());
+                }
+                Main.getHud().setVisible(true);
+                Main.getHud().toFront();
+            }
+
         }
 	}
 }

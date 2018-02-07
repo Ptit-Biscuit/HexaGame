@@ -112,7 +112,7 @@ public class Army {
 
 	/**
 	 *
-	 * @return
+	 * @return The melee value
 	 */
 	public int getMeleeValue(){
 		return this.fighters.stream().mapToInt(Fighter::getMeleeValue).sum();
@@ -132,10 +132,19 @@ public class Army {
 	 *
 	 */
 	public void decreaseMoral(int attackValue){
-		this.fighters.stream().forEach(fighter -> {
+		this.fighters.forEach(fighter -> {
 			fighter.setMP(fighter.getMP() + getTrueLeader().getMoralModifier());
 			fighter.setMP(0);
 		});
+	}
+
+	/**
+	 * Getter of the first fighter
+	 *
+	 * @return The first fighter
+	 */
+	public Fighter getFirstFighter(){
+		return this.fighters.get(0);
 	}
 
 	/**

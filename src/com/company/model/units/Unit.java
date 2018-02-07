@@ -14,6 +14,11 @@ public abstract class Unit {
     private BufferedImage unitImage;
 
     /**
+     * Zoom of the unitImage
+     */
+    private BufferedImage zoom;
+
+    /**
      * Unit armor
      */
     private int armor;
@@ -45,15 +50,17 @@ public abstract class Unit {
 
     /**
      * Constructor
-     * @param unit
-     * @param armor The unitImage armor
+     * @param unit   The fighter image
+     * @param zoom   The fighter image zoom
+     * @param armor The itImage armor
      * @param mounted If the unitImage is mounted
      * @param race The race of the unitImage
      * @param position The position of the unitImage
      * @param deploymentCode The deployment code of the unitImage
      */
-    public Unit(BufferedImage unit, int armor, boolean mounted, String race, Tile position, String deploymentCode) {
+    public Unit(BufferedImage unit, BufferedImage zoom, int armor, boolean mounted, String race, Tile position, String deploymentCode) {
         this.unitImage = unit;
+        this.zoom = zoom;
         this.armor = armor;
         this.mounted = mounted;
         this.race = race;
@@ -68,6 +75,14 @@ public abstract class Unit {
     public BufferedImage getUnitImage() {
         return this.unitImage;
     }
+
+    /**
+     *
+     */
+    public BufferedImage getUnitZoom() {
+        return this.zoom;
+    }
+
 
     /**
      * Getter of the armor

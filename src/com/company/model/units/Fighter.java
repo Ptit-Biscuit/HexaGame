@@ -26,7 +26,8 @@ public class Fighter extends Unit {
 
     /**
      * Constructor
-     * @param fighterImage
+     * @param fighterImage The fighter image
+     * @param zoom The fighter image zoom
      * @param armor Param of the super class Unit
      * @param mounted Param of the super class Unit
      * @param race Param of he super class Unit
@@ -36,8 +37,8 @@ public class Fighter extends Unit {
      * @param missileValue The missile value of the fighter
      * @param meleeValue The melee value of the fighter
      */
-    public Fighter(BufferedImage fighterImage, int armor, Boolean mounted, String race, Tile position, String deploymentCode, String moral, int missileValue, int meleeValue) {
-        super(fighterImage, armor, mounted, race, position, deploymentCode);
+    public Fighter(BufferedImage fighterImage, BufferedImage zoom, int armor, Boolean mounted, String race, Tile position, String deploymentCode, String moral, int missileValue, int meleeValue) {
+        super(fighterImage, zoom, armor, mounted, race, position, deploymentCode);
         this.moral = moral;
         this.missileValue = missileValue;
         this.meleeValue = meleeValue;

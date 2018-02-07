@@ -49,7 +49,7 @@ public class Board {
 
     /**
      *
-     * @return
+     * @return The instance
      */
     public static Board getInstance() {
         if(ourInstance == null)
@@ -68,7 +68,7 @@ public class Board {
     private Board() {
         ourInstance = this;
         this.armyToMove = null;
-        this.path = new ArrayList<Tile>();
+        this.path = new ArrayList<>();
         this.selectArmy = true;
         this.phase = 1;
         this.nbTurns = 0;
@@ -103,15 +103,15 @@ public class Board {
         Tile combatExample3 = Board.getInstance().getTile(new Triplet(12,9,-21)); // goblin (grinphar)
 
         // init feudal example combat army
-        Leader feudalLeader = new Leader(UnitManager.getInstance().getTile(UnitType.COUNT),1,true,"feudal", combatExample , "RE", "Count", 2, 8);
-        Fighter feudal1 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_A_RANK),1,false,"feudal",combatExample,"","A",0,4);
-        Fighter feudal2 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_A_RANK),1,false,"feudal",combatExample,"","A",0,4);
-        Fighter feudal3 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_A_RANK_2),1,false,"feudal",combatExample,"","A",4,3);
-        Fighter feudal4 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_B_RANK),2,true,"feudal", combatExample,"","B",0,4);
-        Fighter feudal5 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_B_RANK_2),2,false,"feudal",combatExample,"","C",4,2);
-        Fighter feudal6 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_B_RANK_2),2,false,"feudal",combatExample,"","C",4,2);
-        Fighter feudal7 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_C_RANK),3,false,"feudal",combatExample,"","C",2,2);
-        Fighter feudal8 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_C_RANK),3,false,"feudal",combatExample,"","C",2,2);
+        Leader feudalLeader = new Leader(UnitManager.getInstance().getTile(UnitType.COUNT), UnitManager.getInstance().getTile(UnitType.COUNT_ZOOM),1,true,"feudal", combatExample , "RE", "Count", 2, 8);
+        Fighter feudal1 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_A_RANK), UnitManager.getInstance().getTile(UnitType.FEUDAL_A_RANK_ZOOM),1,false,"feudal",combatExample,"","A",0,4);
+        Fighter feudal2 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_A_RANK), UnitManager.getInstance().getTile(UnitType.FEUDAL_A_RANK_ZOOM),1,false,"feudal",combatExample,"","A",0,4);
+        Fighter feudal3 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_A_RANK_2), UnitManager.getInstance().getTile(UnitType.FEUDAL_A_RANK_2_ZOOM),1,false,"feudal",combatExample,"","A",4,3);
+        Fighter feudal4 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_B_RANK), UnitManager.getInstance().getTile(UnitType.FEUDAL_A_RANK_ZOOM),2,true,"feudal", combatExample,"","B",0,4);
+        Fighter feudal5 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_B_RANK_2), UnitManager.getInstance().getTile(UnitType.FEUDAL_B_RANK_2_ZOOM),2,false,"feudal",combatExample,"","C",4,2);
+        Fighter feudal6 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_B_RANK_2), UnitManager.getInstance().getTile(UnitType.FEUDAL_B_RANK_2_ZOOM),2,false,"feudal",combatExample,"","C",4,2);
+        Fighter feudal7 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_C_RANK), UnitManager.getInstance().getTile(UnitType.FEUDAL_C_RANK_ZOOM),3,false,"feudal",combatExample,"","C",2,2);
+        Fighter feudal8 = new Fighter(UnitManager.getInstance().getTile(UnitType.FEUDAL_C_RANK), UnitManager.getInstance().getTile(UnitType.FEUDAL_C_RANK_ZOOM),3,false,"feudal",combatExample,"","C",2,2);
 
         List<Leader> leaders = new ArrayList<>();
         leaders.add(feudalLeader);
@@ -130,15 +130,15 @@ public class Board {
         combatExample.setArmy(army);
 
         // init goblin (marglush) example combat army
-        Leader goblinLeader = new Leader(UnitManager.getInstance().getTile(UnitType.MARGLUSH), 1, false, "goblin", combatExample2, "", "Marglush", 1, 8);
-        Fighter goblin1 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_B_RANK), 1, false, "goblin", combatExample2, "", "B", 0, 4);
-        Fighter goblin2 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_B_RANK), 1, false, "goblin", combatExample2, "", "B", 0, 3);
-        Fighter goblin3 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_B_RANK), 2, false, "goblin", combatExample2, "", "B", 0, 4);
-        Fighter goblin4 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_B_RANK_2), 2, false, "goblin", combatExample2, "", "B", 0, 3);
-        Fighter goblin5 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_B_RANK_2), 2, false, "goblin", combatExample2, "", "B", 0, 3);
-        Fighter goblin6 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK), 3, false, "goblin", combatExample2, "", "C", 2, 2);
-        Fighter goblin7 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK), 3, false, "goblin", combatExample2, "", "C", 2, 2);
-        Fighter goblin8 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK), 3, false, "goblin", combatExample2, "", "C", 2, 2);
+        Leader goblinLeader = new Leader(UnitManager.getInstance().getTile(UnitType.MARGLUSH), UnitManager.getInstance().getTile(UnitType.MARGLUSH_ZOOM),1, false, "goblin", combatExample2, "", "Marglush", 1, 8);
+        Fighter goblin1 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_B_RANK), UnitManager.getInstance().getTile(UnitType.GOBLIN_B_RANK_ZOOM),1, false, "goblin", combatExample2, "", "B", 0, 4);
+        Fighter goblin2 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_B_RANK), UnitManager.getInstance().getTile(UnitType.GOBLIN_B_RANK_ZOOM),1, false, "goblin", combatExample2, "", "B", 0, 3);
+        Fighter goblin3 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_B_RANK), UnitManager.getInstance().getTile(UnitType.GOBLIN_B_RANK_ZOOM),2, false, "goblin", combatExample2, "", "B", 0, 4);
+        Fighter goblin4 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_B_RANK_2), UnitManager.getInstance().getTile(UnitType.GOBLIN_B_RANK_2_ZOOM),2, false, "goblin", combatExample2, "", "B", 0, 3);
+        Fighter goblin5 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_B_RANK_2), UnitManager.getInstance().getTile(UnitType.GOBLIN_B_RANK_2_ZOOM), 2, false, "goblin", combatExample2, "", "B", 0, 3);
+        Fighter goblin6 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK), UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK_ZOOM),3, false, "goblin", combatExample2, "", "C", 2, 2);
+        Fighter goblin7 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK), UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK_ZOOM),3, false, "goblin", combatExample2, "", "C", 2, 2);
+        Fighter goblin8 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK), UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK_ZOOM),3, false, "goblin", combatExample2, "", "C", 2, 2);
 
         List<Leader> leadersGoblin = new ArrayList<>();
         leadersGoblin.add(goblinLeader);
@@ -157,10 +157,10 @@ public class Board {
         combatExample2.setArmy(army2);
 
         // init goblin (grinphar) example combat army
-        Leader goblinLeader2 = new Leader(UnitManager.getInstance().getTile(UnitType.GRINPHAR), 3, false, "goblin", combatExample3, "", "Grinphar", 0, 3);
-        Fighter goblin9 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK_2), 3, false, "goblin", combatExample3, "", "C", 0, 3);
-        Fighter goblin10 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK_2), 3, false, "goblin", combatExample3, "", "C", 0, 3);
-        Fighter goblin11 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK_2), 3, false, "goblin", combatExample3, "", "C", 0, 3);
+        Leader goblinLeader2 = new Leader(UnitManager.getInstance().getTile(UnitType.GRINPHAR), UnitManager.getInstance().getTile(UnitType.GRINPHAR_ZOOM),3, false, "goblin", combatExample3, "", "Grinphar", 0, 3);
+        Fighter goblin9 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK_2), UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK_2), 3, false, "goblin", combatExample3, "", "C", 0, 3);
+        Fighter goblin10 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK_2), UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK_2),3, false, "goblin", combatExample3, "", "C", 0, 3);
+        Fighter goblin11 = new Fighter(UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK_2), UnitManager.getInstance().getTile(UnitType.GOBLIN_C_RANK_2),3, false, "goblin", combatExample3, "", "C", 0, 3);
 
         List<Leader> leadersGoblin2 = new ArrayList<>();
         leadersGoblin2.add(goblinLeader2);
@@ -179,7 +179,7 @@ public class Board {
 
     /**
      *
-     * @return
+     * @return Return the tiles
      */
     public HashMap<Triplet, Tile> getTiles() {
         return tiles;
@@ -187,8 +187,8 @@ public class Board {
 
     /**
      *
-     * @param coordinate
-     * @return
+     * @param coordinate The tile coordinate
+     * @return The tile
      */
     public Tile getTile(Triplet coordinate) {
         return tiles.get(coordinate);
