@@ -23,6 +23,8 @@ public class ActionHandler implements EventHandler<KeyEvent> {
 					if (Movement.isValidMove(board.getArmyToMove(), board.getPath())) {
 						Movement.move(board.getArmyToMove(), board.getPath());
 						board.addArmyMoved(board.getArmyToMove());
+						board.emptyPath();
+						board.setArmyToMove(null);
 						System.out.println("mouvement effectué");
 					} else {
 					    board.emptyPath();
@@ -46,7 +48,7 @@ public class ActionHandler implements EventHandler<KeyEvent> {
 					if (board.getAttackers() != null && board.getDefenders() != null) {
 						System.out.println("Bataille entre :");
 
-						Attack.initAttack();
+						//call Attack function
 						System.out.println(board.getAttackers().toString());
 						System.out.println(board.getAttackers().toString());
 
