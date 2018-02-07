@@ -1,7 +1,9 @@
 package com.company.controller.handler;
 
 import com.company.Main;
+import com.company.model.Board;
 import com.company.model.Tile;
+import com.company.utils.Triplet;
 import com.company.view.fxcomponent.Hexagon;
 import javafx.event.EventHandler;
 import javafx.scene.effect.ColorAdjust;
@@ -42,7 +44,7 @@ public class HexaHandler implements EventHandler<MouseEvent> {
 			Main.getHud().setVisible(true);
 			Main.getHud().toFront();
 
-			Tile tile = new Tile(current.getCoords());
+			Tile tile = Board.getInstance().getTile(current.getCoords());
             Main.handleTile(tile);
         }
 	}
