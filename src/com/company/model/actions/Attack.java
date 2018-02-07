@@ -11,11 +11,11 @@ public class Attack {
 	 * Supposed to init the attack, Todo
 	 *
 	 */
-	public void initAttack(Tile location, Army defenser){
-		if (!validLocation(location)){
+	public void initAttack(Tile location, Army defensers){
+		if (!validLocation(location)) {
 			return;
 		}
-		//attack(location.getArmy(), defenser);
+		attackCycle(location.getArmy(), defensers);
 	}
 
 	/**
@@ -34,6 +34,17 @@ public class Attack {
 			}
 		}*/
 		return result;
+	}
+
+	/**
+	 * Method used to cycle the attacks
+	 *
+	 */
+	public void attackCycle(Army attackers, Army defensers){
+		attack(defensers, attackers, "missile");
+		attack(attackers,defensers,"missile");
+		attack(attackers,defensers,"melee");
+		attack(defensers,attackers,"melee");
 	}
 
 	/**
