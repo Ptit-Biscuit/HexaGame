@@ -10,6 +10,7 @@ import com.company.model.actions.Movement;
 import com.company.model.units.Army;
 import com.company.utils.Triplet;
 import com.company.view.TilesetInitializer;
+import javafx.scene.input.KeyEvent;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -20,6 +21,32 @@ import java.util.List;
  *
  */
 public class Board {
+
+    /**
+     *
+     */
+    private Army armyToMove;
+
+    /**
+     *
+     */
+    private ArrayList<Tile> path;
+
+    /**
+     *
+     */
+    private boolean selectArmy;
+
+    /**
+     *
+     */
+    private boolean selectPath;
+
+    /**
+     *
+     */
+    private int phase;
+
     /**
      *
      */
@@ -45,6 +72,10 @@ public class Board {
      */
     private Board() {
         ourInstance = this;
+        this.armyToMove = null;
+        this.path = new ArrayList<Tile>();
+        this.selectArmy = true;
+        this.selectPath = false;
 
         Pair<Integer, Integer> size = Map.getMapSize();
 
@@ -169,12 +200,37 @@ public class Board {
     }
 
 
+    public void setArmyToMove(Army armyToMove) {
+        this.armyToMove = armyToMove;
+    }
+
+    public Army getArmyToMove() {
+        return armyToMove;
+    }
+
+    public ArrayList<Tile> getPath() {
+        return path;
+    }
+
+    public void addPath(Tile tile) {
+        this.path.add(tile);
+    }
+
+    public boolean isSelectArmy() { return selectArmy; }
+
+    public void setSelectArmy(boolean selectArmy) { this.selectArmy = selectArmy; }
+
+    public boolean isSelectPath() { return selectPath; }
+
+    public void setSelectPath(boolean selectPath) { this.selectPath = selectPath; }
+
     public void game(int totalTurns){
         int nbTurns = 0;
-        int phase = 1;
+        this.phase = 1;
         while (totalTurns>nbTurns){
             //phase 1
-            phase = 1;
+            this.phase = 1;
+
             //get which army to move and the path
             //Movement.isValidMove(army, tileList);
             //validation of the movement
@@ -182,19 +238,20 @@ public class Board {
 
 
             //phase 2
-            phase = 2;
+            this.phase = 2;
 
             //phase 3
-            phase = 3;
+            this.phase = 3;
 
             //phase 4
-            phase = 4;
+            this.phase = 4;
 
 
             //phase 5
-            phase = 5;
+            this.phase = 5;
             nbTurns ++;
 
         }
     }
+
 }

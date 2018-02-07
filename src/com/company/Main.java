@@ -1,14 +1,9 @@
 package com.company;
 
-import com.company.controller.manager.UnitManager;
 import com.company.model.Board;
 import com.company.model.Tile;
-import com.company.model.enums.UnitType;
 import com.company.model.units.Army;
 import com.company.view.TilesetInitializer;
-import com.company.model.actions.Movement;
-import com.company.model.units.Fighter;
-import com.company.model.units.Leader;
 import com.company.view.fxcomponent.Hexagon;
 import com.company.controller.handler.HexaHandler;
 import com.company.model.Map;
@@ -22,6 +17,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
@@ -31,13 +28,16 @@ import org.apache.logging.log4j.LogManager;
 
 import java.awt.geom.Point2D;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.*;
 
 import static java.lang.StrictMath.sqrt;
 
 public class Main extends Application {
+    /**
+     * The hexagons
+     */
+    private static Army army = null;
+
     /**
      * The hexagons
      */
@@ -108,8 +108,15 @@ public class Main extends Application {
 	        scrollPane = (ScrollPane) scene.lookup("#scrollPane");
             scrollPane.setContent(pane);
             scrollPane.addEventFilter(ScrollEvent.SCROLL, Event::consume);
+            scrollPane.addEventHandler(KeyEvent.KEY_PRESSED, (event)->{
+                if (event.getCode()== KeyCode.ENTER){
+
+                }
+
+            });
             primaryStage.setScene(scene);
             primaryStage.show();
+
         } catch (IOException e) {
             LogManager.getLogger(Main.class).error(e.getMessage());
         }
@@ -171,5 +178,17 @@ public class Main extends Application {
      */
     public static Hexagon getHexagon(Triplet coordinates) {
         return hexagons.get(coordinates);
+    }
+
+    public static void handleTile(Tile tile){
+        System.out.println("test");
+        Board board = Board.getInstance();
+        if (board.isSelectArmy()) {
+            board.setArmyToMove(tile.getArmy());
+//            System.out.println(tile.getArmy().toString());
+        } else if (board.isSelectPath()) {
+            board.getPath().add(tile);
+            System.out.println(tile.toString());
+        }
     }
 }

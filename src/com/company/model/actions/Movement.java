@@ -17,12 +17,6 @@ import java.util.List;
  */
 public class Movement {
 
-    /**
-     *
-     */
-    private Army armyToMove;
-
-
 	/**
 	 *
 	 * @param tileList
@@ -61,43 +55,31 @@ public class Movement {
 		return true;
 	}
 
-	public static boolean move(Army army, ArrayList<Tile> tileList){
-	    if (isValidMove(army, tileList)){
-            //move the army
-            army.setMP(army.getGhostMP());
-            army.setPosition(army.getGhostPosition());
+	public static boolean move(Army army, ArrayList<Tile> tileList) {
+		if (isValidMove(army, tileList)) {
+			//move the army
+			army.setMP(army.getGhostMP());
+			army.setPosition(army.getGhostPosition());
 
-            //move the leader
-            Leader leader = army.getLeader().get(0);
-            //leader.getPosition().removeUnit(leader);
-            leader.setMP(army.getMP());
-            leader.setPosition(army.getPosition());
-            //leader.getPosition().setUnits(leader);
+			//move the leader
+			Leader leader = army.getLeader().get(0);
+			//leader.getPosition().removeUnit(leader);
+			leader.setMP(army.getMP());
+			leader.setPosition(army.getPosition());
+			//leader.getPosition().setUnits(leader);
 
-            //move the fighters
-            for (Fighter fighter:army.getFighters()) {
-                //fighter.getPosition().removeUnit(fighter);
-                fighter.setMP(army.getMP());
-                fighter.setPosition(army.getPosition());
-                //fighter.getPosition().setUnits(fighter);
-            }
-            return true;
-        } else {
-	        return false;
-        }
+			//move the fighters
+			for (Fighter fighter : army.getFighters()) {
+				//fighter.getPosition().removeUnit(fighter);
+				fighter.setMP(army.getMP());
+				fighter.setPosition(army.getPosition());
+				//fighter.getPosition().setUnits(fighter);
+			}
+			return true;
+		} else {
+			return false;
+		}
 
 	}
-
-    public Army getArmyToMove() {
-        return armyToMove;
-    }
-
-    public void setArmyToMove(Army armyToMove) {
-        this.armyToMove = armyToMove;
-    }
-
-    public static void handleArmyToMove(Army army){
-	    System.out.println("army");
-    }
 
 }
