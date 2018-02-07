@@ -36,13 +36,14 @@ public class Army {
 	private int ghostMP;
 
 	/**
+	 * Constructor of the amry
 	 *
-	 * @param leader
-	 * @param fighters
-	 * @param position
+	 * @param leaders The list of leaders
+	 * @param fighters The list of fighters
+	 * @param position The tile of the fight
 	 */
-	public Army(List<Leader> leader, List<Fighter> fighters, Tile position){
-		this.leaders = leader;
+	public Army(List<Leader> leaders, List<Fighter> fighters, Tile position){
+		this.leaders = leaders;
 		this.fighters = fighters;
 		this.MP = 10;
 		this.ghostMP = 10;
@@ -51,58 +52,59 @@ public class Army {
 	}
 
 	/**
+	 * Getter of the fighter list
 	 *
-	 * @return
+	 * @return The fighter list
 	 */
 	public List<Fighter> getFighters(){
 		return this.fighters;
 	}
 
 	/**
+	 * Getter of the leader list
 	 *
-	 * @return
+	 * @return The leader list
 	 */
 	public List<Leader> getLeader(){
 		return this.leaders;
 	}
 
 	/**
-	 *
-	 * @param fighter
+	 * Method used to add a fighter
 	 */
 	public void addUnit(Fighter fighter){
 		this.fighters.add(fighter);
 	}
 
 	/**
-	 *
-	 * @param leader
+	 * Method used to add a leader
 	 */
 	public void addLeader(Leader leader){
 		this.leaders.add(leader);
 	}
 
 	/**
+	 * Method used to remove an unit
 	 *
-	 * @param unit
-	 * @return
+	 * @return The state of removal
 	 */
 	public Boolean removeUnit(Fighter unit){
 		return fighters.contains(unit) && this.fighters.remove(unit);
 	}
 
 	/**
+	 * Method used to remove a leader
 	 *
-	 * @param leader
-	 * @return
+	 * @return The state of removal
 	 */
 	public Boolean removeLeader(Leader leader){
 		return leaders.contains(leader) && this.leaders.remove(leader);
 	}
 
 	/**
+	 * Getter of the missile value
 	 *
-	 * @return
+	 * @return Themissile value
 	 */
 	public int getMissileValue(){
 		return this.fighters.stream().mapToInt(Fighter::getMissileValue).sum();
@@ -117,19 +119,40 @@ public class Army {
 	}
 
 	/**
+	 * Getter of the armor value
 	 *
-	 * @return
+	 * @return The armor value
 	 */
 	public int getArmorValue(){
 		return this.fighters.stream().mapToInt(Unit::getArmor).sum();
 	}
 
 	/**
+	 * Method used to decrease an unit moral
 	 *
-	 * @param attackValue
 	 */
 	public void decreaseMoral(int attackValue){
-		this.fighters.forEach(fighter -> fighter.setMP(0));
+		this.fighters.stream().forEach(fighter -> {
+			fighter.setMP(fighter.getMP() + getTrueLeader().getMoralModifier());
+			fighter.setMP(0);
+		});
+	}
+
+	/**
+	 * Getter of the acting leader
+	 *
+	 * @return The acting leader
+	 */
+	public Leader getTrueLeader(){
+		final int[] maxCommand = {0};
+		final Leader[] topLeader = {null};
+		this.leaders.forEach(leader -> {
+			if(leader.getCommandLimit() > maxCommand[0]){
+				maxCommand[0] = leader.getCommandLimit();
+				topLeader[0] = leader;
+			}
+		});
+		return topLeader[0];
 	}
 
     /**

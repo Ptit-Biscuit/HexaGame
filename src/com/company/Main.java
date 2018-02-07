@@ -52,7 +52,7 @@ public class Main extends Application {
     /**
      * The H.U.D
      */
-    private static Hud hud = new Hud(0, 0, 355, 175);
+    private static Hud hud  = new Hud(0, 0, 355, 175);
 
     /**
      * Main
