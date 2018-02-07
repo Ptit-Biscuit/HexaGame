@@ -24,6 +24,10 @@ public class Movement {
 	 */
 	public static Boolean isValidMove(Army army, ArrayList<Tile> tileList) {
 		int mpCost = 1;
+
+		if (army == null)
+			return false;
+
 		army.setGhostPosition(army.getPosition());
 		army.setGhostMP(army.getMP());
 		for (Tile tile:tileList) {
