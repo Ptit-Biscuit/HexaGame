@@ -42,16 +42,13 @@ public class HexaHandler implements EventHandler<MouseEvent> {
 				Main.getHud().setTranslateY(current.getCenter().getY() + 35);
 			}
 
-			Main.setHud("name",1,2,3);//TODO fix?
-
-
+			Main.getHud().updateStats("name",1,2,3);
 			Main.getHud().setVisible(true);
 			Main.getHud().toFront();
 
 			Tile tile = new Tile(current.getCoords());
             Army army = tile.getArmy();
 
-			System.out.println(army.getTrueLeader().getName());
             Movement.handleArmyToMove(army);
         }
 	}

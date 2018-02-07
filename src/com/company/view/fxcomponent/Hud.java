@@ -7,21 +7,27 @@ import javafx.scene.shape.Rectangle;
 
 
 public class Hud extends Pane {
-	public Hud(double x, double y, double width, double height, String text_name, int text_stat1, int text_stat2, int text_stat3) {
+
+	private Text name;
+	private Text stat_1;
+	private Text stat_2;
+	private Text stat_3;
+
+	public Hud(double x, double y, double width, double height) {
 
 		super();
 		this.setPrefSize(width,height);
 		//this.setFill(Color.color(0.1d, 0.8d, 0.1d, 0.9d));
-		Text name = new Text(150, 50, text_name);
+		name = new Text(150, 50, "");
 		name.setFill(Color.WHITE);
 
-		Text stat_1 = new Text(150, 90, ""+text_stat1);
+		stat_1 = new Text(150, 90, "");
 		stat_1.setFill(Color.WHITE);
 
-		Text stat_2 = new Text(150, 110, ""+text_stat2);
+		stat_2 = new Text(150, 110, "");
 		stat_2.setFill(Color.WHITE);
 
-		Text stat_3 = new Text(150, 130,""+text_stat3);
+		stat_3 = new Text(150, 130,"");
 		stat_3.setFill(Color.WHITE);
 
 
@@ -31,5 +37,12 @@ public class Hud extends Pane {
 		rectangle.setArcHeight(15d);
 		this.getChildren().addAll(rectangle, name, stat_1, stat_2, stat_3);
 
+	}
+
+	public void updateStats(String text_name, int text_stat1, int text_stat2, int text_stat3){
+		name.setText(text_name);
+		stat_1.setText(String.valueOf(text_stat1));
+		stat_2.setText(String.valueOf(text_stat2));
+		stat_3.setText(String.valueOf(text_stat3));
 	}
 }
