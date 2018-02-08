@@ -48,6 +48,8 @@ public class ActionHandler implements EventHandler<KeyEvent> {
 					if (board.getAttackers() != null && board.getDefenders() != null) {
 						System.out.println("Bataille entre :");
 
+						Attack.initAttack(Board.getInstance().getAttackers(), Board.getInstance().getDefenders().getArmy());
+
 						//call Attack function
 						System.out.println(board.getAttackers().toString());
 						System.out.println(board.getAttackers().toString());

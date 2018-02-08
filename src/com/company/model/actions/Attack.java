@@ -6,6 +6,8 @@ import com.company.model.units.Fighter;
 import com.company.utils.AttackUtil;
 import com.company.utils.Triplet;
 
+import java.util.Random;
+
 public class Attack {
 
 	/**
@@ -61,7 +63,7 @@ public class Attack {
 				});
 				break;
 			case ("melee"):
-				int meleeCheck = AttackUtil.getMissileTable(attackers.getMeleeValue(), defenders.getMeleeValue());
+				int meleeCheck = AttackUtil.getMeleeTable(attackers.getMeleeValue(), defenders.getMeleeValue());
 				defenders.getFighters().forEach(defender -> {
 					if (new DiceRoll(8).getDiceRoll() >= meleeCheck) {
 						checkMoral(defender);
@@ -77,15 +79,15 @@ public class Attack {
 	 * @return The moral result
 	 */
 	public static int checkMoral(Fighter fighter){
-		int moralClass = 0;
-		if(fighter.getMoral() == "A"){
-			moralClass = 0;
-		}
-		if(fighter.getMoral() == "B"){
+		int moralClass = 1;
+		if(fighter.getMoral().equals("A")){
 			moralClass = 1;
 		}
-		if(fighter.getMoral() == "C"){
+		if(fighter.getMoral().equals("B")){
 			moralClass = 2;
+		}
+		if(fighter.getMoral().equals("C")){
+			moralClass = 3;
 		}
 		return AttackUtil.getMissileTable(moralClass, new DiceRoll(8).getDiceRoll());
 	}
