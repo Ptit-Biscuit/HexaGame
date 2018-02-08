@@ -2,18 +2,12 @@ package com.company.controller.handler;
 
 import com.company.Main;
 import com.company.model.Board;
-import com.company.controller.manager.UnitManager;
 import com.company.model.Tile;
-import com.company.utils.Triplet;
-import com.company.model.actions.Movement;
-import com.company.model.enums.UnitType;
-import com.company.model.units.Army;
 import com.company.view.fxcomponent.Hexagon;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class HexaHandler implements EventHandler<MouseEvent> {
