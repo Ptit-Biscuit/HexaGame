@@ -21,6 +21,7 @@ public class Hud extends Pane {
 	private Text stat_4;
 	private Text stat_5;
 	private Text stat_6;
+	private Text stat_7;
 
 	public Hud(double x, double y, double width, double height) {
 
@@ -39,6 +40,9 @@ public class Hud extends Pane {
 		stat_3 = new Text(150, 130,"");
 		stat_3.setFill(Color.WHITE);
 
+		stat_7 = new Text(150, 150,"");
+		stat_7.setFill(Color.WHITE);
+
 		stat_4 = new Text(280, 90, "");
 		stat_4.setFill(Color.WHITE);
 
@@ -49,22 +53,26 @@ public class Hud extends Pane {
 		stat_6.setFill(Color.WHITE);
 
 
+
+
 		Rectangle rectangle = new Rectangle(x, y, width, height);
 		rectangle.setFill(Color.web("0x000000",0.9));
 		rectangle.setArcWidth(15d);
 		rectangle.setArcHeight(15d);
-		this.getChildren().addAll(rectangle, portrait, name, stat_1, stat_2, stat_3, stat_4, stat_5, stat_6);
+		this.getChildren().addAll(rectangle, portrait, name, stat_1, stat_2, stat_3, stat_4, stat_5, stat_6, stat_7);
 
 	}
 
-	public void updateStats(String text_name, Image image_portrait, int text_MP_Lead, int text_Armor_Lead, int text_Command_Lead, int text_Missile_Fighter, int text_Melee_Fighter, int text_Armor_Fighter){
+	public void updateStats(String text_name, Image image_portrait, int text_Moral_Lead, int text_Armor_Lead, int text_Command_Lead, int text_MP_Lead, int text_Missile_Fighter, int text_Melee_Fighter, int text_Armor_Fighter){
 		name.setText(text_name);
 		portrait.setImage(image_portrait);
-		stat_1.setText("MP modifier: "+String.valueOf(text_MP_Lead));
+		stat_1.setText("Moral modifier: "+String.valueOf(text_Moral_Lead));
 		stat_2.setText("Command limit: "+String.valueOf(text_Command_Lead));
 		stat_3.setText("Armor: "+String.valueOf(text_Armor_Lead));
 		stat_4.setText("Missile: "+String.valueOf(text_Missile_Fighter));
 		stat_5.setText("Melee: "+String.valueOf(text_Melee_Fighter));
 		stat_6.setText("Armor: "+String.valueOf(text_Armor_Fighter));
+
+		stat_7.setText("MP: "+String.valueOf(text_MP_Lead));
 	}
 }

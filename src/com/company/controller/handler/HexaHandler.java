@@ -56,12 +56,12 @@ public class HexaHandler implements EventHandler<MouseEvent> {
             if(tile.getArmy() != null){
                 if(tile.getArmy().getTrueLeader()!=null){
                     Image image = SwingFXUtils.toFXImage(tile.getArmy().getTrueLeader().getUnitZoom(), null);
-                    Main.getHud().updateStats(tile.getArmy().getTrueLeader().getName(), image,tile.getArmy().getTrueLeader().getMoralModifier(),tile.getArmy().getTrueLeader().getArmor(),tile.getArmy().getTrueLeader().getCommandLimit(), tile.getArmy().getMissileValue(), tile.getArmy().getMeleeValue(), tile.getArmy().getArmorValue());
+                    Main.getHud().updateStats(tile.getArmy().getTrueLeader().getName(), image,tile.getArmy().getTrueLeader().getMoralModifier(),tile.getArmy().getTrueLeader().getArmor(),tile.getArmy().getTrueLeader().getCommandLimit(),tile.getArmy().getTrueLeader().getMP(), tile.getArmy().getMissileValue(), tile.getArmy().getMeleeValue(), tile.getArmy().getArmorValue());
                     Main.getHud().setVisible(true);
                     Main.getHud().toFront();
                 }else{
                     Image image = SwingFXUtils.toFXImage(tile.getArmy().getFirstFighter().getUnitZoom(), null);
-                    Main.getHud().updateStats("Fighters", image, 0, 0, 0, tile.getArmy().getMissileValue(), tile.getArmy().getMeleeValue(), tile.getArmy().getArmorValue());
+                    Main.getHud().updateStats("Fighters", image, 0, 0, 0, 0, tile.getArmy().getMissileValue(), tile.getArmy().getMeleeValue(), tile.getArmy().getArmorValue());
                 }
                 Main.getHud().setVisible(true);
                 Main.getHud().toFront();
