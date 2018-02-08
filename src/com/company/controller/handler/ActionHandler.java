@@ -70,7 +70,7 @@ public class ActionHandler implements EventHandler<KeyEvent> {
 			}
 		}
 
-		if (event.getCode() == KeyCode.SPACE) {
+		if (event.getCode() == KeyCode.P) {
 			Board board = Board.getInstance();
 			board.setPhase(board.getPhase() + 1);
 			if (board.getPhase() == 1 || board.getPhase() == 3) {

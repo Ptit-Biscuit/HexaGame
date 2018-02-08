@@ -13,11 +13,13 @@ import com.company.view.fxcomponent.Hud;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -108,6 +110,11 @@ public class Main extends Application {
 	        scrollPane = (ScrollPane) scene.lookup("#scrollPane");
             scrollPane.setContent(pane);
             scrollPane.addEventFilter(ScrollEvent.SCROLL, Event::consume);
+	        scrollPane.addEventFilter(KeyEvent.KEY_PRESSED, t -> {
+		        if (t.getCode() == KeyCode.SPACE) {
+			        t.consume();
+		        }
+	        });
             scrollPane.addEventHandler(KeyEvent.KEY_PRESSED, new ActionHandler());
             primaryStage.setScene(scene);
             primaryStage.show();
