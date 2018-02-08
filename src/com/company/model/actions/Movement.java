@@ -28,6 +28,9 @@ public class Movement {
         if (tileList.isEmpty()) {
             return false;
         }
+        if (tileList.contains(army.getPosition())){
+            return false;
+        }
         army.setGhostPosition(army.getPosition());
         army.setGhostMP(army.getMP());
         for (Tile tile : tileList) {
@@ -55,18 +58,24 @@ public class Movement {
                 if (army.getGhostMP() < 0) {
                     army.setGhostMP(army.getMP());
                     army.setGhostPosition(army.getPosition());
+                    System.out.println("Pas assez de mp");
+                    return false;
+                }
+                if (tile.getArmy()!=null){
+                    System.out.println("La tile est déjà occupée");
                     return false;
                 }
             } else {
                 army.setGhostMP(army.getMP());
                 army.setGhostPosition(army.getPosition());
+                System.out.println("Tiles non liées");
                 return false;
             }
         }
         return true;
     }
 
-    public static boolean move(Army army, ArrayList<Tile> tileList) {
+    public static boolean move(Army army) {
         //move the army
         army.setMP(army.getGhostMP());
         Tile oldPosition = army.getPosition();
