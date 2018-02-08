@@ -21,7 +21,7 @@ public class ActionHandler implements EventHandler<KeyEvent> {
 					System.out.println("Selection chemin");
 				} else {
 					if (Movement.isValidMove(board.getArmyToMove(), board.getPath())) {
-						Movement.move(board.getArmyToMove(), board.getPath());
+						Movement.move(board.getArmyToMove());
 						board.addArmyMoved(board.getArmyToMove());
 						board.emptyPath();
 						board.setArmyToMove(null);
