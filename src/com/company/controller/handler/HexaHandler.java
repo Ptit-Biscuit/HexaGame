@@ -21,16 +21,7 @@ public class HexaHandler implements EventHandler<MouseEvent> {
 			colorAdjust.setBrightness(-0.2);
 			current.setEffect(colorAdjust);
 			current.toFront();
-			System.out.println(current.getCoords().getX() + ", " + current.getCoords().getY());
-		}
 
-		if (event.getEventType().equals(MouseEvent.MOUSE_EXITED)) {
-			colorAdjust.setBrightness(0);
-			current.setEffect(colorAdjust);
-			Main.getHud().setVisible(false);
-		}
-
-		if (event.getEventType().equals(MouseEvent.MOUSE_CLICKED)) {
 			Main.getHud().setTranslateX(current.getCenter().getX() + 65);
 			Main.getHud().setTranslateY(current.getCenter().getY() - 210);
 
@@ -42,25 +33,33 @@ public class HexaHandler implements EventHandler<MouseEvent> {
 				Main.getHud().setTranslateY(current.getCenter().getY() + 35);
 			}
 
-
 			Tile tile = Board.getInstance().getTile(current.getCoords());
-            Main.handleTile(tile);
+			if(tile.getArmy() != null){
+				if(tile.getArmy().getTrueLeader()!=null){
+					Image image = SwingFXUtils.toFXImage(tile.getArmy().getTrueLeader().getUnitZoom(), null);
+					Main.getHud().updateStats(tile.getArmy().getTrueLeader().getName(), image,tile.getArmy().getTrueLeader().getMoralModifier(),tile.getArmy().getTrueLeader().getArmor(),tile.getArmy().getTrueLeader().getCommandLimit(),tile.getArmy().getTrueLeader().getMP(), tile.getArmy().getMissileValue(), tile.getArmy().getMeleeValue(), tile.getArmy().getArmorValue());
+					Main.getHud().setVisible(true);
+					Main.getHud().toFront();
+				}else{
+					Image image = SwingFXUtils.toFXImage(tile.getArmy().getFirstFighter().getUnitZoom(), null);
+					Main.getHud().updateStats("Fighters", image, 0, 0, 0, 0, tile.getArmy().getMissileValue(), tile.getArmy().getMeleeValue(), tile.getArmy().getArmorValue());
+				}
+				Main.getHud().setVisible(true);
+				Main.getHud().toFront();
+			}
 
+			System.out.println(current.getCoords().getX() + ", " + current.getCoords().getY());
+		}
 
-            if(tile.getArmy() != null){
-                if(tile.getArmy().getTrueLeader()!=null){
-                    Image image = SwingFXUtils.toFXImage(tile.getArmy().getTrueLeader().getUnitZoom(), null);
-                    Main.getHud().updateStats(tile.getArmy().getTrueLeader().getName(), image,tile.getArmy().getTrueLeader().getMoralModifier(),tile.getArmy().getTrueLeader().getArmor(),tile.getArmy().getTrueLeader().getCommandLimit(),tile.getArmy().getTrueLeader().getMP(), tile.getArmy().getMissileValue(), tile.getArmy().getMeleeValue(), tile.getArmy().getArmorValue());
-                    Main.getHud().setVisible(true);
-                    Main.getHud().toFront();
-                }else{
-                    Image image = SwingFXUtils.toFXImage(tile.getArmy().getFirstFighter().getUnitZoom(), null);
-                    Main.getHud().updateStats("Fighters", image, 0, 0, 0, 0, tile.getArmy().getMissileValue(), tile.getArmy().getMeleeValue(), tile.getArmy().getArmorValue());
-                }
-                Main.getHud().setVisible(true);
-                Main.getHud().toFront();
-            }
+		if (event.getEventType().equals(MouseEvent.MOUSE_EXITED)) {
+			colorAdjust.setBrightness(0);
+			current.setEffect(colorAdjust);
+			Main.getHud().setVisible(false);
+		}
 
-        }
+		if (event.getEventType().equals(MouseEvent.MOUSE_CLICKED)) {
+			Tile tile = Board.getInstance().getTile(current.getCoords());
+			Main.handleTile(tile);
+		}
 	}
 }
