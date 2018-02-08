@@ -9,6 +9,7 @@ import com.company.model.units.Leader;
 import com.company.utils.Triplet;
 import javafx.util.Pair;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -116,6 +117,16 @@ public class Board {
      *
      */
     private void initUnits() {
+        Tile baronTile = Board.getInstance().getTile(new Triplet(8, 19, -27));
+        Leader baron = new Leader(UnitManager.getInstance().getTile(UnitType.BARON), UnitManager.getInstance().getTile(UnitType.BARON_ZOOM), 1, false, "feudal", baronTile, "KP", "Baron", 2, 12);
+
+        baronTile.setArmy(new Army(Arrays.asList(baron), new ArrayList<>(), baronTile));
+
+        Tile kingTile = Board.getInstance().getTile(new Triplet(9, 16, -25));
+        Leader king = new Leader(UnitManager.getInstance().getTile(UnitType.KING), UnitManager.getInstance().getTile(UnitType.KING_ZOOM), 1, false, "goblin", kingTile, "", "King", 2, 12);
+
+        kingTile.setArmy(new Army(Arrays.asList(king), new ArrayList<>(), kingTile));
+
         Tile combatExample = Board.getInstance().getTile(new Triplet(12,10,-22)); // feudal
         Tile combatExample2 = Board.getInstance().getTile(new Triplet(11,9,-20)); // goblin (marglush)
         Tile combatExample3 = Board.getInstance().getTile(new Triplet(12,9,-21)); // goblin (grinphar)
@@ -192,6 +203,8 @@ public class Board {
 
         Army army3 = new Army(leadersGoblin2, fightersGoblin2, combatExample3);
         combatExample3.setArmy(army3);
+
+
 
 
         Main.update();
