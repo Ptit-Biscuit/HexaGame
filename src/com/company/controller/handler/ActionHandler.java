@@ -13,7 +13,6 @@ public class ActionHandler implements EventHandler<KeyEvent> {
 	public void handle(KeyEvent event) {
 		if (event.getCode() == KeyCode.ENTER) {
 
-
 			Board board = Board.getInstance();
 			if (board.getPhase() % 2 == 1) {
 				if (board.isSelectArmy()) {
@@ -27,8 +26,8 @@ public class ActionHandler implements EventHandler<KeyEvent> {
 						board.setArmyToMove(null);
 						System.out.println("mouvement effectué");
 					} else {
-					    board.emptyPath();
-					    board.setArmyToMove(null);
+						board.emptyPath();
+						board.setArmyToMove(null);
 						System.out.println("Mouvement non valide");
 					}
 					board.setSelectArmy(true);
@@ -83,7 +82,7 @@ public class ActionHandler implements EventHandler<KeyEvent> {
 				board.setNbTurns(board.getNbTurns() + 1);
 				board.setPhase(1);
 				//reset army mp
-				for (Army armyMoved:board.getArmyMoved()) {
+				for (Army armyMoved : board.getArmyMoved()) {
 					armyMoved.setGhostMP(10);
 					armyMoved.setMP(10);
 				}
